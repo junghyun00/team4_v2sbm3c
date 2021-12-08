@@ -38,8 +38,8 @@
         </java.beans.PropertyChangeSupport>
       </listeners>
       <constraint>
-        <height>548</height>
-        <width>834</width>
+        <height>525</height>
+        <width>750</width>
         <x>206</x>
         <y>152</y>
       </constraint>
@@ -218,8 +218,8 @@
           <constraint>
             <height>40</height>
             <width>100</width>
-            <x>708</x>
-            <y>187</y>
+            <x>601</x>
+            <y>159</y>
           </constraint>
           <sourceConnections>
             <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel>
@@ -251,8 +251,8 @@
                 <constraint>
                   <height>-1</height>
                   <width>-1</width>
-                  <x>1133</x>
-                  <y>371</y>
+                  <x>1014</x>
+                  <y>357</y>
                 </constraint>
                 <sourceConnections/>
                 <targetConnections>
