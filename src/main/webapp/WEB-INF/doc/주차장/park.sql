@@ -67,15 +67,16 @@ WHERE parkno=5;
 
 -- 수정
 UPDATE park
-SET area='A06'
-WHERE parkno=4;
+SET address='서울특별시 광진구 자양동 5-5'
+WHERE parkno=3;
 
 commit;
 
 
 
-
-
+select parkno, memberno, name, phone, address, area, price, cmt, file1
+from park
+where address like '%강남%'
 
 
 

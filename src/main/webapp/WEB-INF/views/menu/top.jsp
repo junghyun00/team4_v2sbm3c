@@ -13,23 +13,16 @@
    <div class="collapse navbar-collapse" id="navbar_list">
       <ul class="navbar-nav mr-auto" id="cate_bar">
          <li class="nav-item">
-            <button class="btn btn-dark pt-2" id="manage_btn">주차 예약</button>
-            <button class="btn btn-dark pt-2" id="manage_btn">주차 목록</button>
-            <button class="btn btn-dark pt-2" id="manage_btn"></button>
+            <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/read.do'">주차 목록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn">주차 등록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>            
          </li>
       </ul>
       <ul class="navbar-nav">
          <li class="nav-item" >
             <button class="btn btn-dark pt-2" id="login_btn">로그인</button>
          </li>
-         <li class="nav-item" >
-            <button class="btn btn-dark pt-2" id="SignUP_btn">Sign UP</button>
-         </li>
-         <a class="nav-link" href="#">Project Detail</a></li>
       </ul>
-      <form class="form-inline my-2 my-md-0" action="/content/cateno_search.do" method="GET" >
-         <input class="form-control" type="text" placeholder="Search">
-      </form>
    </div>
 </nav>
 
