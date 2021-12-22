@@ -73,16 +73,36 @@ WHERE parkno=3;
 commit;
 
 
-
+-- 검색
 select parkno, memberno, name, phone, address, area, price, cmt, file1
 from park
-where address like '%강남%'
+where (address like '%건대%'
+    OR name like '%건대%')
+    
+    
+
+SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
+FROM (
+            SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, rownum as r
+            FROM (
+                        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+                        FROM park
+                        where (address like '%건대%' OR name like '%건대%')
+            )
+);
 
 
-
-
-
-
+-- 페이징
+SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
+FROM (
+            SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, rownum as r
+            FROM (
+                        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+                        FROM park
+                        where (address like '%%' OR name like '%%')
+            )
+)
+WHERE r >= 4 AND r <= 6;
 
 
 

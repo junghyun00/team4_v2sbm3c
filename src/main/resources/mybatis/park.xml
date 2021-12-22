@@ -11,9 +11,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM park
     </select>
     
-    <!-- read에서 검색 -->
+    <!-- 목록 + 검색 -->
     <select id="park_list_search" resultType="dev.mvc.park.ParkVO" parameterType="HashMap">
         SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+        FROM park
+            <choose>
+                <when test="address == null or address == ''">
+                </when>
+                <otherwise>
+                    WHERE (address LIKE '%' || #{address} || '%'
+                            OR name LIKE '%' || #{address} || '%')
+                </otherwise>
+            </choose>
+    </select>
+    
+    
+    <!-- 검색 레코드 개수 -->
+    <select id="search_count" resultType="int" parameterType="HashMap">
+        SELECT COUNT(*) as cnt
         FROM park
             <choose>
                 <when test="address == null or address == ''">
@@ -23,6 +38,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 </otherwise>
             </choose>
     </select>
+    
+    
+    <!-- 목록 + 검색 + 페이징 -->
+    <select id="park_list_search_paging" resultType="dev.mvc.park.ParkVO" parameterType="HashMap">
+        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
+        FROM (
+                    SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, rownum as r
+                    FROM (
+                                SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+                                FROM park
+                                    <choose>
+                                        <when test="address == null or address == ''">
+                                        </when>
+                                        <otherwise>
+                                            WHERE (address LIKE '%' || #{address} || '%'
+                                                   OR name LIKE '%' || #{address} || '%')
+                                        </otherwise>
+                                    </choose>
+                      )
+         )
+         WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+    
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
