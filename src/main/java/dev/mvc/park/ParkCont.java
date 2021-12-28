@@ -3,6 +3,8 @@ package dev.mvc.park;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
+
+import dev.mvc.tool.Tool;
+import dev.mvc.tool.Upload;
 
 @Controller
 public class ParkCont {
@@ -18,48 +27,16 @@ public class ParkCont {
     @Qualifier("dev.mvc.park.ParkProc")
     private ParkProcInter parkProc;
     
+    @Qualifier("dev.mvc.member.MemberProc")
+    private MemberProcInter memberProc;
+    
+    
+    /** 업로드 파일 절대 경로 */
+    private String uploadDir = Park.getUploadDir();
+    
+    
     public ParkCont() {
         System.out.println("-> ParkCont created.");
-    }
-    
-    
-    /**
-     * 목록 조회
-     * @return
-     */
-    // http://localhost:9091/park/park_list.do
-    @RequestMapping(value = "/park/park_list.do", method = RequestMethod.GET)
-    public ModelAndView park_list() {
-        ModelAndView mav = new ModelAndView();
-        List<ParkVO> list = this.parkProc.park_list();
-        
-        mav.addObject("list", list);
-        mav.setViewName("/park/park_list");
-        
-        return mav;
-    }
-    
-    /**
-     * 목록 + 검색
-     * @param address
-     * @return
-     */
-    // http://localhost:9091/park/park_list_search.do
-    @RequestMapping(value = "/park/park_list_search.do", method = RequestMethod.GET)
-    public ModelAndView park_list_search(@RequestParam(value="address", defaultValue="") String address) {
-        ModelAndView mav = new ModelAndView(); 
-        
-        HashMap<String, Object> map = new HashMap<String, Object>(); 
-        map.put("address", address); // #{address}
-        
-        // 검색 목록
-        List<ParkVO> list = parkProc.park_list_search(map);
-        mav.addObject("list", list);
-        
-        mav.setViewName("/park/park_list_search");
-            
-        return mav;
-        
     }
     
     
@@ -78,10 +55,10 @@ public class ParkCont {
         
         HashMap<String, Object> map = new HashMap<String, Object>(); 
         map.put("address", address); // #{address}
-        map.put("now_page", now_page);
+        map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
         
         // 검색 목록
-        List<ParkVO> list = parkProc.park_list_search(map);
+        List<ParkVO> list = parkProc.park_list_search_paging(map);
         mav.addObject("list", list);
         
         // 검색 레코드 개수
@@ -97,6 +74,67 @@ public class ParkCont {
 
         return mav;
         
+    }
+    
+    
+    /**
+     * 등록 폼
+     * @return
+     */
+    @RequestMapping(value = "/park/park_create.do", method = RequestMethod.GET)
+    public ModelAndView park_create() {
+        ModelAndView mav = new ModelAndView();
+        
+        mav.setViewName("/park/park_create");
+        
+        return mav;
+    }
+    
+    
+    /**
+     * 등록 처리
+     * @param request
+     * @param parkVO
+     * @return
+     */
+    @RequestMapping(value = "/park/park_create.do", method = RequestMethod.POST)
+    public ModelAndView park_create(HttpServletRequest request, ParkVO parkVO) {
+        ModelAndView mav = new ModelAndView();
+        
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 시작
+        // ------------------------------------------------------------------------------
+        String file1 = "";    // 원본 파일명 image
+        String uploadDir = this.uploadDir;   // 파일 업로드 경로
+        
+        MultipartFile mf = parkVO.getFile1MF();
+        
+        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+
+        parkVO.setFile1(file1);
+
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 종료
+        // ------------------------------------------------------------------------------
+        System.out.println("-> contentsno:" + parkVO.getParkno());
+        mav.addObject("parkno", parkVO.getParkno());
+        
+        int cnt = this.parkProc.park_create(parkVO);
+        //cnt = 0;    // else 테스트
+        
+        mav.addObject("cnt", cnt);
+        
+        if (cnt == 1) {
+            mav.setViewName("redirect:/park/park_list_search_paging.do");
+        } else {
+            mav.setViewName("/park/msg");
+        }
+        
+        
+        
+        
+        
+        return mav;
     }
     
     

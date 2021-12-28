@@ -22,23 +22,6 @@ public class ParkProc implements ParkProcInter{
     }
     
     
-    // 주차장 목록 조회
-    @Override
-    public List<ParkVO> park_list() {
-        List<ParkVO> list = this.parkDAO.park_list();
-        return list;
-    }
-
-    
-    // 목록 + 검색
-    @Override
-    public List<ParkVO> park_list_search(HashMap<String, Object> hashMap) {
-        List<ParkVO> list = parkDAO.park_list_search(hashMap);
-
-        return list;
-    }
-    
-    
     // 검색 레코드 갯수
     @Override
     public int search_count(HashMap<String, Object> hashMap) {
@@ -51,11 +34,9 @@ public class ParkProc implements ParkProcInter{
     @Override
     public List<ParkVO> park_list_search_paging(HashMap<String, Object> hashMap) {
         int begin_of_page = ((Integer)hashMap.get("now_page") - 1) * Park.RECORD_PER_PAGE;
-        System.out.println(begin_of_page);
         
         // 시작 rownum 결정
         int start_num = begin_of_page + 1;
-        System.out.println(start_num);
         
         //  종료 rownum
         int end_num = begin_of_page + Park.RECORD_PER_PAGE;
@@ -152,6 +133,14 @@ public class ParkProc implements ParkProcInter{
         str.append("</DIV>"); 
          
         return str.toString(); 
+    }
+
+    
+    // 주차장 등록
+    @Override
+    public int park_create(ParkVO parkVO) {
+        int cnt = this.parkDAO.park_create(parkVO);
+        return cnt;
     }
     
     
