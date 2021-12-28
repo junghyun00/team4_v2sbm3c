@@ -81,7 +81,7 @@ public class ParkCont {
         map.put("now_page", now_page);
         
         // 검색 목록
-        List<ParkVO> list = parkProc.park_list_search(map);
+        List<ParkVO> list = parkProc.park_list_search_paging(map);
         mav.addObject("list", list);
         
         // 검색 레코드 개수

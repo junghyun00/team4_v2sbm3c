@@ -15,7 +15,8 @@
          <li class="nav-item">
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
             <button class="btn btn-dark pt-2" id="manage_btn">주차 등록</button>
-            <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>            
+            <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list.do'" >QNA </button>
          </li>
       </ul>
       <ul class="navbar-nav">
