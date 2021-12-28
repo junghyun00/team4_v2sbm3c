@@ -13,10 +13,16 @@
    <div class="collapse navbar-collapse" id="navbar_list">
       <ul class="navbar-nav mr-auto" id="cate_bar">
          <li class="nav-item">
+<<<<<<< HEAD
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
             <button class="btn btn-dark pt-2" id="manage_btn">주차 등록</button>
             <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list.do'" >QNA </button>
+=======
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do'">주차 등록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>            
+>>>>>>> e9b97bcd07107a50f37c33a59102e5d5a09cdabf
          </li>
       </ul>
       <ul class="navbar-nav">

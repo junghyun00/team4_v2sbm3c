@@ -62,7 +62,8 @@ order by parkno desc;
 
 -- 삭제
 DELETE FROM park
-WHERE parkno=5;
+WHERE parkno=40;
+
 
 
 -- 수정
@@ -102,7 +103,7 @@ FROM (
                         where (address like '%%' OR name like '%%')
             )
 )
-WHERE r >= 4 AND r <= 6;
+WHERE r >= 1 AND r <= 3;
 
 
 

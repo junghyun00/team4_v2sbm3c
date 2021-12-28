@@ -5,28 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.mvc.park.ParkDAOInter">
-    <!-- 주차장 목록 조회 -->
-    <select id="park_list" resultType="dev.mvc.park.ParkVO" >
-        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
-        FROM park
-    </select>
-    
-    <!-- 목록 + 검색 -->
-    <select id="park_list_search" resultType="dev.mvc.park.ParkVO" parameterType="HashMap">
-        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
-        FROM park
-            <choose>
-                <when test="address == null or address == ''">
-                </when>
-                <otherwise>
-                    WHERE (address LIKE '%' || #{address} || '%'
-                            OR name LIKE '%' || #{address} || '%')
-                </otherwise>
-            </choose>
-    </select>
+
+    <!-- 주차장 등록 -->
+    <insert id="park_create" parameterType="dev.mvc.park.ParkVO">
+        INSERT INTO park(parkno, memberno, name, phone, address, area, price, cmt, file1)
+        VALUES (park_seq.nextval, #{memberno}, #{name}, #{phone}, #{address}, #{area}, #{price},  #{cmt}, #{file1})
+    </insert>
     
     
-    <!-- 검색 레코드 개수 -->
+    <!-- 주차장 검색 레코드 개수 -->
     <select id="search_count" resultType="int" parameterType="HashMap">
         SELECT COUNT(*) as cnt
         FROM park
@@ -40,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
-    <!-- 목록 + 검색 + 페이징 -->
+    <!-- 주차장 목록 + 검색 + 페이징 -->
     <select id="park_list_search_paging" resultType="dev.mvc.park.ParkVO" parameterType="HashMap">
         SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
         FROM (
@@ -61,17 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
     
     </select>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 </mapper>
