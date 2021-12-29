@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.qna.QnaDAOInter">
   <!-- QNA 조회 -->
-    <select id="qna_read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+    <select id="qna_list" resultType="dev.mvc.qna.QnaVO" parameterType="int">
          SELECT qnano, memberno, title, content
          FROM qna
     </select>

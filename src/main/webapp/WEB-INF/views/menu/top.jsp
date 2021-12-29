@@ -13,7 +13,7 @@
       <ul class="navbar-nav mr-auto" id="cate_bar">
          <li class="nav-item">
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
-            <button class="btn btn-dark pt-2" id="manage_btn">주차 등록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do'">주차 등록</button>
             <span class="dropdown">
                 <button class="btn btn-dark pt-2" id="manage_btn" data-toggle="dropdown">마이페이지</button>   
                     <ul class="dropdown-menu" style="margin:15px 0px 0px 0px ; background-color: #545a5e;">
