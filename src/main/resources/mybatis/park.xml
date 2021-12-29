@@ -39,8 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                         <when test="address == null or address == ''">
                                         </when>
                                         <otherwise>
-                                            WHERE (address LIKE '%' || #{address} || '%'
-                                                   OR name LIKE '%' || #{address} || '%')
+                                            WHERE (address LIKE '%' || #{address} || '%')
                                         </otherwise>
                                     </choose>
                       )

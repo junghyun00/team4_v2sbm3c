@@ -5,9 +5,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.mvc.qna.QnaDAOInter">
-  <!-- QNA 조회 -->
-    <select id="qna_read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
-         SELECT qnano, memberno, title, content
-         FROM qna
+  
+    <!-- qna 등록 -->
+    <insert id="qna_create" parameterType="dev.mvc.qna.QnaVO">
+        INSERT INTO qna(qnano, memberno, title, content, img)
+        VALUES (qna_seq.nextval, #{memberno}, #{title}, #{content}, #{img})
+    </insert>
+    
+    <!-- qna 검색 레코드 개수 -->
+    <select id="search_count" resultType="int" parameterType="HashMap">
+        SELECT COUNT(*) as cnt
+        FROM qna
+            <choose>
+                <when test="title == null or title == ''">
+                </when>
+                <otherwise>
+                    WHERE (title LIKE '%' || #{title} || '%')
+                </otherwise>
+            </choose>
+    </select>
+    
+    <!-- qna 목록 + 검색 + 페이징 -->
+    <select id="qna_list_search_paging" resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
+        SELECT qnano, memberno, title, content, img, r
+        FROM (
+                    SELECT qnano, memberno, title, content, img, rownum as r
+                    FROM (
+                                SELECT qnano, memberno, title, content, img
+                                FROM qna
+                                    <choose>
+                                        <when test="title == null or title == ''">
+                                        </when>
+                                        <otherwise>
+                                            WHERE (title LIKE '%' || #{title} || '%')
+                                        </otherwise>
+                                    </choose>
+                      )
+         )
+         WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+    
     </select>
 </mapper>

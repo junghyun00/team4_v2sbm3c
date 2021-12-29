@@ -1,11 +1,15 @@
 package dev.mvc.qna;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class QnaVO {
     private int qnano;
     private int memberno;
     private String title="";
     private String content="";
     private String img="";
+    
+    private MultipartFile file1MF;
     
     public int getQnano() {
         return qnano;
@@ -36,6 +40,14 @@ public class QnaVO {
     }
     public void setImg(String img) {
         this.img = img;
+    }
+    
+    public MultipartFile getFile1MF() {
+        return file1MF;
+    }
+
+    public void setFile1MF(MultipartFile file1mf) {
+        file1MF = file1mf;
     }
     
     
