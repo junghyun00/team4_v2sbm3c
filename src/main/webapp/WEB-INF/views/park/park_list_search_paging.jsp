@@ -61,8 +61,12 @@
                         <c:set var='file1'  value="${parkVO.file1 }" />
                         
                         <tr>
-                            <td class="th_bs">${name }</td>
-                            <td class="th_bs">${address }</td>
+                            <td class="th_bs">
+                                <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${name }</a>
+                            </td>    
+                            <td class="th_bs">
+                                <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${address }</a>
+                            </td>
                             <td class="th_bs">${price }원</td>
                         </tr>
                         

@@ -48,6 +48,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
     
     </select>
+    
+    
+    <!-- 글 한 개 조회  -->
+    <select id="read" resultType="dev.mvc.park.ParkVO" parameterType="int">
+        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+        FROM park
+        WHERE parkno = #{parkno}
+    </select>
+    
+    
 
     
 </mapper>

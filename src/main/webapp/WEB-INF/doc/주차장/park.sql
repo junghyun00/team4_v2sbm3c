@@ -62,7 +62,7 @@ order by parkno desc;
 
 -- 삭제
 DELETE FROM park
-WHERE parkno=40;
+WHERE parkno=43;
 
 
 
@@ -105,6 +105,12 @@ FROM (
 )
 WHERE r >= 1 AND r <= 3;
 
+
+
+-- 글 한개 조회
+select parkno, memberno, name, phone, address, area, price, cmt, file1
+from park
+where parkno = 1;
 
 
 
