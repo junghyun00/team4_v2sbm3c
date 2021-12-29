@@ -43,6 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                       )
          )
          WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+         
+         </select>
     
+
+  <!-- QNA 조회 -->
+    <select id="qna_list" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+         SELECT qnano, memberno, title, content
+         FROM qna
     </select>
 </mapper>

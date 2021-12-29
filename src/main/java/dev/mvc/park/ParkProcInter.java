@@ -36,4 +36,12 @@ public interface ParkProcInter {
      * @return
      */
     public int park_create(ParkVO parkVO);
+    
+    
+    /**
+     * 글 한 개 조회
+     * @param parkno
+     * @return
+     */
+    public ParkVO read(int parkno);
 }

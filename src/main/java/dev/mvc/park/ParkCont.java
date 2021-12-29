@@ -110,13 +110,20 @@ public class ParkCont {
         MultipartFile mf = parkVO.getFile1MF();
         
         file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        
+        long size1 = mf.getSize(); // 파일 크기
+        
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+            file1 = Upload.saveFileSpring(mf, uploadDir);
+        }
+        
 
         parkVO.setFile1(file1);
 
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 종료
         // ------------------------------------------------------------------------------
-        System.out.println("-> contentsno:" + parkVO.getParkno());
         mav.addObject("parkno", parkVO.getParkno());
         
         int cnt = this.parkProc.park_create(parkVO);
@@ -130,12 +137,39 @@ public class ParkCont {
             mav.setViewName("/park/msg");
         }
         
-        
-        
-        
-        
         return mav;
     }
     
     
+    /**
+     * 글 한 개 조회
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/park/read.do", method=RequestMethod.GET )
+    public ModelAndView read(int parkno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ParkVO parkVO = this.parkProc.read(parkno);
+        mav.addObject("parkVO", parkVO);
+        
+        mav.setViewName("/park/read");
+        
+        
+        return mav;
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+
