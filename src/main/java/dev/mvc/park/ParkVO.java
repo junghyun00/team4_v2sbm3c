@@ -42,6 +42,12 @@ public class ParkVO {
                      value='' placeholder="파일 선택">
     */
     private MultipartFile file1MF;
+    
+    
+    /**
+     * 파일 크기 단위 출력
+     */
+    private String size1_label;
 
 
 
@@ -125,13 +131,22 @@ public class ParkVO {
         file1MF = file1mf;
     }
 
+    public String getSize1_label() {
+        return size1_label;
+    }
+
+    public void setSize1_label(String size1_label) {
+        this.size1_label = size1_label;
+    }
 
     @Override
     public String toString() {
         return "ParkVO [parkno=" + parkno + ", memberno=" + memberno + ", name=" + name + ", phone=" + phone
                 + ", address=" + address + ", area=" + area + ", price=" + price + ", cmt=" + cmt + ", file1=" + file1
-                + ", file1MF=" + file1MF + "]";
+                + ", file1MF=" + file1MF + ", size1_label=" + size1_label + "]";
     }
     
+    
+
 
 }

@@ -26,7 +26,8 @@
         <div class="row-fluid">
             <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./park_create.do' class="form-horizontal"
              enctype="multipart/form-data">
-                <input type="hidden" name="memberno" value="1">
+                <input type="hidden" name="memberno" value="1">   <!-- 이건 나중에 수정 -->
+                
 	            <div class="form-group">
 	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이름</label>
 	                <div class="col-md-10">

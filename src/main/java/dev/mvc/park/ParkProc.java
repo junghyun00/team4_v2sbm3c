@@ -142,6 +142,18 @@ public class ParkProc implements ParkProcInter{
         int cnt = this.parkDAO.park_create(parkVO);
         return cnt;
     }
+
+    
+    // 글 한 개 조회
+    @Override
+    public ParkVO read(int parkno) {
+        ParkVO parkVO = this.parkDAO.read(parkno);
+        
+
+        
+        
+        return parkVO;
+    }
     
     
     
