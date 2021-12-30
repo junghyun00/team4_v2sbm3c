@@ -52,4 +52,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          SELECT qnano, memberno, title, content
          FROM qna
     </select>
+    
+   <!-- 글 조회  -->
+    <select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+        SELECT qnano, memberno, title, content, img
+        FROM qna
+        WHERE qnano = #{qnano}
+    </select>
+    
+    <!-- 글 삭제 -->
+    <delete id="delete" parameterType="int">
+    DELETE FROM qna
+    WHERE qnano=#{qnano}
+  </delete>
+     
 </mapper>

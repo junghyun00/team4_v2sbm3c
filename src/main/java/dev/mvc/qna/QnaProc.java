@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.park.ParkVO;
+
 @Component("dev.mvc.qna.QnaProc")
 public class QnaProc implements QnaProcInter {
     
@@ -131,5 +133,18 @@ public class QnaProc implements QnaProcInter {
     public int qna_create(QnaVO qnaVO) {
         int cnt = this.qnaDAO.qna_create(qnaVO);
         return cnt;
+    }
+
+
+    @Override
+    public QnaVO read(int qnano) {
+        QnaVO qnaVO = this.qnaDAO.read(qnano);
+        return qnaVO;
+    }
+    
+    @Override
+    public int delete(int qnano) {
+      int cnt = this.qnaDAO.delete(qnano);
+      return cnt;
     }
 }

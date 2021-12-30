@@ -9,12 +9,11 @@
 <title>BLOG</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
@@ -64,9 +63,11 @@
                         
                         <tr>
                             <td class="th_bs">${memberno }</td>
-                            <td class="th_bs">${title }</td>
-                            <td class="th_bs"><A href="./read_update.do?qnano=${qnano }"  title="수정"><span class="glyphicon glyphicon-pencil"></span></A></td>
-                            <td class="th_bs"><A href="./read_delete.do?qnano=${qnano }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A></td>
+                            <td class="th_bs">
+                            <a href="./read.do?qnano=${qnano}&now_page=${param.now_page }&title=${param.title}">${title }</a>
+                            </td>
+                            <td class="th_bs"><A href="./qna_update.do?qnano=${qnano }"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
+                            <td class="th_bs"><A href="./qna_delete.do?qnano=${qnano }" title="삭제" "><i class="fas fa-trash-alt" ></i></A></td>
                         </tr>
                         
                        
