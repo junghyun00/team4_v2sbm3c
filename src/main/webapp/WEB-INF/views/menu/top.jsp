@@ -14,11 +14,6 @@
          <li class="nav-item">
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do'">주차 등록</button>
-<<<<<<< HEAD
-            <button class="btn btn-dark pt-2" id="manage_btn">마이페이지</button>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do'" >QNA </button>
-
-=======
             <span class="dropdown">
                 <button class="btn btn-dark pt-2" id="manage_btn" data-toggle="dropdown">마이페이지</button>   
                     <ul class="dropdown-menu" style="margin:15px 0px 0px 0px ; background-color: #545a5e;">
@@ -26,8 +21,7 @@
                         <li><button class="dropdown-item" href="#" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
                     </ul>
             </span>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list.do'" >QNA </button>
->>>>>>> b376a4eda3b3db69d18206a8c4d1251558dbb027
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do'" >QNA </button>
          </li>
       </ul>
       <ul class="navbar-nav">
