@@ -8,9 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SurveyVO {
-	private int SURVEYNO;
+	private int surveyno;
 	private int memberno;
-	private String PURPOSEPARK;
-	private String PREFERDAY;
-	private String RESERVEPERIOD;
+	private int purposepark;
+	private int preferday;
+	private int reserveperiod;
 }
