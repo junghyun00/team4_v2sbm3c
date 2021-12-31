@@ -44,4 +44,22 @@ public interface ParkProcInter {
      * @return
      */
     public ParkVO read(int parkno);
+    
+    
+    
+    
+    /**
+     * 회원별 등록한 주차장 목록
+     * @param memberno
+     * @return
+     */
+    public List<ParkVO> my_park(int memberno);
+    
+    
+    /**
+     * 회원별 등록한 주차장 목록 조회
+     * @param parkno
+     * @return
+     */
+    public ParkVO my_park_read(int parkno);
 }

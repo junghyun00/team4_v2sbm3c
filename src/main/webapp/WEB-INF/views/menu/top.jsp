@@ -17,7 +17,7 @@
             <span class="dropdown">
                 <button class="btn btn-dark pt-2" id="manage_btn" data-toggle="dropdown">마이페이지</button>   
                     <ul class="dropdown-menu" style="margin:15px 0px 0px 0px ; background-color: #545a5e;">
-                        <li><button class="dropdown-item" href="#" style="color:#fff; background-color: #545a5e;">내가 예약한 주차장</button></li>
+                        <li><button class="dropdown-item" onclick="location.href='/mypage/my_park.do?memberno=${param.memberno }'" style="color:#fff; background-color: #545a5e;">내가 예약한 주차장</button></li>
                         <li><button class="dropdown-item" href="#" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
                     </ul>
             </span>
@@ -31,5 +31,5 @@
       </ul>
    </div>
 </nav>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/index_load.js"></script>

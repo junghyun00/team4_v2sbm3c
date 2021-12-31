@@ -31,7 +31,7 @@ COMMENT ON COLUMN park.file1 is '주차장 사진';
 DROP SEQUENCE park_seq;
 
 CREATE SEQUENCE park_seq
-  START WITH 1              -- 시작 번호
+  START WITH 53              -- 시작 번호
   INCREMENT BY 1          -- 증가값
   MAXVALUE 9999999999 -- 최대값: 999999999 --> NUMBER(10) 대응
   CACHE 2                       -- 2번은 메모리에서만 계산
@@ -62,7 +62,7 @@ order by parkno desc;
 
 -- 삭제
 DELETE FROM park
-WHERE parkno=43;
+WHERE parkno=52;
 
 
 
@@ -110,7 +110,40 @@ WHERE r >= 1 AND r <= 3;
 -- 글 한개 조회
 select parkno, memberno, name, phone, address, area, price, cmt, file1
 from park
-where parkno = 1;
+where memberno=1 and parkno = 11;
+
+
+-- 회원 번호로 글 조회하기
+select parkno, memberno, name, phone, address, area, price, cmt, file1
+from park
+where memberno = 1
+ORDER BY parkno DESC;
 
 
 
+-- 회원별로 자기가 등록한 주차장 상세 조회
+select parkno, memberno, name, phone, address, area, price, cmt, file1
+from park
+where memberno=2 and parkno = 3;
+
+
+
+
+SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
+FROM (
+            SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, rownum as r
+            FROM (
+                        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+                        FROM park
+                        where memberno = 1
+                        ORDER BY parkno DESC
+            )
+)
+WHERE r >= 1 AND r <= 3;
+
+
+
+
+SELECT COUNT(*) as cnt
+FROM park
+WHERE memberno =1;

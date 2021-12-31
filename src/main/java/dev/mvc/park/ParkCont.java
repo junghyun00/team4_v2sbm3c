@@ -110,12 +110,15 @@ public class ParkCont {
         MultipartFile mf = parkVO.getFile1MF();
         
         file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        System.out.println("file1"+ file1);
         
         long size1 = mf.getSize(); // 파일 크기
+        System.out.println("size1"+ size1);
         
         if (size1 > 0) { // 파일 크기 체크
-            // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+            // 파일 저장 후 업로드된 파일명이 리턴됨
             file1 = Upload.saveFileSpring(mf, uploadDir);
+            System.out.println("file1"+ file1);
         }
         
 
@@ -161,13 +164,40 @@ public class ParkCont {
     }
 
     
+   /**
+    *  회원별 등록한 주차장 목록
+    * @param parkno
+    * @return
+    */
+    @RequestMapping(value="/mypage/my_park.do", method=RequestMethod.GET )
+    public ModelAndView my_park(int memberno) {
+        ModelAndView mav = new  ModelAndView(); 
+        
+        List<ParkVO> list = this.parkProc.my_park(memberno);
+        mav.addObject("list", list);
+        
+        return mav;
+    }
     
     
     
-    
-    
-    
-    
+    /**
+     * 회원별 등록한 주차장 목록 조회
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_read.do", method=RequestMethod.GET )
+    public ModelAndView my_park_read(int parkno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ParkVO parkVO = this.parkProc.my_park_read(parkno);
+        mav.addObject("parkVO", parkVO);
+        
+        mav.setViewName("/mypage/my_park_read");
+        
+        
+        return mav;
+    }
     
     
 }

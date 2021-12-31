@@ -29,11 +29,11 @@
 <div class='content_body' style='margin:70px;'>
     <div class="container" >
         <div class="row" >
-            <div class="col-md-6" style="margin: 50px 0px 0px 0px;">
+            <div class="col-md-6" style="margin: 70px 0px 0px 0px;">
                 <c:set var="file1" value="${file1.toLowerCase() }" />
 	                <c:choose>
 		              <c:when test="${file1.endsWith('jpg') || file1.endsWith('png') || file1.endsWith('gif')}">
-		                <IMG src="/park/storage/${file1 }" style="width: 90%;"> 
+		                <IMG src="/park/storage/${file1 }" style="width: 80%;"> 
 		              </c:when>
 		              <c:otherwise> <!-- 기본 이미지 출력 -->
 		                <IMG src="/park/images/none1.png" style="margin: 0px 0px 0px 20px; width: 90%;"> 
@@ -48,9 +48,8 @@
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 전화번호 [ ${phone } ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${price }원 ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
-              
                 
-                <button type='button' onclick="" class="btn btn-dark">예약</button>
+                
                 <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
             </div>
 

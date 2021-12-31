@@ -149,11 +149,34 @@ public class ParkProc implements ParkProcInter{
     public ParkVO read(int parkno) {
         ParkVO parkVO = this.parkDAO.read(parkno);
         
+        return parkVO;
+    }
 
+    
+    // 회원별 등록한 주차장 목록
+    @Override
+    public List<ParkVO> my_park(int memberno) {
+        List<ParkVO> list = this.parkDAO.my_park(memberno);
         
+        return list;
+    }
+
+
+    // 회원별 등록한 주차장 목록 조회
+    @Override
+    public ParkVO my_park_read(int parkno) {
+        ParkVO parkVO = this.parkDAO.my_park_read(parkno);
         
         return parkVO;
     }
+
+
+    
+    
+    
+
+   
+
     
     
     

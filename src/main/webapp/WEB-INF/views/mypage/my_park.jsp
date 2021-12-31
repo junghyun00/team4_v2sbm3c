@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,40 +13,36 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
 <div class='content_body'>
-    <div class="container-fluid">
-        <div class="row" style='border: solid 1px;'>
-            <div class="col-md-6" style='border: solid 1px;'>
-                
-                <%-- ******************** 검색 시작 ******************** --%>
-                <DIV style="text-align: center; clear: both;">  
-                    <form name='frm' id='frm' method='get' action='./park_list_search_paging.do'>
-                      <input type='text' name='address' id='address' placeholder="주차할 지역을 입력해주세요." value='${param.address }' style='margin:15px; width: 30%;'>
-                      <button type='submit' type="button" class="btn btn-dark">검색</button>
-                      <c:if test="${param.address.length() > 0 }">
-                        <button type='button' 
-                                     onclick="location.href='./park_list_search_paging.do?address='" class="btn btn-dark">검색 취소</button>  
-                      </c:if>    
-                    </form>
-                  </DIV>
-                  <%-- ******************** 검색 종료 ******************** --%>
-                
-                <table class="table">
+    <div class="container">
+        <div class="row-fluid">
+            <div style='margin:30px;'>
+            <h4>${memberVO.name }님이 등록하신 주차장</h4>
+            <div style='border-bottom: solid 3px #555555; '></div>
+            </div>
+        </div>
+        
+        <div class="row-fluid">
+            <table class="table">
                 <colgroup>
                   <col style="width: 20%;"></col>
                   <col style="width: 30%;"></col>
-                  <col style="width: 10%;"></col>
+                  <col style="width: 5%;"></col>
+                  <col style="width: 5%;"></col>
                 </colgroup>           
                 
                 <thead>  
                     <TR>
                       <TH class="th_bs">주차장 이름</TH>
                       <TH class="th_bs">주소</TH>
-                      <TH class="th_bs">1시간 당 <br>가격</TH>
+                      <TH class="th_bs">수정</TH>
+                      <TH class="th_bs">삭제</TH>
                     </TR>
                  </thead>
                 
@@ -62,30 +60,25 @@
                         
                         <tr>
                             <td class="th_bs">
-                                <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${name }</a>
+                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${name }</a>
                             </td>    
-                            <td class="th_bs">
-                                <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${address }</a>
+                            <td class="th_bs">${address }</a>
                             </td>
-                            <td class="th_bs">${price }원</td>
+                            <td class="th_bs"><A href=""  title="수정"></A></td>
+                            <td class="th_bs"><A href="" title="삭제"></A></td>
                         </tr>
                         
                    </c:forEach>
                 </tbody>
                 </table>
                     <hr>
-					<!-- 페이지 목록 출력 부분 시작 -->
-					<DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
-					<!-- 페이지 목록 출력 부분 종료 -->
-            </div>
-            
-            <div class="col-md-6" style='border: solid 1px;'>
-               <!--  <img src="/ex/images/map.jpg" style='width:100%'> -->
-           </div>
-       </div>
+                    <!-- 페이지 목록 출력 부분 시작 -->
+                    <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+                    <!-- 페이지 목록 출력 부분 종료 -->
+        </div>
     </div>
 </div>
-
+ 
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
 </html>

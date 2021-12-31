@@ -57,6 +57,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
+    
+    <!-- 회원별 등록한 주차장 목록 -->
+    <select id="my_park" resultType="dev.mvc.park.ParkVO" parameterType="int">
+        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+        FROM park
+        WHERE memberno = #{memberno}
+        ORDER BY parkno DESC
+    </select>
+   
+    
+    <!-- 회원별 등록한 주차장 목록 조회  -->
+    <select id="my_park_read" resultType="dev.mvc.park.ParkVO" parameterType="int">
+        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
+        FROM park
+        WHERE parkno = #{parkno}
+    </select>
+    
 
     
 </mapper>
