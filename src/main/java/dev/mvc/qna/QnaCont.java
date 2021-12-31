@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.park.ParkVO;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -122,5 +123,99 @@ public class QnaCont {
         return mav;
     }
     
+    /**
+     * 글 한 개 조회
+     * @param qnano
+     * @return
+     */
+    @RequestMapping(value="/qna/read.do", method=RequestMethod.GET )
+    public ModelAndView read(int qnano) {
+        ModelAndView mav = new ModelAndView();
+        
+        QnaVO qnaVO = this.qnaProc.read(qnano);
+        mav.addObject("qnaVO", qnaVO);
+        
+        mav.setViewName("/qna/read");
+        
+        
+        return mav;
+    }
+    
+    /**
+     * 삭제 폼
+     * @param qnano
+     * @return
+     */
+    @RequestMapping(value="/qna/qna_delete.do", method=RequestMethod.GET )
+    public ModelAndView delete(int qnano) { 
+      ModelAndView mav = new  ModelAndView();
+      
+      QnaVO qnaVO = this.qnaProc.read(qnano);
+      // 삭제할 정보를 조회하여 확인
+      mav.addObject("qnaVO", qnaVO);
+           
+      mav.setViewName("/qna/qna_delete");  // qna/delete.jsp
+      
+      return mav; 
+    }
 
+    /**
+     * 삭제 처리 http://localhost:9091/qna/delete.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/qna/qna_delete.do", method = RequestMethod.POST)
+    public ModelAndView delete(HttpServletRequest request, QnaVO qnaVO, 
+                                            int now_page,
+                                            @RequestParam(value="word", defaultValue="") String word) {
+      ModelAndView mav = new ModelAndView();
+      int qnano = qnaVO.getQnano();
+     
+      int cnt = 0;
+          // -------------------------------------------------------------------
+          // 파일 삭제 코드 시작
+          // -------------------------------------------------------------------
+          // 삭제할 파일 정보를 읽어옴.
+      QnaVO vo = qnaProc.read(qnano);
+//          System.out.println("contentsno: " + vo.getContentsno());
+//          System.out.println("file1: " + vo.getFile1());
+      long size1 = 0;
+      boolean sw = false;
+          
+     
+      String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/qna/storage/"; // 절대 경로
+
+          // System.out.println("sw: " + sw);
+          // -------------------------------------------------------------------
+          // 파일 삭제 종료 시작
+          // -------------------------------------------------------------------
+          
+      cnt = this.qnaProc.delete(qnano); // DBMS 삭제
+          
+          // -------------------------------------------------------------------------------------
+      System.out.println("-> qnano: " + vo.getQnano());
+      System.out.println("-> word: " + word);
+          
+          // 마지막 페이지의 레코드 삭제시의 페이지 번호 -1 처리
+      HashMap<String, Object> page_map = new HashMap<String, Object>();
+      page_map.put("qnano", vo.getQnano());
+      page_map.put("word", word);
+          // 10번째 레코드를 삭제후
+          // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
+          // 페이지수를 4 -> 3으로 감소 시켜야함.
+      if (qnaProc.search_count(page_map) % Qna.RECORD_PER_PAGE == 0) {
+        now_page = now_page - 1;
+            
+      }
+          // -------------------------------------------------------------------------------------
+          
+      mav.addObject("now_page", now_page);
+      mav.setViewName("redirect:/qna/qna_list_search_paging.do"); 
+
+      mav.addObject("qnano", qnaVO.getQnano());
+      System.out.println("-> qnano: " + qnaVO.getQnano());
+      
+      return mav; // forward
+    }   
+    
 }

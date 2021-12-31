@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="dev.mvc.reservation.ReservationDAOInter">
+
+    <!-- 주차장 등록 -->
+    <insert id="reservation_create" parameterType="dev.mvc.reservation.ReservationVO">
+        INSERT INTO reservation(reserveno, memberno, parkno, reservedate,reservetime, carno,notice)
+        VALUES (reservation_seq.nextval, #{memberno}, #{parkno}, TO_DATE(#{reservedate},'YYYY-MM-DD'), TO_DATE(#{reservetime},'HH24:MI'), #{ carno}, #{notice})
+    </insert>
+    
+     <!-- 글 한 개 조회  -->
+    <select id="read" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+        SELECT reserveno, memberno, parkno, reservedate, reservetime, carno,notice
+        FROM reservation
+        WHERE reserveno = #{reserveno}
+    </select>
+    
+    
+    </mapper>

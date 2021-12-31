@@ -2,16 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var='parkno' value="${parkVO.parkno }" />
-<c:set var='memberno' value="${parkVO.memberno }" />
-<c:set var='name'  value="${parkVO.name }" />
-<c:set var='phone'  value="${parkVO.phone }" />
-<c:set var='address'  value="${parkVO.address }" />
-<c:set var='area'  value="${parkVO.area }" />
-<c:set var='price'  value="${parkVO.price }" />
-<c:set var='cmt'  value="${parkVO.cmt }" />
-<c:set var='file1'  value="${parkVO.file1 }" />
-
+<c:set var='qnano' value="${qnaVO.qnano }" />
+<c:set var='memberno' value="${qnaVO.memberno }" />
+<c:set var='title'  value="${qnaVO.title }" />
+<c:set var='content'  value="${qnaVO.content }" />
+<c:set var='img'  value="${qnaVO.img }" />
 
 <!DOCTYPE html>
 <html>
@@ -29,32 +24,27 @@
 <div class='content_body' style='margin:70px;'>
     <div class="container" >
         <div class="row" >
-            <div class="col-md-6" style="margin: 50px 0px 0px 0px;">
+            <div class="col-md-6" >
                 <c:set var="file1" value="${file1.toLowerCase() }" />
 	                <c:choose>
 		              <c:when test="${file1.endsWith('jpg') || file1.endsWith('png') || file1.endsWith('gif')}">
-		                <IMG src="/park/storage/${file1 }" style="width: 90%;"> 
+		                <IMG src="/qna/storage/${file1 }" style="width: 80%;"> 
 		              </c:when>
 		              <c:otherwise> <!-- 기본 이미지 출력 -->
-		                <IMG src="/park/images/none1.png" style="margin: 0px 0px 0px 20px; width: 90%;"> 
+		                <IMG src="/qna/images/none1.png" style="margin: 0px 0px 0px 20px; width: 90%;"> 
 		              </c:otherwise>
 		            </c:choose>
             </div>
             
             <div class="col-md-6" ><br>
-                <span style="font-size: 1.5em; font-weight: bold; ">${name }</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">주소 [ ${address } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">구역번호 [ ${area } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">주차장 전화번호 [ ${phone } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${price }원 ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">제목 [ ${title } ]</span><br><br><br><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">내용 [ ${content } ]</span><br><br>
               
                 
-                <button type='button' onclick="location.href='/reservation/reservation_create.do?parkno=${parkno}'"  class="btn btn-dark">예약</button>
+                <button type='button' onclick="" class="btn btn-dark">답변</button>
                 <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
             </div>
-
-            
+  
         </div>
     </div>
 </div>

@@ -3,6 +3,8 @@ package dev.mvc.qna;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.park.ParkVO;
+
 public interface QnaProcInter {
     
     /**
@@ -36,5 +38,19 @@ public interface QnaProcInter {
      * @return
      */
     public int qna_create(QnaVO qnaVO);
+    
+    /**
+     * 글 한 개 조회
+     * @param qnano
+     * @return
+     */
+    public QnaVO read(int qnano);
+    
+    /**
+     * 삭제
+     * @param qnano
+     * @return
+     */
+    public int delete(int qnano);
 
 }

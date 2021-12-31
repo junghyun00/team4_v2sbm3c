@@ -12,7 +12,7 @@ notice      VARCHAR2(150 BYTE)
 
 public class ReservationVO {
     /** 예약 번호 */
-    private int reseveno;
+    private int reserveno;
     /** 회원 번호 */
     private int memberno;
     /** 주차장 번호 */
@@ -28,11 +28,11 @@ public class ReservationVO {
     
     
     
-    public int getReseveno() {
-        return reseveno;
+    public int getReserveno() {
+        return reserveno;
     }
-    public void setReseveno(int reseveno) {
-        this.reseveno = reseveno;
+    public void setReserveno(int reserveno) {
+        this.reserveno = reserveno;
     }
     public int getMemberno() {
         return memberno;
@@ -74,7 +74,7 @@ public class ReservationVO {
     
     @Override
     public String toString() {
-        return "ReservationVO [reseveno=" + reseveno + ", memberno=" + memberno + ", parkno=" + parkno
+        return "ReservationVO [reserveno=" + reserveno + ", memberno=" + memberno + ", parkno=" + parkno
                 + ", reservedate=" + reservedate + ", reservetime=" + reservetime + ", carno=" + carno + ", notice="
                 + notice + "]";
     }
