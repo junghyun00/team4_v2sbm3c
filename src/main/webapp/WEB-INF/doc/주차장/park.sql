@@ -31,7 +31,7 @@ COMMENT ON COLUMN park.file1 is '주차장 사진';
 DROP SEQUENCE park_seq;
 
 CREATE SEQUENCE park_seq
-  START WITH 53              -- 시작 번호
+  START WITH 13           -- 시작 번호
   INCREMENT BY 1          -- 증가값
   MAXVALUE 9999999999 -- 최대값: 999999999 --> NUMBER(10) 대응
   CACHE 2                       -- 2번은 메모리에서만 계산
