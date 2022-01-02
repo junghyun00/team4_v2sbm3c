@@ -1,5 +1,7 @@
 package dev.mvc.reservation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +33,25 @@ public class ReservationProc implements ReservationProcInter{
         
         
         return reservationVO;
+    }
+    
+    
+    
+    // 회원별 예약 목록 조회
+    @Override
+    public List<ReservationVO> my_reser(int memberno) {
+        List<ReservationVO> list = this.reservationDAO.my_reser(memberno);
+        
+        return list;
+    }
+    
+    
+    // 회원별 예약 목록 Park + Reservation join
+    @Override
+    public List<Park_ReservationVO> my_reser_join(int memberno) {
+        List<Park_ReservationVO> list = this.reservationDAO.my_reser_join(memberno);
+        
+        return list;
     }
    
 
