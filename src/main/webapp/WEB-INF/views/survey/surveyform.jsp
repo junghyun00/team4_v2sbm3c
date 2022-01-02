@@ -25,36 +25,40 @@
 						<h1>Survey</h1>
 					</div>
 					<div class="col-md-12 border-bottom">
-						<form action="">
+						<form action="" name="">
+							<input type="hidden" name="memberno" id="memberno" value=3>
 							<div class="mt-3">
 								<h5>주차 목적</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="PURPOSEPARK" class="PURPOSEPARK" value=1>시설 이용
+									<input type="radio" name="purposepark" class="purposepark" value=1>시설 이용
 								</label>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="PURPOSEPARK" class="PURPOSEPARK" value=2>주변 방문
+									<input type="radio" name="purposepark" class="purposepark" value=2>주변 방문
 								</label>  
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="PURPOSEPARK" class="PURPOSEPARK" value=3>일반 주차
+									<input type="radio" name="purposepark" class="purposepark" value=3>일반 주차
 								</label> 
 							</div>
 							<div class="mt-3">
 								<h5>선호 요일</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="PREFERDAY" class="PREFERDAY" value=1>평일
+									<input type="radio" name="preferday" class="preferday" value=1>평일
 								</label>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="PREFERDAY" class="PREFERDAY" value=2>주말
+									<input type="radio" name="preferday" class="preferday" value=2>주말
 								</label>
 							</div>
 							<div class="mt-3">
 								<h5>예약 기간</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="RESERVEPERIOD" class="RESERVEPERIOD" value=1>장기
+									<input type="radio" name="reserveperiod" class="reserveperiod" value=1>장기
 								</label>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="RESERVEPERIOD" class="RESERVEPERIOD" value=2>단기
+									<input type="radio" name="reserveperiod" class="reserveperiod" value=2>단기
 								</label>
+							</div>
+							<div class="mt-3 mb-3 text-center">
+								<button type="button" class="btn btn-ligth border text-center" id="submit_btn">SUBMIT</button>
 							</div>
 						</form>
 					</div>
@@ -68,5 +72,6 @@
 		crossorigin="anonymous"></script>
 
 	<jsp:include page="../menu/bottom.jsp" flush='false' />
+	<script type="text/javascript" src="/js/survey.js"></script>
 </body>
 </html>
