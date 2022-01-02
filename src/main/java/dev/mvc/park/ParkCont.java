@@ -200,6 +200,193 @@ public class ParkCont {
     }
     
     
+    
+    /**
+     * 주차장 정보 수정폼
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_update.do", method=RequestMethod.GET )
+    public ModelAndView my_park_update(int parkno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ParkVO parkVO = this.parkProc.read_my_park_update(parkno);
+        
+        mav.addObject("parkVO", parkVO);
+        mav.setViewName("/mypage/my_park_update");
+        
+        return mav;
+    }
+    
+    /**
+     * 주차장 정보 수정 처리
+     * @param parkVO
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_update.do", method=RequestMethod.POST )
+    public ModelAndView my_park_update(ParkVO parkVO) {
+        ModelAndView mav = new ModelAndView();
+        
+        int cnt = this.parkProc.my_park_update(parkVO);
+        
+        mav.addObject("cnt", cnt);
+        mav.addObject("parkno", parkVO.getParkno());
+        mav.addObject("memberno", parkVO.getMemberno());
+        
+        mav.setViewName("redirect:/mypage/my_park_read.do");
+        
+        return mav;
+        
+        
+    }
+    
+    
+    /**
+     * 주차장 이미지 파일 수정 폼
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_update_file.do", method=RequestMethod.GET )
+    public ModelAndView my_park_update_file(int parkno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ParkVO parkVO = this.parkProc.read_my_park_update(parkno);
+        
+        mav.addObject("parkVO", parkVO);
+        mav.setViewName("/mypage/my_park_update_file");
+        
+        return mav;
+    }
+    
+    /**
+     * 주차장 이미지 파일 수정 처리
+     * @param parkVO
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_update_file.do", method=RequestMethod.POST )
+    public ModelAndView my_park_update_file(HttpServletRequest request, ParkVO parkVO) {
+        ModelAndView mav = new ModelAndView();
+        String uploadDir = this.uploadDir;
+        
+        
+        ParkVO vo = parkProc.my_park_read(parkVO.getParkno());  // 삭제할 파일 정보 읽어옴
+        
+        mav.addObject("memberno", parkVO.getMemberno());
+        System.out.println("memberno" + parkVO.getMemberno());
+        
+        
+        int cnt = 0;
+        // -------------------------------------------------------------------
+        // 파일 삭제 코드 시작
+        // -------------------------------------------------------------------
+        String file1 = vo.getFile1();
+        long size1 = 0;
+        boolean sw = false;
+        
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
+        // -------------------------------------------------------------------
+        // 파일 삭제 종료 
+        // -------------------------------------------------------------------
+        // -------------------------------------------------------------------
+        // 파일 전송 코드 시작
+        // -------------------------------------------------------------------
+        file1 = "";
+        MultipartFile mf = parkVO.getFile1MF();
+        
+        file1 = mf.getOriginalFilename();
+        size1 = mf.getSize(); // 파일 크기
+        
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨
+            file1 = Upload.saveFileSpring(mf, uploadDir);
+            System.out.println("file1"+ file1);
+        }
+        
+
+        parkVO.setFile1(file1);
+        // -------------------------------------------------------------------
+        // 파일 전송 코드 종료
+        // -------------------------------------------------------------------
+        cnt = this.parkProc.my_park_update_file(parkVO);
+        
+        mav.addObject("cnt", cnt);
+        mav.addObject("parkno", parkVO.getParkno());
+        mav.addObject("memberno", parkVO.getMemberno());
+        
+        mav.setViewName("redirect:/mypage/my_park_read.do");
+        
+        return mav;
+        
+        
+    }
+    
+    
+                                                            
+    
+    /**
+     * 주차장 삭제 폼
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.GET )
+    public ModelAndView my_park_delete(int parkno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ParkVO parkVO = this.parkProc.my_park_read(parkno);
+        
+        mav.addObject("parkVO", parkVO);
+        mav.setViewName("/mypage/my_park_delete");
+        
+        return mav;
+    }
+    
+    
+    /**
+     * 주차장 삭제 처리
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.POST)
+    public ModelAndView my_park_delete(HttpServletRequest request, ParkVO parkVO) {
+        ModelAndView mav = new ModelAndView();
+        String uploadDir = this.uploadDir;
+        
+        int parkno = parkVO.getParkno();
+        
+        mav.addObject("memberno", parkVO.getMemberno());
+        System.out.println("memberno" + parkVO.getMemberno());
+        
+        int cnt = 0;
+        // -------------------------------------------------------------------
+        // 파일 삭제 코드 시작
+        // -------------------------------------------------------------------
+        // 삭제할 파일 정보를 읽어옴.
+        ParkVO vo = parkProc.my_park_read(parkno);
+        
+        String file1 = vo.getFile1();
+        long size1 = 0;
+        boolean sw = false;
+        
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
+        // -------------------------------------------------------------------
+        // 파일 삭제 종료 시작
+        // -------------------------------------------------------------------
+        
+        cnt = this.parkProc.my_park_delete(parkno);
+        
+        //mav.addObject("cnt", cnt);
+        //mav.addObject("parkno", parkVO.getParkno());
+        
+        
+        mav.setViewName("redirect:/mypage/my_park.do");
+        
+        
+        return mav;
+        
+    }
+    
+
+    
 }
 
 

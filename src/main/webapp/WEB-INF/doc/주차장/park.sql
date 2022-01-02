@@ -71,6 +71,12 @@ UPDATE park
 SET address='서울특별시 광진구 자양동 5-5'
 WHERE parkno=3;
 
+
+UPDATE park
+SET name='강남 주차장', phone='01011112222', address='서울 강남구', area='a04', price=1000, cmt='주차 자리 협소'
+WHERE parkno=54
+
+
 commit;
 
 
@@ -129,21 +135,3 @@ where memberno=2 and parkno = 3;
 
 
 
-SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, r
-FROM (
-            SELECT parkno, memberno, name, phone, address, area, price, cmt, file1, rownum as r
-            FROM (
-                        SELECT parkno, memberno, name, phone, address, area, price, cmt, file1
-                        FROM park
-                        where memberno = 1
-                        ORDER BY parkno DESC
-            )
-)
-WHERE r >= 1 AND r <= 3;
-
-
-
-
-SELECT COUNT(*) as cnt
-FROM park
-WHERE memberno =1;

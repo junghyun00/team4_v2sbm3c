@@ -402,12 +402,12 @@
   
   /* 기타 메시지 */
   .message {
-    width: 70%;
+    width: 100%;
     border: none;
-    margin: 30px auto;
+    margin:70px auto;
     text-align: center;
     background-color: #FAFAFA;
-    padding: 30px;
+    padding: 50px;
     
   }
   

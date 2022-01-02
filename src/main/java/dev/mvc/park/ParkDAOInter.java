@@ -53,4 +53,27 @@ public interface ParkDAOInter {
      */
     public ParkVO my_park_read(int parkno);
     
+    
+    /**
+     * 주차장 정보 수정
+     * @param parkVO
+     * @return
+     */
+    public int my_park_update(ParkVO parkVO);
+    
+    
+    /**
+     * 주차장 이미지 파일 수정
+     * @param parkVO
+     * @return
+     */
+    public int my_park_update_file(ParkVO parkVO);
+    
+    
+    /**
+     * 주차장 삭제
+     * @param parkno
+     * @return
+     */
+    public int my_park_delete(int parkno);
 }
