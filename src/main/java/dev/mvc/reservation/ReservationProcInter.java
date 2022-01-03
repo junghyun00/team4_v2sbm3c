@@ -1,10 +1,14 @@
 package dev.mvc.reservation;
 
 
+
 import java.util.HashMap;
 import java.util.List;
 
 import dev.mvc.park.ParkVO;
+
+import java.util.List;
+
 
 public interface ReservationProcInter {
     
@@ -17,6 +21,7 @@ public interface ReservationProcInter {
      */
     public ReservationVO read(int reserveno);
     
+
     /**
      * 검색 레코드 갯수
      * @param hashMap
@@ -48,3 +53,20 @@ public interface ReservationProcInter {
 
     
 }
+   
+    
+    /**
+     * 회원별 예약 목록 조회
+     * @param reserveno
+     * @return
+     */
+    public List<ReservationVO> my_reser(int memberno);
+    
+    
+    /**
+     * 회원별 예약 목록 Park + Reservation join
+     * @return
+     */
+    public List<Park_ReservationVO> my_reser_join(int memberno);
+}
+

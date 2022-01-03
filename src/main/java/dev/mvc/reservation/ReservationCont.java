@@ -1,6 +1,9 @@
  package dev.mvc.reservation;
 
+
 import java.util.HashMap;
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,6 +101,7 @@ public class ReservationCont {
         
     }
     
+
     /**
      * 목록 + 검색 + 페이징
      * @param carno
@@ -212,4 +216,43 @@ public class ReservationCont {
       
       return mav; // forward
     }   
+
+    
+    /**
+     * 회원별 예약 목록 조회
+     * @param reserveno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_reser.do", method=RequestMethod.GET)
+    public ModelAndView my_reser(int memberno) {
+        ModelAndView mav = new ModelAndView();
+        
+        List<ReservationVO> list = this.reservationProc.my_reser(memberno);
+        mav.addObject("list", list);
+        
+        ParkVO parkVO = this.parkProc.my_park_read(memberno);
+        mav.addObject("parkVO", parkVO);
+        
+        mav.setViewName("/mypage/my_reser");
+        
+        return mav;
+    }
+    
+    /**
+     * 회원별 예약 목록 Park + Reservation join
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_reser_join.do", method=RequestMethod.GET)
+    public ModelAndView my_reser_join(int memberno) {
+        ModelAndView mav = new ModelAndView();
+        
+        List<Reservation_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
+        mav.addObject("list", list);
+        
+        mav.setViewName("/mypage/my_reser_join");
+        
+        return mav;
+    }
+    
+
 }

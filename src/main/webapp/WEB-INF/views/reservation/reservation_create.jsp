@@ -62,7 +62,7 @@
                 <div class="table-responsive">
                       <table class="table table-bordered">
                         <tbody>
-                        <input type="hidden" name="memberno" value="1" required="required">   <!-- 이건 나중에 수정 -->
+                        <input type="hidden" name="memberno" value="2" required="required">   <!-- 이건 나중에 수정 -->
                         <input type="hidden" name="parkno" value="${parkno}" required="required">   <!-- 이건 나중에 수정 -->
                             <tr>
                                 <th width:"10%;">차량번호

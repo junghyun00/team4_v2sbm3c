@@ -74,4 +74,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </delete>
         
     
+    
+    <!-- 회원별 예약 목록  -->
+    <select id="my_reser" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+        SELECT reserveno, memberno, parkno, reservedate, reservetime, carno,notice
+        FROM reservation
+        WHERE memberno = #{memberno}
+        ORDER BY memberno DESC
+    </select>
+    
+    
+    <!-- 회원별 예약 목록 Park + Reservation join  -->
+    <select id="my_reser_join" resultType="dev.mvc.reservation.Park_ReservationVO" parameterType="int">
+        SELECT p.parkno as p_parkno, p.name as p_name, 
+                   r.reservedate, r.carno, r.notice
+        FROM park p, reservation r
+        WHERE p.parkno = r.parkno AND r.memberno= #{memberno}
+        ORDER BY r.reserveno DESC
+    </select>
+    
+    
     </mapper>
