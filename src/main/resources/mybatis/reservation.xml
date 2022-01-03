@@ -20,5 +20,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE reserveno = #{reserveno}
     </select>
     
+        <select id="max" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+        SELECT MAX(reserveno)
+        FROM reservation
+
+        </select>
+        
+       <!-- 예약 검색 레코드 개수 -->
+    <select id="search_count" resultType="int" parameterType="HashMap">
+        SELECT COUNT(*) as cnt
+        FROM reservation
+            <choose>
+                <when test="carno == null or carno == ''">
+                </when>
+                <otherwise>
+                    WHERE (carno LIKE '%' || #{carno} || '%')
+                </otherwise>
+            </choose>
+    </select>
+    
+    <!-- reservation 목록 + 검색 + 페이징 -->
+    <select id="reservation_list_search_paging" resultType="dev.mvc.reservation.ReservationVO" parameterType="HashMap">
+        SELECT reserveno, memberno, parkno, reservedate,reservetime,carno,notice,r
+        FROM (
+                    SELECT reserveno, memberno, parkno, reservedate,reservetime, carno,notice,rownum as r
+                    FROM (
+                                SELECT reserveno, memberno, parkno, reservedate,reservetime, carno,notice
+                                FROM reservation
+                                    <choose>
+                                        <when test="carno == null or carno == ''">
+                                        </when>
+                                        <otherwise>
+                                            WHERE (carno LIKE '%' || #{carno} || '%')
+                                        </otherwise>
+                                    </choose>
+                      )
+         )
+         WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+         
+         </select>
+    
+
+  <!-- reservation 조회 -->
+    <select id="reservation_list" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+         SELECT reserveno, memberno, parkno, reservedate,reservetime, carno,notice
+         FROM reservation
+    </select>
+    
+      <!-- 글 삭제 -->
+    <delete id="delete" parameterType="int">
+    DELETE FROM reservation
+    WHERE reserveno=#{reserveno}
+  </delete>
+        
     
     </mapper>
