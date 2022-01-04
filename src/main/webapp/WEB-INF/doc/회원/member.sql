@@ -47,6 +47,7 @@ values(member_seq.nextval, 'ghi789', '456789', '사아자', '서울특별시 성
 -- 조회
 select memberno, id, passwd, name, address, phone, email
 from member
+WHERE memberno = 1
 order by memberno asc;
 
 -- 삭제
@@ -59,4 +60,31 @@ SET passwd=123, name='바바바'
 WHERE memberno=4;
 
 commit;
+
+
+
+-- id 중복 확인
+SELECT count(id) as cnt
+FROM member
+WHERE id='abc321';
+
+
+
+
+-- 페이징
+SELECT memberno, id, passwd, name, address, phone, email, r
+FROM (
+            SELECT memberno, id, passwd, name, address, phone, email, rownum as r
+            FROM (
+                        SELECT memberno, id, passwd, name, address, phone, email
+                        FROM member
+                        where (id like '%abc123%' OR name like '%왕눈삼%')
+            )
+)
+WHERE r >= 1 AND r <= 3;
+
+
+
+
+
 
