@@ -1,13 +1,21 @@
 package dev.mvc.reservation;
 
+
+import java.util.HashMap;
 import java.util.List;
+
+import dev.mvc.park.ParkVO;
+import dev.mvc.qna.QnaVO;
+
+import java.util.List;
+
 
 
 public interface ReservationDAOInter {
     
     /**
      * 주차장 등록
-     * @param parkVO
+     * @param ReservationVO
      * @return
      */
     public int reservation_create(ReservationVO reservationVO);
@@ -20,6 +28,28 @@ public interface ReservationDAOInter {
      */
     public ReservationVO read(int reserveno);
     
+
+    /**
+     * 검색 레코드 갯수
+     * @param hashMap
+     * @return
+     */
+    public int search_count(HashMap<String, Object> hashMap);
+    
+    /**
+     * Reservation 목록 + 검색 + 페이징
+     * @param map
+     * @return
+     */
+    public List<ReservationVO>reservation_list_search_paging(HashMap<String, Object> map);
+    
+    /**
+     * 삭제
+     * @param reserveno
+     * @return
+     */
+    public int delete(int reserveno);
+
     
     /**
      * 회원별 예약 목록 조회
@@ -36,6 +66,6 @@ public interface ReservationDAOInter {
      * @return
      */
     public List<Park_ReservationVO> my_reser_join(int memberno);
-    
+ 
 
 }
