@@ -246,7 +246,7 @@ public class ReservationCont {
     public ModelAndView my_reser_join(int memberno) {
         ModelAndView mav = new ModelAndView();
         
-        List<Reservation_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
+        List<Park_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
         mav.addObject("list", list);
         
         mav.setViewName("/mypage/my_reser_join");

@@ -52,7 +52,6 @@ public interface ReservationProcInter {
     public int delete(int reserveno);
 
     
-}
    
     
     /**
