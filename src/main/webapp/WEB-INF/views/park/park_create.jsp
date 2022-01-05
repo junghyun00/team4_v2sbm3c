@@ -28,55 +28,56 @@
              enctype="multipart/form-data">
                 <input type="hidden" name="memberno" value="1">   <!-- 이건 나중에 수정 -->
                 
-	            <div class="form-group">
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이름</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이름*</label>
 	                <div class="col-md-10">
 	                    <input type='text' name='name'  placeholder='주차장 이름을 입력해주세요.' required="required" 
 	                       class="form-control" style='width: 50%;'>
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 주소</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 주소*</label>
 	                <div class="col-md-10">
 	                    <input type='text' name='address' placeholder='주차장 상세 주소를 입력해주세요.' required="required" 
 	                       class="form-control" style='width: 80%;'>
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 구역번호</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 구역번호*</label>
 	                <div class="col-md-10">
 	                    <input type='text' name='area' placeholder='주차장 구역번호를 입력해주세요.' required="required" 
 	                       class="form-control" style='width: 50%;'>
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>전화번호</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>전화번호*</label>
 	                <div class="col-md-10">
 	                    <input type='text' name='phone' placeholder='주차장 전화번호를 입력해주세요.' required="required" 
 	                       class="form-control" style='width: 50%;'>
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
-	                <label class="col-md-6" style='color:#555555;; font-weight: bold; '>주차장 가격 (숫자만 입력해주세요)</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 가격*</label>
 	                <div class="col-md-10">
-	                    <input type='text' name='price' placeholder='1시간 당 가격을 입력해주세요.' required="required" 
+	                    <input type='text' name='price' placeholder='1시간 당 가격을 입력해주세요. ' required="required" 
 	                       class="form-control" style='width: 50%;'>
+	                     숫자만 입력해주세요   
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이미지</label>
+	            <div class="row" style='margin:40px auto;'>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이미지*</label>
 	                <div class="col-md-10">
 	                    <input type='file' name='file1MF' id='file1MF' required="required" 
 	                       placeholder="파일 선택" class="form-control" style='width: 30%;'>
 	                </div>
 	            </div>
 	
-	            <div class="form-group" style='margin-top:30px;'>
+	            <div class="row" style='margin:40px auto;'>
 	                <label class="col-md-10" style='color:#555555;; font-weight: bold; '>주차장에 대한 공지사항, 주의사항 등을 적어주세요. (필수는 아닙니다)</label>
 	                <div class="col-md-10">
 	                    <textarea type='text' name='cmt' rows="3" 
@@ -93,5 +94,6 @@
         
     </div>
 </div>
+<jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
 </html>

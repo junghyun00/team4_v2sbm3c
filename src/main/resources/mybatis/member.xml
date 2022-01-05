@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.member.MemberDAOInter">
+    
+    <!-- id 중복 체크 -->
+    <select id="checkID" resultType="int" parameterType="String">
+      SELECT COUNT(id) as cnt
+      FROM member
+      WHERE id=#{id}
+    </select>
+    
+    
+    <!-- 회원 가입 -->
+    <insert id="create" parameterType="dev.mvc.member.MemberVO">
+        INSERT INTO member(memberno, id, passwd, name, address, phone, email)
+        VALUES (member_seq.nextval, #{id}, #{passwd}, #{name}, #{address}, #{phone}, #{email})
+    </insert>
+    
+
+    
+    <!-- id로 회원 정보 조회 -->
+    <select id="readById" resultType="dev.mvc.member.MemberVO" parameterType="String">
+      SELECT memberno, id, passwd, name, address, phone, email
+      FROM member
+      WHERE id = #{id}
+    </select>
+    
+    <!-- 로그인 -->
+    <select id="login" resultType="int" parameterType="Map">
+      SELECT COUNT(memberno) as cnt
+      FROM member
+      WHERE id=#{id} AND passwd=#{passwd}
+    </select>
+    
+    
+    
+    
+    <!-- 회원 검색 레코드 개수 -->
+    <select id="search_count" resultType="int" parameterType="HashMap">
+        SELECT COUNT(*) as cnt
+        FROM member
+            <choose>
+                <when test="id == null or id == ''">
+                </when>
+                <otherwise>
+                    WHERE (id LIKE '%' || #{id} || '%')
+                </otherwise>
+            </choose>
+    </select>
+    
+    <!-- 회원 목록 + 검색 + 페이징 -->
+    <select id="list" resultType="dev.mvc.member.MemberVO" parameterType="HashMap">
+      SELECT memberno, id, passwd, name, address, phone, email, r
+        FROM (
+                    SELECT memberno, id, passwd, name, address, phone, email, rownum as r
+                    FROM (
+                                SELECT memberno, id, passwd, name, address, phone, email
+                                FROM member
+                                    <choose>
+                                        <when test="id == null or id == ''">
+                                        </when>
+                                        <otherwise>
+                                            WHERE (id LIKE '%' || #{id} || '%')
+                                        </otherwise>
+                                    </choose>
+                      )
+         )
+         WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+    </select>
+    
+    
+    
+    <!-- 회원 정보 조회 -->
+    <select id ="read" resultType="dev.mvc.member.MemberVO" parameterType="int">
+        SELECT memberno, id, passwd, name, address, phone, email
+        FROM member
+        WHERE memberno = #{memberno}
+    </select>
+    
+    <!-- 회원 정보 수정 -->
+    <update id="update" parameterType="dev.mvc.member.MemberVO">
+      UPDATE member 
+      SET name=#{name}, address=#{address},
+            phone=#{phone}, email=#{email}
+      WHERE memberno=#{memberno}
+    </update>
+    
+    
+    <!-- 회원 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM member
+        WHERE memberno = #{memberno} 
+    </delete>
+    
+    
+</mapper>

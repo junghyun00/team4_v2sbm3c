@@ -41,7 +41,7 @@ function updatefun() {
             <div style='border-bottom: solid 3px #555555; '></div>
             </div>
         </div>
-        <div class="row-fluid">
+        <div class="row-fluid" style='margin:20px 10px 10px 50px; '>
             <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./my_park_update.do' class="form-horizontal"
              enctype="multipart/form-data">
                 <input type='hidden' name='parkno' value='${parkno }'>
@@ -104,5 +104,7 @@ function updatefun() {
         
     </div>
 </div>
+<jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
+
 </html>
