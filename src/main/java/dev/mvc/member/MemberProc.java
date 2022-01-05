@@ -61,7 +61,7 @@ public class MemberProc implements MemberProcInter {
     
     // 회원 목록 + 검색 + 페이징
     @Override
-    public List<MemberVO> list(HashMap<String, Object> hashMap) {
+    public List<MemberVO> member_list(HashMap<String, Object> hashMap) {
         int begin_of_page = ((Integer)hashMap.get("now_page") - 1) * Member.RECORD_PER_PAGE;
         
         // 시작 rownum 결정
@@ -73,7 +73,7 @@ public class MemberProc implements MemberProcInter {
         hashMap.put("start_num", start_num);
         hashMap.put("end_num", end_num);
         
-        List<MemberVO> list = this.memberDAO.list(hashMap);
+        List<MemberVO> list = this.memberDAO.member_list(hashMap);
         
         
         return list;
@@ -176,22 +176,34 @@ public class MemberProc implements MemberProcInter {
     
     // 회원 정보 수정 처리
     @Override
-    public int update(MemberVO memberVO) {
-        int cnt = this.memberDAO.update(memberVO);
+    public int member_update(MemberVO memberVO) {
+        int cnt = this.memberDAO.member_update(memberVO);
         return cnt;
     }
     
     
     // 회원 삭제
     @Override
-    public int delete(int memberno) {
-        int cnt = this.memberDAO.delete(memberno);
+    public int member_delete(int memberno) {
+        int cnt = this.memberDAO.member_delete(memberno);
         return cnt;
     }
     
     
 
-    
+    // 현재 패스워드 검사
+    @Override
+    public int passwd_check(HashMap<Object, Object> map) {
+      int cnt = this.memberDAO.passwd_check(map);
+      return cnt;
+    }
+
+    // 패스워드 변경
+    @Override
+    public int passwd_update(HashMap<Object, Object> map) {
+      int cnt = this.memberDAO.passwd_update(map);
+      return cnt;
+    }
 
     
 

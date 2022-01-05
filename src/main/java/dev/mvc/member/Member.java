@@ -11,7 +11,7 @@ public class Member {
     
     
     /** 목록 파일명 */
-    public static String LIST_FILE = "list.do";
+    public static String LIST_FILE = "member_list.do";
     
     
 //    // Windows, VMWare, AWS cloud 절대 경로

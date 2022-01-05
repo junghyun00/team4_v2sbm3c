@@ -19,19 +19,81 @@
     <div class="container">
         <div class="row-fluid">
             <div class='message'>
-                <span class="span_fail">
-                    오류로 인해 회원 가입에 실패했습니다.<br>
-                    다시 가입 해주세요.
-                </span><br><br>
-                <button type='button' onclick="history.back()" class="btn btn-dark">다시 시도</button>
+                <fieldset class='fieldset_basic'>
+                    <UL>
+                        <c:choose>
+                        
+                        
+                            <c:when test="${param.code == 'passwd_update_success'}"> <%-- Java if --%>
+					          <LI class='li_none'>
+					            <span class="span_success">${param.name }님(${param.id }) 패스워드를 변경했습니다.</span>
+					          </LI>                                                                      
+					          <LI class='li_none'>
+					            <button type='button' 
+					                         onclick="location.href='/member/list.do'"
+					                         class="btn btn-default">확인</button>
+					           </LI>            
+					        </c:when>
+					        
+					        
+					        <c:when test="${param.code == 'passwd_update_success'}"> <%-- Java if --%>
+					          <LI class='li_none'>
+					            <span class="span_success">${param.name }님(${param.id }) 패스워드를 변경했습니다.</span>
+					          </LI>                                                                      
+					          <LI class='li_none'>
+					            <button type='button' 
+					                         onclick="location.href='/member/list.do'"
+					                         class="btn btn-dark">확인</button>
+					           </LI>            
+					        </c:when>
+					        
+					        <c:when test="${param.code == 'passwd_fail'}">
+					          <LI class='li_none'>
+					            <span class="span_fail">현재 패스워드가 일치하지 않습니다.</span>
+					          </LI>
+					          <LI class='li_none'>
+					            <button type='button' 
+					                         onclick="history.back()"
+					                         class="btn btn-default">다시 시도</button>
+					           </LI>     
+					        </c:when>
+					        
+					        <c:when test="${code == 'passwd_update_fail'}"> <%-- Java if --%>
+					          <LI class='li_none'>
+					            <span class="span_fail">${param.name }님(${param.id }) 패스워드 변경에 실패했습니다.</span>
+					          </LI>                                                                      
+					        </c:when>
+					        
+					        <c:otherwise>
+					          <LI class='li_none_left'>
+					            <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>
+					          </LI>
+					          <LI class='li_none_left'>
+					            <span class="span_fail">다시 시도해주세요.</span>
+					          </LI>
+					        </c:otherwise>
+					        
+					        
+                        </c:choose>
+                        
+                        <LI class='li_none'><br>
+                        
+				        <c:choose>
+				            <c:when test="${param.cnt == 0 }">
+				                <button type='button' onclick="history.back()" class="btn btn-default">다시 시도</button>    
+				            </c:when>
+				        </c:choose>
+				        
+				        </LI>
+                     </UL>
+                </fieldset>
             </div>
         </div>
     </div>
 </div>
 
+
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
 
 </html>
-
-

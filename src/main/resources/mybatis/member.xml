@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 회원 목록 + 검색 + 페이징 -->
-    <select id="list" resultType="dev.mvc.member.MemberVO" parameterType="HashMap">
+    <select id="member_list" resultType="dev.mvc.member.MemberVO" parameterType="HashMap">
       SELECT memberno, id, passwd, name, address, phone, email, r
         FROM (
                     SELECT memberno, id, passwd, name, address, phone, email, rownum as r
@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 회원 정보 수정 -->
-    <update id="update" parameterType="dev.mvc.member.MemberVO">
+    <update id="member_update" parameterType="dev.mvc.member.MemberVO">
       UPDATE member 
       SET name=#{name}, address=#{address},
             phone=#{phone}, email=#{email}
@@ -91,10 +91,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
     <!-- 회원 삭제 -->
-    <delete id="delete" parameterType="int">
+    <delete id="member_delete" parameterType="int">
         DELETE FROM member
         WHERE memberno = #{memberno} 
     </delete>
     
+    
+    
+    <!--  현재 패스워드 검사 -->
+    <select id="passwd_check" parameterType="HashMap" resultType="int">
+      SELECT COUNT(memberno) as cnt
+      FROM member
+      WHERE memberno=#{memberno} AND passwd=#{passwd}
+    </select>
+    
+    
+    <!-- 패스워드 변경 -->
+    <update id="passwd_update" parameterType="HashMap">
+      UPDATE member
+      SET passwd=#{passwd}
+      WHERE memberno=#{memberno}
+    </update>
     
 </mapper>

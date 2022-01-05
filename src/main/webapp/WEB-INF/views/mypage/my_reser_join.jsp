@@ -30,7 +30,7 @@
         </div>
         
         <div class="row-fluid">
-            <table class="table">
+            <table class="table table-hover">
                 <colgroup>
                   <col style="width: 20%;"></col>
                   <col style="width: 30%;"></col>
