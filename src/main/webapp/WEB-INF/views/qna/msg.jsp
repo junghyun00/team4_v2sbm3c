@@ -11,13 +11,6 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-<script>
-function deletefun() {
-	alert("삭제되었습니다.")
-}
-</script>
-
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
@@ -25,17 +18,13 @@ function deletefun() {
 <div class='content_body'>
     <div class="container">
         <div class="row-fluid">
-        <form name='frm' method='POST' action='./my_qna_delete.do'>
-            <input type='hidden' name='qnano' value='${param.qnano }'>
-            <input type="hidden" name="memberno" value='${param.memberno }'>
-            
-            <div class='message' style="font-size: 1.2em; font-weight: bold; ">
-                삭제하면 복구 할 수 없습니다.
-                삭제하시겠습니까?<br><br>
-                <button type = "submit" onclick = "deletefun()" class="btn btn-dark">삭제</button>
-                <button type = "button" onclick = "history.back()" class="btn btn-dark">취소</button>
+            <div class='message'>
+                <span class="span_fail">
+                    오류로 인해 등록에 실패했습니다.<br>
+                    다시 등록 해주세요.
+                </span><br><br>
+                <button type='button' onclick="history.back()" class="btn btn-dark">다시 시도</button>
             </div>
-	    </form>
         </div>
     </div>
 </div>
@@ -44,3 +33,5 @@ function deletefun() {
 </body>
 
 </html>
+
+

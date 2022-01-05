@@ -66,8 +66,8 @@
                             <td class="th_bs">
                             <a href="./read.do?qnano=${qnano}&now_page=${param.now_page }&title=${param.title}">${title }</a>
                             </td>
-                            <td class="th_bs"><A href="./qna_update.do?qnano=${qnano }"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
-                            <td class="th_bs"><A href="./qna_delete.do?qnano=${qnano }" title="삭제" "><i class="fas fa-trash-alt" ></i></A></td>
+                            <td class="th_bs"><A href="./my_qna_update.do?qnano=${qnano }"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
+                            <td class="th_bs"><A href="./my_qna_delete.do?qnano=${qnano }" title="삭제"><i class="fas fa-trash-alt" ></i></A></td>
                         </tr>
                         
                        

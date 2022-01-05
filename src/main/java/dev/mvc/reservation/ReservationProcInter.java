@@ -52,8 +52,6 @@ public interface ReservationProcInter {
     public int delete(int reserveno);
 
     
-}
-   
     
     /**
      * 회원별 예약 목록 조회
