@@ -21,7 +21,7 @@
   <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-	        <h4>○○님의 주차장 등록</h4>
+	        <h4>○○님의 QNA 등록</h4>
 	        <div style='border-bottom: solid 3px #555555; '></div>
 	        </div>
         </div>
@@ -31,7 +31,7 @@
                 <input type="hidden" name="memberno" value="1">   <!-- 이건 나중에 수정 -->
   
     <div class="form-group">
-       <label class="control-label col-md-2">제목</label>
+       <label class="control-label col-md-2">글 제목</label>
        <div class="col-md-10">
          <input type='text' name='title' value='' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>
@@ -39,7 +39,7 @@
     </div>
     
     <div class="form-group">
-       <label class="control-label col-md-2">내용</label>
+       <label class="control-label col-md-2">글 내용</label>
        <div class="col-md-10">
          <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'></textarea>
        </div>

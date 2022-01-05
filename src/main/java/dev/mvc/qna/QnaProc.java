@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.park.ParkVO;
-
 @Component("dev.mvc.qna.QnaProc")
 public class QnaProc implements QnaProcInter {
     
@@ -128,23 +126,60 @@ public class QnaProc implements QnaProcInter {
     }
 
     
-    // 주차장 등록
+    // QNA 등록
     @Override
     public int qna_create(QnaVO qnaVO) {
         int cnt = this.qnaDAO.qna_create(qnaVO);
         return cnt;
     }
 
-
+    // 글 조회
     @Override
     public QnaVO read(int qnano) {
         QnaVO qnaVO = this.qnaDAO.read(qnano);
         return qnaVO;
     }
     
+    // 회원별 등록한 QNA 목록
     @Override
-    public int delete(int qnano) {
-      int cnt = this.qnaDAO.delete(qnano);
-      return cnt;
+    public List<QnaVO> my_qna(int memberno) {
+        List<QnaVO> list = this.qnaDAO.my_qna(memberno);
+        
+        return list;
     }
+    
+    // 회원별 등록한 QNA 목록 조회
+    @Override
+    public QnaVO my_qna_read(int qnano) {
+        QnaVO qnaVO = this.qnaDAO.my_qna_read(qnano);
+        
+        return qnaVO;
+    }
+    
+    // QNA 수정용 조회
+    @Override
+    public QnaVO read_my_qna_update(int qnano) {
+        QnaVO qnaVO = this.qnaDAO.read(qnano);
+        
+        return qnaVO;
+    }
+     
+    // qna 정보 수정
+    @Override
+    public int my_qna_update(QnaVO qnaVO) {
+        int cnt = this.qnaDAO.my_qna_update(qnaVO);
+        
+        return cnt;
+    }
+
+
+     // qna 삭제
+    @Override
+    public int my_qna_delete(int qnano) {
+        int cnt = this.qnaDAO.my_qna_delete(qnano);
+        
+        return cnt;
+    }
+
+ 
 }

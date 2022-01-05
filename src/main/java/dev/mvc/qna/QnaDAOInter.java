@@ -3,8 +3,6 @@ package dev.mvc.qna;
 import java.util.HashMap;
 import java.util.List;
 
-import dev.mvc.park.ParkVO;
-
 public interface QnaDAOInter {
     
     /**
@@ -36,10 +34,31 @@ public interface QnaDAOInter {
     public QnaVO read(int qnano);
     
     /**
+     * 회원별 등록한 QNA 목록
+     * @param memberno
+     * @return
+     */
+    public List<QnaVO> my_qna(int memberno);
+    
+    /**
+     * 회원별 등록한 QNA 목록 조회
+     * @param qnano
+     * @return
+     */
+    public QnaVO my_qna_read(int qnano);
+    
+    /**
+     * 글 정보 수정
+     * @param qnaVO
+     * @return
+     */
+    public int my_qna_update(QnaVO qnaVO);
+    
+    /**
      * 삭제
      * @param qnano
      * @return
      */
-    public int delete(int qnano);
+    public int my_qna_delete(int qnano);
 
 }
