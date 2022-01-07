@@ -406,7 +406,6 @@ public class MemberCont {
          map.put("passwd", new_passwd); // 새로운 패스워드를 저장
          update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
          
-         
          if (update_cnt == 1) {
              mav.addObject("code", "passwd_update_success");   // 패스워드 변경 성공
          } else {

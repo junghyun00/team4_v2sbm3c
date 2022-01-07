@@ -71,8 +71,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 글 정보 수정 -->
     <update id="my_qna_update" parameterType="dev.mvc.qna.QnaVO">
         UPDATE qna
-        SET title = #{title}, content = #{content}
-        WHERE qnano = #{qnano}
+        SET title=#{title}, content=#{content}
+        WHERE qnano=#{qnano}
     </update>
     
     <!-- 글 삭제 -->

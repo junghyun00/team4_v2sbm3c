@@ -186,6 +186,8 @@ public class QnaCont {
 
         return mav;
     }
+    
+    
 
     /**
      * QNA 정보 수정폼
@@ -194,12 +196,12 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value = "/qna/my_qna_update.do", method = RequestMethod.GET)
-    public ModelAndView my_qna_update(int qnano) {
+    public ModelAndView update(int qnano) {
         ModelAndView mav = new ModelAndView();
 
-        QnaVO qnaVO = this.qnaProc.read_my_qna_update(qnano);
-
+        QnaVO qnaVO = this.qnaProc.read(qnano);
         mav.addObject("qnaVO", qnaVO);
+        
         mav.setViewName("/qna/my_qna_update");
 
         return mav;
@@ -212,24 +214,18 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value = "/qna/my_qna_update.do", method = RequestMethod.POST)
-    public ModelAndView my_qna_update(HttpServletRequest request, QnaVO qnaVO) {
+    public ModelAndView update(QnaVO qnaVO){
         ModelAndView mav = new ModelAndView();
-
-        int cnt = this.qnaProc.my_qna_update(qnaVO);
-
+        
+        int cnt= qnaProc.my_qna_update(qnaVO);
+        
         mav.addObject("cnt", cnt);
         mav.addObject("qnano", qnaVO.getQnano());
-        mav.addObject("memberno", qnaVO.getMemberno());
+
+        mav.setViewName("redirect:/qna/qna_list_search_paging.do");
         
-        if (cnt == 1) {
-            mav.setViewName("redirect:/qna/qna_list_search_paging.do");
-        } else {
-            mav.setViewName("/qna/msg");
-        }
-
         return mav;
-
-    }
+      }
 
     /**
      * 삭제 폼
@@ -256,52 +252,18 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value = "/qna/my_qna_delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, QnaVO qnaVO, 
-                                            int now_page,
-                                            @RequestParam(value="word", defaultValue="") String word) {
+    public ModelAndView delete_proc(int qnano) {
       ModelAndView mav = new ModelAndView();
-      int qnano = qnaVO.getQnano();
+      
+      QnaVO qnaVO = this.qnaProc.read(qnano);
      
-      int cnt = 0;
-          // -------------------------------------------------------------------
-          // 파일 삭제 코드 시작
-          // -------------------------------------------------------------------
-          // 삭제할 파일 정보를 읽어옴.
-      QnaVO vo = qnaProc.read(qnano);
+      int cnt = qnaProc.my_qna_delete(qnano);
 
-      long size1 = 0;
-      boolean sw = false;
-          
-          // System.out.println("sw: " + sw);
-          // -------------------------------------------------------------------
-          // 파일 삭제 종료 시작
-          // -------------------------------------------------------------------
-          
-      cnt = this.qnaProc.my_qna_delete(qnano); // DBMS 삭제
-          
-          // -------------------------------------------------------------------------------------
-      System.out.println("-> qnano: " + vo.getQnano());
-      System.out.println("-> word: " + word);
-          
-          // 마지막 페이지의 레코드 삭제시의 페이지 번호 -1 처리
-      HashMap<String, Object> page_map = new HashMap<String, Object>();
-      page_map.put("qnano", vo.getQnano());
-      page_map.put("word", word);
-          // 10번째 레코드를 삭제후
-          // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
-          // 페이지수를 4 -> 3으로 감소 시켜야함.
-      if (qnaProc.search_count(page_map) % Qna.RECORD_PER_PAGE == 0) {
-        now_page = now_page - 1;
-            
-      }
-          // -------------------------------------------------------------------------------------
-          
-      mav.addObject("now_page", now_page);
+      mav.addObject("cnt", cnt);
+      mav.addObject("qnano", qnaVO.getQnano());
+      
       mav.setViewName("redirect:/qna/qna_list_search_paging.do"); 
 
-      mav.addObject("qnano", qnaVO.getQnano());
-      System.out.println("-> qnano: " + qnaVO.getQnano());
-      
       return mav; // forward
     }   
 
