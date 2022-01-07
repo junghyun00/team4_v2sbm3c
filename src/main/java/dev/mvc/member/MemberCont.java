@@ -409,8 +409,8 @@ public class MemberCont {
        if (cnt == 1) { // 현재 패스워드가 일치하는 경우
          map.put("passwd", new_passwd); // 새로운 패스워드를 저장
          update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
-         
          //update_cnt=0;   // update_cnt의 else 테스트
+         
          if (update_cnt == 1) {
              mav.addObject("code", "passwd_update_success");   // 패스워드 변경 성공
          } else {
@@ -444,8 +444,6 @@ public class MemberCont {
        MemberVO memberVO = this.memberProc.read(memberno);
        mav.addObject("memberVO", memberVO);
        
-//       MemberVO memberVO2 = memberProc.readById(memberVO.getId());
-//       mav.addObject("memberno", memberVO2.getMemberno());
        
        mav.setViewName("/mypage/me_update"); 
        

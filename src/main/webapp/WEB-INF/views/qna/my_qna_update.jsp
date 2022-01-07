@@ -41,12 +41,12 @@ function updatefun() {
             <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./my_qna_update.do' class="form-horizontal"
              enctype="multipart/form-data">
                 <input type='hidden' name='qnano' value='${qnano }'>
-                <input type="hidden" name="memberno" value='${memberno }'>  
+                <input type="hidden" name="memberno" value='${memberno }'>
                 
                 <div class="form-group">
-                    <label class="col-md-2" style='color:#555555;; font-weight: bold; '>글 제목</label>
+                    <label class="col-md-2" style='color:#555555; font-weight: bold; '>글 제목</label>
                     <div class="col-md-10">
-                        <input type='text' name='name' value='${title }' required="required" 
+                        <input type='text' name='title' value='${title }' required="required" 
                            class="form-control" style='width: 50%;'>
                     </div>
                 </div>
