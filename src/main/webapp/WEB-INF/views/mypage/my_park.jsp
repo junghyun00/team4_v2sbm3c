@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-            <h4>${memberVO.name }님이 등록하신 주차장</h4>
+            <h4>${memberVO.id }(${memberVO.name })님이 등록하신 주차장</h4>
             <div style='border-bottom: solid 3px #555555; '></div>
             </div>
         </div>

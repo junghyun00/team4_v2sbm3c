@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 public interface MemberProcInter {
     
     /**
@@ -71,11 +73,19 @@ public interface MemberProcInter {
     
     
     /**
-     * 회원 정보 수정 처리
+     * 관리자가 회원 정보 수정
      * @param memberVO
      * @return
      */
     public int member_update(MemberVO memberVO);
+    
+    
+    /**
+     * 회원이 자기 정보 수정
+     * @param memberVO
+     * @return
+     */
+    public int member_update1(MemberVO memberVO);
     
     
     /**
@@ -101,5 +111,20 @@ public interface MemberProcInter {
      * @return 변경된 패스워드 갯수
      */
     public int passwd_update(HashMap<Object, Object> map);
+    
+    
+    /**
+     * 로그인된 회원 계정인지 검사합니다.
+     * @param session
+     * @return true: 관리자
+     */
+    public boolean isMember(HttpSession session);   
+
+    /**
+     * 로그인된 관리자인지 검사합니다.
+     * @param session
+     * @return true: 관리자
+     */
+    public boolean isAdmin(HttpSession session);   
 
 }

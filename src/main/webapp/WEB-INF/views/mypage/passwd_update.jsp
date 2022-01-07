@@ -74,7 +74,7 @@
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-            <h4>패스워드 변경</h4>
+            <h4>${memberVO.id }(${memberVO.name })님의 패스워드 변경</h4>
             <div style='border-bottom: solid 3px #555555; '></div>
             </div>
         </div>

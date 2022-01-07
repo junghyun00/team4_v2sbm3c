@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,7 @@ public class QnaCont {
     @Qualifier("dev.mvc.qna.QnaProc")
     private QnaProcInter qnaProc;
 
+    @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
 
@@ -39,29 +41,36 @@ public class QnaCont {
      */
     @RequestMapping(value = "/qna/qna_list_search_paging.do", method = RequestMethod.GET)
     public ModelAndView qna_list_search_paging(@RequestParam(value = "title", defaultValue = "") String title,
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
+                                                                    @RequestParam(value = "now_page", defaultValue = "1") int now_page, 
+                                                                    HttpSession session) {
         System.out.println("--> now_page: " + now_page);
 
         ModelAndView mav = new ModelAndView();
+        
+        if (memberProc.isMember(session)) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("title", title); // #{title}
+            map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("title", title); // #{title}
-        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+            // 검색 목록
+            List<QnaVO> list = qnaProc.qna_list_search_paging(map);
+            mav.addObject("list", list);
 
-        // 검색 목록
-        List<QnaVO> list = qnaProc.qna_list_search_paging(map);
-        mav.addObject("list", list);
+            // 검색 레코드 개수
+            int search_count = qnaProc.search_count(map);
+            mav.addObject("search_count", search_count);
 
-        // 검색 레코드 개수
-        int search_count = qnaProc.search_count(map);
-        mav.addObject("search_count", search_count);
+            // 페이지 목록 문자열 생성
+            String paging = qnaProc.pagingBox(search_count, now_page, title);
+            mav.addObject("paging", paging);
+            mav.addObject("now_page", now_page);
 
-        // 페이지 목록 문자열 생성
-        String paging = qnaProc.pagingBox(search_count, now_page, title);
-        mav.addObject("paging", paging);
-        mav.addObject("now_page", now_page);
+            mav.setViewName("/qna/qna_list_search_paging");
+        } else {
+            mav.setViewName("/member/login_need"); 
+        }
 
-        mav.setViewName("/qna/qna_list_search_paging");
+        
 
         return mav;
 

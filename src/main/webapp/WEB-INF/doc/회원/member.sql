@@ -21,6 +21,7 @@ COMMENT ON COLUMN member.name is '회원 이름';
 COMMENT ON COLUMN member.address is '회원 주소';
 COMMENT ON COLUMN member.phone is '회원 핸드폰 번호';
 COMMENT ON COLUMN member.email is '회원 EMAIL';
+COMMENT ON COLUMN member.grade is '등급';
 
 
 DROP SEQUENCE member_seq;
@@ -84,6 +85,9 @@ FROM (
 WHERE r >= 1 AND r <= 3;
 
 
+
+-- 등급 컬럼 추가
+alter table member add (grade NUMBER);
 
 
 

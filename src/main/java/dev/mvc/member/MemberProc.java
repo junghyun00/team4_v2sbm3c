@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -182,6 +184,15 @@ public class MemberProc implements MemberProcInter {
     }
     
     
+    // 회원이 자기 정보 수정
+    @Override
+    public int member_update1(MemberVO memberVO) {
+        int cnt = this.memberDAO.member_update(memberVO);
+        return cnt;
+    }
+    
+    
+    
     // 회원 삭제
     @Override
     public int member_delete(int memberno) {
@@ -203,6 +214,47 @@ public class MemberProc implements MemberProcInter {
     public int passwd_update(HashMap<Object, Object> map) {
       int cnt = this.memberDAO.passwd_update(map);
       return cnt;
+    }
+    
+    
+    // 로그인된 회원 계정인지 검사합니다
+    @Override
+    public boolean isMember(HttpSession session) {
+        boolean sw = false;  // 로그인하지 않은 것으로 초기화
+        int grade = 99;
+        
+        if (session != null) {
+            String id = (String)session.getAttribute("id");
+            
+            if (session.getAttribute("grade") != null) {
+                grade = (int)session.getAttribute("grade");
+            }
+            
+            if (id != null && grade <= 20){   // grade가 20이하니까 grade가 10인 관리자도 접근 가능
+                sw = true;
+            }
+                
+        }
+        return sw;
+    }
+    
+    // 관리자인지 검사
+    @Override
+    public boolean isAdmin(HttpSession session) {
+        boolean sw = false;  // 로그인하지 않은 것으로 초기화
+        int grade = 99;
+        
+        if (session != null) {
+            String id = (String)session.getAttribute("id");
+            if (session.getAttribute("memberno") != null) {
+                grade = (int)session.getAttribute("grade");
+            }
+            
+            if (id != null && grade <= 10) {   // grade가 10 이하니까 10인 관리자만 접근 가능
+                sw = true;
+            }
+        }
+        return sw;
     }
 
     

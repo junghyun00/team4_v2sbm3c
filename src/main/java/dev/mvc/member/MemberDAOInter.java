@@ -60,11 +60,19 @@ public interface MemberDAOInter {
     public MemberVO read(int memberno);
     
     /**
-     * 수정 처리
+     * 관리자가 회원 정보 수정
      * @param memberVO
      * @return
      */
     public int member_update(MemberVO memberVO);
+    
+    
+    /**
+     * 회원이 자기 정보 수정
+     * @param memberVO
+     * @return
+     */
+    public int member_update1(MemberVO memberVO);
     
     
     /**

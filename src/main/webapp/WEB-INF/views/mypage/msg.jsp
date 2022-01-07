@@ -23,45 +23,37 @@
                     <UL>
                         <c:choose>
                         
-                        
-                            <c:when test="${param.code == 'passwd_update_success'}"> <%-- Java if --%>
+					        <c:when test="${code == 'passwd_update_success'}"> <%-- Java if --%>
 					          <LI class='li_none'>
-					            <span class="span_success">${param.name }님(${param.id }) 패스워드를 변경했습니다.</span>
+					            <span class="span_success">${name }님(${id }) 패스워드를 변경했습니다.</span>
 					          </LI>                                                                      
 					          <LI class='li_none'>
 					            <button type='button' 
-					                         onclick="location.href='/member/list.do'"
-					                         class="btn btn-default">확인</button>
-					           </LI>            
-					        </c:when>
-					        
-					        
-					        <c:when test="${param.code == 'passwd_update_success'}"> <%-- Java if --%>
-					          <LI class='li_none'>
-					            <span class="span_success">${param.name }님(${param.id }) 패스워드를 변경했습니다.</span>
-					          </LI>                                                                      
-					          <LI class='li_none'>
-					            <button type='button' 
-					                         onclick="location.href='/member/list.do'"
+					                         onclick="location.href='/'"
 					                         class="btn btn-dark">확인</button>
 					           </LI>            
 					        </c:when>
 					        
-					        <c:when test="${param.code == 'passwd_fail'}">
+					        <c:when test="${code == 'passwd_fail'}">
 					          <LI class='li_none'>
 					            <span class="span_fail">현재 패스워드가 일치하지 않습니다.</span>
 					          </LI>
 					          <LI class='li_none'>
 					            <button type='button' 
 					                         onclick="history.back()"
-					                         class="btn btn-default">다시 시도</button>
+					                         class="btn btn-dark">다시 시도</button>
 					           </LI>     
 					        </c:when>
 					        
 					        <c:when test="${code == 'passwd_update_fail'}"> <%-- Java if --%>
 					          <LI class='li_none'>
-					            <span class="span_fail">${param.name }님(${param.id }) 패스워드 변경에 실패했습니다.</span>
-					          </LI>                                                                      
+					            <span class="span_fail">${name }님(${id }) 패스워드 변경에 실패했습니다.</span>
+					          </LI>
+					          <LI class='li_none'>
+                                <button type='button' 
+                                             onclick="history.back()"
+                                             class="btn btn-dark">다시 시도</button>
+                               </LI>                                                                        
 					        </c:when>
 					        
 					        <c:otherwise>
@@ -71,6 +63,11 @@
 					          <LI class='li_none_left'>
 					            <span class="span_fail">다시 시도해주세요.</span>
 					          </LI>
+					          <LI class='li_none'>
+                                <button type='button' 
+                                             onclick="history.back()"
+                                             class="btn btn-dark">다시 시도</button>
+                               </LI>  
 					        </c:otherwise>
 					        
 					        
@@ -80,7 +77,7 @@
                         
 				        <c:choose>
 				            <c:when test="${param.cnt == 0 }">
-				                <button type='button' onclick="history.back()" class="btn btn-default">다시 시도</button>    
+				                <button type='button' onclick="history.back()" class="btn btn-dark">다시 시도</button>    
 				            </c:when>
 				        </c:choose>
 				        

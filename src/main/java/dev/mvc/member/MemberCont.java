@@ -72,19 +72,19 @@ public class MemberCont {
      public ModelAndView create(MemberVO memberVO){
          ModelAndView mav = new ModelAndView();
          
-         int cnt= memberProc.create(memberVO);
-         // cnt = 0;     // else 테스트
+         memberVO.setGrade(20); // 기본 회원 가입 등록 20 지정   관리자 = 10, 일반 회원 = 20
          
-         mav.addObject("cnt", cnt);
-         mav.addObject("name", memberVO.getName());
-         mav.addObject("id", memberVO.getId());
+         int cnt= memberProc.create(memberVO);
+         
+         MemberVO memberVO2 = memberProc.readById(memberVO.getId());
+         mav.addObject("memberno", memberVO2.getMemberno());
          
          if (cnt == 1) {
-             mav.setViewName("redirect:/");
+             mav.setViewName("/survey/surveyform");
          } else {
              mav.setViewName("/member/create_msg");
          }
-         
+        
          return mav;
          
      }
@@ -172,7 +172,7 @@ public class MemberCont {
          session.setAttribute("memberno", memberVO.getMemberno()); // 서버의 메모리에 기록
          session.setAttribute("id", id);
          session.setAttribute("name", memberVO.getName());
-         session.setAttribute("phone", memberVO.getPhone());
+         session.setAttribute("grade", memberVO.getGrade());
          
          // -------------------------------------------------------------------
          // id 관련 쿠기 저장
@@ -236,8 +236,7 @@ public class MemberCont {
       * @param session
       * @return
       */
-     @RequestMapping(value="/member/logout.do", 
-                                method=RequestMethod.GET)
+     @RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
      public ModelAndView logout(HttpSession session){
        ModelAndView mav = new ModelAndView();
        session.invalidate(); // 모든 session 변수 삭제
@@ -369,10 +368,14 @@ public class MemberCont {
       * @param memberno
       * @return
       */
-     @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.GET)
+     @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
      public ModelAndView passwd_update(int memberno){
        ModelAndView mav = new ModelAndView();
-       mav.setViewName("/member/passwd_update");
+       
+       MemberVO memberVO = this.memberProc.read(memberno);
+       mav.addObject("memberVO", memberVO);
+       
+       mav.setViewName("/mypage/passwd_update");
        
        return mav;
      }
@@ -385,7 +388,7 @@ public class MemberCont {
       * @param new_passwd 새로운 패스워드
       * @return
       */
-     @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.POST)
+     @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.POST)
      public ModelAndView passwd_update(int memberno, String current_passwd, String new_passwd){
        ModelAndView mav = new ModelAndView();
        
@@ -402,11 +405,12 @@ public class MemberCont {
        int cnt = memberProc.passwd_check(map);
        int update_cnt = 0; // 변경된 패스워드 수
        
+       
        if (cnt == 1) { // 현재 패스워드가 일치하는 경우
          map.put("passwd", new_passwd); // 새로운 패스워드를 저장
          update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
          
-         
+         //update_cnt=0;   // update_cnt의 else 테스트
          if (update_cnt == 1) {
              mav.addObject("code", "passwd_update_success");   // 패스워드 변경 성공
          } else {
@@ -419,15 +423,54 @@ public class MemberCont {
            mav.addObject("code", "passwd_fail");   // 패스워드가 일치하지 않는 경우
        }
        
-       System.out.println(mav);
-       
-       
-       mav.addObject("url", "/member/msg");  
-       mav.setViewName("/member/msg");
+       mav.addObject("url", "/mypage/msg");  
+       mav.setViewName("/mypage/msg");
        
        return mav;
      }
      
      
+     
+     
+     /**
+      * 회원이 자기 정보 수정
+      * @param memberno
+      * @return
+      */
+     @RequestMapping(value="/mypage/me_update.do", method=RequestMethod.GET)
+     public ModelAndView member_update1(int memberno){
+       ModelAndView mav = new ModelAndView();
+       
+       MemberVO memberVO = this.memberProc.read(memberno);
+       mav.addObject("memberVO", memberVO);
+       
+//       MemberVO memberVO2 = memberProc.readById(memberVO.getId());
+//       mav.addObject("memberno", memberVO2.getMemberno());
+       
+       mav.setViewName("/mypage/me_update"); 
+       
+       return mav;
+     }
+     
+     
+     
+     /**
+      * 회원이 자기 정보 수정 처리
+      * @param memberVO
+      * @return
+      */
+     @RequestMapping(value="/mypage/me_update.do", method=RequestMethod.POST)
+     public ModelAndView member_update1(MemberVO memberVO){
+       ModelAndView mav = new ModelAndView();
+       
+       int cnt= memberProc.member_update(memberVO);
+       
+       mav.addObject("cnt", cnt);
+       mav.addObject("memberno", memberVO.getMemberno());
+
+       mav.setViewName("redirect:/");
+       
+       return mav;
+     }
      
 }

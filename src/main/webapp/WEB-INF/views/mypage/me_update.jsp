@@ -10,7 +10,6 @@
 <c:set var='address'  value="${memberVO.address }" />
 <c:set var='phone'  value="${memberVO.phone }" />
 <c:set var='email'  value="${memberVO.email }" />
-<c:set var='grade'  value="${memberVO.grade }" />
 
 <!DOCTYPE html>
 <html>
@@ -42,7 +41,7 @@ function updatefun() {
         </div>
         
         <div class="row-fluid" style='margin:20px 10px 10px 50px;'>
-            <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./member_update.do' class="form-horizontal"
+            <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./me_update.do' class="form-horizontal"
              enctype="multipart/form-data">
                 <input type="hidden" name="memberno" value='${memberno }'>
                 
@@ -50,14 +49,6 @@ function updatefun() {
                     <label class="col-md-2" style='color:#555555;; font-weight: bold; '>아이디</label>
                     <div class="col-md-10">
                         ${id } (아이디는 변경 불가)
-                    </div>
-                </div>
-                
-                <div class="row" style='margin-top:30px;'>
-                    <label class="col-md-2" style='color:#555555;; font-weight: bold; '>회원 등급</label>
-                    <div class="col-md-10">
-                        <input type='text' name='grade' value='${grade }'  required="required" 
-                           class="form-control" style='width: 40%;'> (관리자: 10 / 일반 회원: 20)
                     </div>
                 </div>
     
@@ -72,7 +63,7 @@ function updatefun() {
                 <div class="row" style='margin-top:30px;'>
                     <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주소</label>
                     <div class="col-md-10">
-                        <input type='text' name='address' value='${address }' 
+                        <input type='text' name='address' value='${address }'  required="required" 
                            class="form-control" style='width: 70%;'>
                     </div>
                 </div>
@@ -88,7 +79,7 @@ function updatefun() {
                 <div class="row" style='margin-top:30px;'>
                     <label class="col-md-2" style='color:#555555;; font-weight: bold; '>이메일</label>
                     <div class="col-md-10">
-                        <input type='text' name='email' value='${email }' 
+                        <input type='text' name='email' value='${email }'  required="required" 
                            class="form-control" style='width: 40%;'>
                     </div>
                 </div>

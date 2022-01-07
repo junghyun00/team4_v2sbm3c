@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
 import dev.mvc.park.ParkProcInter;
 import dev.mvc.park.ParkVO;
 import dev.mvc.qna.Qna;
@@ -33,6 +34,7 @@ public class ReservationCont {
     @Qualifier("dev.mvc.park.ParkProc")
     private ParkProcInter parkProc;
     
+    @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
     
@@ -245,6 +247,9 @@ public class ReservationCont {
     @RequestMapping(value="/mypage/my_reser_join.do", method=RequestMethod.GET)
     public ModelAndView my_reser_join(int memberno) {
         ModelAndView mav = new ModelAndView();
+        
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
         
         List<Park_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
         mav.addObject("list", list);

@@ -44,10 +44,11 @@
        <div class="row-fluid">
             <table class="table table-hover">
                 <colgroup>
-                  <col style="width: 15%;"></col>
+                  <col style="width: 10%;"></col>
                   <col style="width: 10%;"></col>
                   <col style="width: 15%;"></col>
                   <col style="width: 20%;"></col>
+                  <col style="width: 15%;"></col>
                   <col style="width: 15%;"></col>
                   <col style="width: 15%;"></col>
                   <col style="width: 10%;"></col>
@@ -55,13 +56,14 @@
                 
                 <thead>  
                     <TR>
+                      <TH class="th_bs">등급</TH>
                       <TH class="th_bs">아이디</TH>
                       <TH class="th_bs">성명</TH>
                       <TH class="th_bs">비밀번호</TH>
                       <TH class="th_bs">주소</TH>
                       <TH class="th_bs">전화번호</TH>
                       <TH class="th_bs">이메일</TH>
-                      <TH class="th_bs">기타</TH>
+                      <TH class="th_bs"></TH>
                     </TR>
                  </thead>
                 
@@ -74,9 +76,11 @@
                         <c:set var='address'  value="${MemberVO.address }" />
                         <c:set var='phone'  value="${MemberVO.phone }" />
                         <c:set var='email'  value="${MemberVO.email }" />
+                        <c:set var='grade'  value="${MemberVO.grade }" />
 
                         
                         <tr>   
+                            <td class="th_bs">${grade }</td>
                             <td class="th_bs">${id }</td>
                             <td class="th_bs">${name }</td>
                             <td class="th_bs">${passwd }</td>
