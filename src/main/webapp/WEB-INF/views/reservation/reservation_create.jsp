@@ -11,7 +11,7 @@
 <c:set var='price'  value="${parkVO.price }" />
 <c:set var='cmt'  value="${parkVO.cmt }" />
 <c:set var='file1'  value="${parkVO.file1 }" />
-
+<c:set var='memberno' value="${memberVO.memberno }" />
 
 
 <!DOCTYPE html>

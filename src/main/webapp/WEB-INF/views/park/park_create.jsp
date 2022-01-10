@@ -19,14 +19,14 @@
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-	        <h4>○○님의 주차장 등록</h4>
+	        <h4>${memberVO.id }(${memberVO.name })님의 주차장 등록</h4>
 	        <div style='border-bottom: solid 3px #555555; '></div>
 	        </div>
         </div>
         <div class="row-fluid">
             <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./park_create.do' class="form-horizontal"
              enctype="multipart/form-data">
-                <input type="hidden" name="memberno" value="1">   <!-- 이건 나중에 수정 -->
+                <input type="hidden" name="memberno" value="${memberVO.memberno}">   <!-- 이건 나중에 수정 -->
                 
 	            <div class="row" style='margin:40px auto;'>
 	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 이름*</label>

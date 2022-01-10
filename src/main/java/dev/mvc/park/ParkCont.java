@@ -51,6 +51,7 @@ public class ParkCont {
     @RequestMapping(value = "/park/park_list_search_paging.do", method = RequestMethod.GET)
     public ModelAndView park_list_search_paging(@RequestParam(value="address", defaultValue="") String address,
                                                                      @RequestParam(value = "now_page", defaultValue = "1") int now_page, 
+                                                                     @RequestParam(value = "memberno", defaultValue = "1") int memberno, 
                                                                      HttpSession session) {
         ModelAndView mav = new ModelAndView(); 
         
@@ -58,6 +59,11 @@ public class ParkCont {
             HashMap<String, Object> map = new HashMap<String, Object>(); 
             map.put("address", address); // #{address}
             map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+            map.put("memberno", memberno);
+
+            MemberVO memberVO = this.memberProc.read(memberno);
+            mav.addObject("memberVO", memberVO);
+            //System.out.println(memberVO.getMemberno());
             
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
@@ -88,10 +94,15 @@ public class ParkCont {
      * @return
      */
     @RequestMapping(value = "/park/park_create.do", method = RequestMethod.GET)
-    public ModelAndView park_create(HttpSession session) {
+    public ModelAndView park_create(HttpSession session, 
+                                                    @RequestParam(value = "memberno", defaultValue = "1") int memberno) {
         ModelAndView mav = new ModelAndView();
         
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
+        
         if (memberProc.isMember(session)) {
+
             mav.setViewName("/park/park_create");
         } else {
             mav.setViewName("/member/login_need"); 
@@ -113,6 +124,8 @@ public class ParkCont {
     @RequestMapping(value = "/park/park_create.do", method = RequestMethod.POST)
     public ModelAndView park_create(HttpServletRequest request, ParkVO parkVO) {
         ModelAndView mav = new ModelAndView();
+        
+        mav.addObject("memberno", parkVO.getMemberno());
         
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 시작
@@ -148,7 +161,7 @@ public class ParkCont {
         mav.addObject("cnt", cnt);
         
         if (cnt == 1) {
-            mav.setViewName("redirect:/park/park_list_search_paging.do");
+            mav.setViewName("redirect:/mypage/my_park.do?memberno=" + parkVO.getMemberno());
         } else {
             mav.setViewName("/park/msg");
         }
@@ -163,8 +176,13 @@ public class ParkCont {
      * @return
      */
     @RequestMapping(value="/park/read.do", method=RequestMethod.GET )
-    public ModelAndView read(int parkno) {
+    public ModelAndView read(int parkno,
+                                           @RequestParam(value="memberno", defaultValue="") int memberno) {
         ModelAndView mav = new ModelAndView();
+        
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
+        
         
         ParkVO parkVO = this.parkProc.read(parkno);
         mav.addObject("parkVO", parkVO);

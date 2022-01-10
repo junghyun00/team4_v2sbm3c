@@ -11,7 +11,7 @@
 <c:set var='price'  value="${parkVO.price }" />
 <c:set var='cmt'  value="${parkVO.cmt }" />
 <c:set var='file1'  value="${parkVO.file1 }" />
-
+<c:set var='memberno' value="${memberVO.memberno }" />
 
 <!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
               
                 
-                <button type='button' onclick="location.href='/reservation/reservation_create.do?parkno=${parkno}'"  class="btn btn-dark">예약</button>
+                <button type='button' onclick="location.href='/reservation/reservation_create.do?memberno=${memberno }&parkno=${parkno}'"  class="btn btn-dark">예약</button>
                 <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
             </div>
 

@@ -175,6 +175,15 @@ public class ReservationProc implements ReservationProcInter{
         
         return list;
     }
+
+    
+    // 관리자 확인용 예약 목록 Park + Reservation join
+    @Override 
+    public List<Park_ReservationVO> reser_list() {
+        List<Park_ReservationVO> list = this.reservationDAO.reser_list();
+        
+        return list;
+    }
    
 
 }

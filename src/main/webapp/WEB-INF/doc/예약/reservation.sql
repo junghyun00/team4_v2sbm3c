@@ -111,3 +111,13 @@ SELECT p.parkno as p_parkno, p.name as p_name,
 FROM park p, reservation r
 WHERE p.parkno = r.parkno AND r.memberno= 1
 ORDER BY r.reserveno DESC
+
+
+select * from reservation
+
+-- reservation + park join
+SELECT p.parkno as p_parkno, p.name as p_name, 
+           r.reserveno, r.reservedate, r.carno, r.notice
+FROM park p, reservation r
+WHERE p.parkno = r.parkno
+ORDER BY r.reserveno DESC

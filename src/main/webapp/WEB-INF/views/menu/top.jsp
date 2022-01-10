@@ -20,9 +20,9 @@ function logoutfun() {
    <div class="collapse navbar-collapse" id="navbar_list">
       <ul class="navbar-nav mr-auto" id="cate_bar">
          <li class="nav-item">
-            <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do'">주차 목록</button>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do'">주차 등록</button>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do'" >QNA </button>
+            <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do?memberno=${memberno }'">주차 목록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do?memberno=${memberno }'">주차 등록</button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do?memberno=${memberno }'" >QNA </button>
             
          </li>
       </ul>
@@ -42,7 +42,7 @@ function logoutfun() {
 			                    <ul class="dropdown-menu" style="margin:15px 0px 0px 0px ; background-color: #545a5e;">
 			                        <li><button class="dropdown-item" onclick="location.href='/admin/member_list.do'" style="color:#fff; background-color: #545a5e;">회원 관리</button></li>
 			                        <li><button class="dropdown-item" onclick="location.href='/admin/park_list.do'" style="color:#fff; background-color: #545a5e;">주차장 관리</button></li>
-			                        <li><button class="dropdown-item" onclick="" style="color:#fff; background-color: #545a5e;">예약 관리</button></li>
+			                        <li><button class="dropdown-item" onclick="location.href='/admin/reser_list.do'" style="color:#fff; background-color: #545a5e;">예약 관리</button></li>
 			                    </ul>
 			            </span>
 	                </c:when>
