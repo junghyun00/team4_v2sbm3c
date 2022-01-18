@@ -41,7 +41,7 @@ function updatefun() {
         </div>
         
         <div class="row-fluid" style='margin:20px 10px 10px 50px;'>
-            <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./update.do' class="form-horizontal"
+            <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./me_update.do' class="form-horizontal"
              enctype="multipart/form-data">
                 <input type="hidden" name="memberno" value='${memberno }'>
                 

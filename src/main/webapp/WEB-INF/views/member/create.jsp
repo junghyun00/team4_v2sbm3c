@@ -14,6 +14,11 @@
 
 <script type="text/javascript">
 
+function create_memberfun() {
+    alert("주차장 추천을 위해 설문조사를 해주시면 회원 가입이 끝납니다.")
+}
+
+
     $(function() {
         $('#btn_checkID').on('click', checkID);
         $('#btn_close').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
@@ -194,7 +199,7 @@
                 
 
                 <div class="content_body_bottom">
-                    <button type="submit" onclick ="alert('회원 가입을 축하합니다.')"  id='btn_send' class="btn btn-dark">가입</button>
+                    <button type="submit" onclick ="create_memberfun()"  id='btn_send' class="btn btn-dark">가입</button>
                     <button type="button" onclick="history.back();" class="btn btn-dark">취소</button>
                 </div>
             </form>

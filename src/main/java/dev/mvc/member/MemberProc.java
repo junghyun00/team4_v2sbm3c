@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -61,7 +63,7 @@ public class MemberProc implements MemberProcInter {
     
     // 회원 목록 + 검색 + 페이징
     @Override
-    public List<MemberVO> list(HashMap<String, Object> hashMap) {
+    public List<MemberVO> member_list(HashMap<String, Object> hashMap) {
         int begin_of_page = ((Integer)hashMap.get("now_page") - 1) * Member.RECORD_PER_PAGE;
         
         // 시작 rownum 결정
@@ -73,7 +75,7 @@ public class MemberProc implements MemberProcInter {
         hashMap.put("start_num", start_num);
         hashMap.put("end_num", end_num);
         
-        List<MemberVO> list = this.memberDAO.list(hashMap);
+        List<MemberVO> list = this.memberDAO.member_list(hashMap);
         
         
         return list;
@@ -176,22 +178,84 @@ public class MemberProc implements MemberProcInter {
     
     // 회원 정보 수정 처리
     @Override
-    public int update(MemberVO memberVO) {
-        int cnt = this.memberDAO.update(memberVO);
+    public int member_update(MemberVO memberVO) {
+        int cnt = this.memberDAO.member_update(memberVO);
         return cnt;
     }
     
     
+    // 회원이 자기 정보 수정
+    @Override
+    public int member_update1(MemberVO memberVO) {
+        int cnt = this.memberDAO.member_update(memberVO);
+        return cnt;
+    }
+    
+    
+    
     // 회원 삭제
     @Override
-    public int delete(int memberno) {
-        int cnt = this.memberDAO.delete(memberno);
+    public int member_delete(int memberno) {
+        int cnt = this.memberDAO.member_delete(memberno);
         return cnt;
     }
     
     
 
+    // 현재 패스워드 검사
+    @Override
+    public int passwd_check(HashMap<Object, Object> map) {
+      int cnt = this.memberDAO.passwd_check(map);
+      return cnt;
+    }
+
+    // 패스워드 변경
+    @Override
+    public int passwd_update(HashMap<Object, Object> map) {
+      int cnt = this.memberDAO.passwd_update(map);
+      return cnt;
+    }
     
+    
+    // 로그인된 회원 계정인지 검사합니다
+    @Override
+    public boolean isMember(HttpSession session) {
+        boolean sw = false;  // 로그인하지 않은 것으로 초기화
+        int grade = 99;
+        
+        if (session != null) {
+            String id = (String)session.getAttribute("id");
+            
+            if (session.getAttribute("grade") != null) {
+                grade = (int)session.getAttribute("grade");
+            }
+            
+            if (id != null && grade <= 20){   // grade가 20이하니까 grade가 10인 관리자도 접근 가능
+                sw = true;
+            }
+                
+        }
+        return sw;
+    }
+    
+    // 관리자인지 검사
+    @Override
+    public boolean isAdmin(HttpSession session) {
+        boolean sw = false;  // 로그인하지 않은 것으로 초기화
+        int grade = 99;
+        
+        if (session != null) {
+            String id = (String)session.getAttribute("id");
+            if (session.getAttribute("memberno") != null) {
+                grade = (int)session.getAttribute("grade");
+            }
+            
+            if (id != null && grade <= 10) {   // grade가 10 이하니까 10인 관리자만 접근 가능
+                sw = true;
+            }
+        }
+        return sw;
+    }
 
     
 

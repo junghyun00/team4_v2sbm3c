@@ -24,28 +24,46 @@
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-            <h4>${memberVO.id }(${memberVO.name })님이 등록하신 주차장</h4>
+            <h4>주차장 목록 (관리자 전용)</h4>
             <div style='border-bottom: solid 3px #555555; '></div>
             </div>
         </div>
         
         <div class="row-fluid">
+            <%-- ******************** 검색 시작 ******************** --%>
+            <DIV style="text-align: center; clear: both;">  
+                <form name='frm' id='frm' method='get' action='./park_list.do'>
+                  <input type='text' name='address' id='address' placeholder="찾으실 주차장 이름 및 주소를 입력해주세요." value='${param.address }' style='margin:15px; width: 30%;'>
+                  <button type='submit' type="button" class="btn btn-dark">검색</button>
+                  <c:if test="${param.address.length() > 0 }">
+                    <button type='button' 
+                                 onclick="location.href='./park_list.do?address='" class="btn btn-dark">검색 취소</button>  
+                  </c:if>    
+                </form>
+              </DIV>
+              <%-- ******************** 검색 종료 ******************** --%>
+        </div>
+        
+        
+        <div class="row-fluid">
             <table class="table table-hover">
                 <colgroup>
-                  <col style="width: 20%;"></col>
-                  <col style="width: 30%;"></col>
+                  <col style="width: 15%;"></col>
+                  <col style="width: 25%;"></col>
+                  <col style="width: 10%;"></col>
+                  <col style="width: 10%;"></col>
+                  <col style="width: 15%;"></col>
                   <col style="width: 8%;"></col>
-                  <col style="width: 8%;"></col>
-                  <col style="width: 5%;"></col>
                 </colgroup>           
                 
                 <thead>  
                     <TR>
                       <TH class="th_bs">이름</TH>
                       <TH class="th_bs">주소</TH>
-                      <TH class="th_bs">정보 수정</TH>
-                      <TH class="th_bs">이미지 수정</TH>
-                      <TH class="th_bs">삭제</TH>
+                      <TH class="th_bs">구역번호</TH>
+                      <TH class="th_bs">전화번호</TH>
+                      <TH class="th_bs">시간 당 가격</TH>
+                      <TH class="th_bs">기타</TH>
                     </TR>
                  </thead>
                 
@@ -63,18 +81,26 @@
                         
                         <tr>
                             <td class="th_bs">
-                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${name }</a>
+                                <a href="../park/read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${name }</a>
                             </td>    
-                            <td class="th_bs">${address }</a>
+                            <td class="th_bs">${address }</td>
+                            <td class="th_bs">${area }</td>
+                            <td class="th_bs">${phone }</td>
+                            <td class="th_bs">${price } 원</td>
+                            <td class="th_bs">
+                                <A href="./park_update.do?parkno=${parkno}"  title="수정"><i class="fas fa-pencil-alt"></i></A>
+                                <A href="./park_update_file.do?parkno=${parkno}"  title="이미지 수정"><i class="far fa-image"></i></A>
+                                <A href="./park_delete.do?parkno=${parkno}"  title="삭제"><i class="fas fa-trash-alt" ></i></A>
                             </td>
-                            <td class="th_bs"><A href="./my_park_update.do?memberno=${memberno }&parkno=${parkno}"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
-                            <td class="th_bs"><A href="./my_park_update_file.do?memberno=${memberno }&parkno=${parkno}"  title="이미지 수정"><i class="far fa-image"></i></A></td>
-                            <td class="th_bs"><A href="./my_park_delete.do?memberno=${memberno }&parkno=${parkno}"  title="삭제"><i class="fas fa-trash-alt" ></i></A></td>
                         </tr>
                         
                    </c:forEach>
                 </tbody>
                 </table>
+                    <hr>
+                    <!-- 페이지 목록 출력 부분 시작 -->
+                    <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+                    <!-- 페이지 목록 출력 부분 종료 -->
         </div>
     </div>
 </div>

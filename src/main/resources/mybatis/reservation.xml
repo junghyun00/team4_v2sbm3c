@@ -94,4 +94,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
+    <!-- 관리자 확인용 예약 목록 Park + Reservation join  -->
+    <select id="reser_list" resultType="dev.mvc.reservation.Park_ReservationVO">
+        SELECT p.parkno as p_parkno, p.name as p_name, 
+                   r.reservedate, r.carno, r.notice
+        FROM park p, reservation r
+        WHERE p.parkno = r.parkno
+        ORDER BY r.reserveno DESC
+    </select>
+    
+    
     </mapper>

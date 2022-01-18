@@ -59,13 +59,18 @@ public interface ReservationDAOInter {
     public List<ReservationVO> my_reser(int memberno);
     
     
-    
-    
     /**
      * 회원별 예약 목록 Park + Reservation join
      * @return
      */
     public List<Park_ReservationVO> my_reser_join(int memberno);
+    
+    
+    /**
+     * 관리자 확인용 예약 목록 Park + Reservation join
+     * @return
+     */
+    public List<Park_ReservationVO> reser_list();
  
 
 }

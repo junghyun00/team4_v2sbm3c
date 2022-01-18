@@ -25,6 +25,9 @@ public class MemberVO {
     private String phone;
     /** 회원 email */
     private String email;
+    /** 등급 */
+    private int grade = 0;
+    
     
     
     public int getMemberno() {
@@ -69,14 +72,20 @@ public class MemberVO {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    
+    public int getGrade() {
+        return grade;
+    }
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
     @Override
     public String toString() {
         return "MemberVO [memberno=" + memberno + ", id=" + id + ", passwd=" + passwd + ", name=" + name + ", address="
-                + address + ", phone=" + phone + ", email=" + email + "]";
+                + address + ", phone=" + phone + ", email=" + email + ", grade=" + grade + "]";
     }
+    
+    
+    
     
     
     

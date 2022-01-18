@@ -23,7 +23,7 @@
                 <%-- ******************** 검색 시작 ******************** --%>
                 <DIV style="text-align: center; clear: both;">  
                     <form name='frm' id='frm' method='get' action='./park_list_search_paging.do'>
-                      <input type='text' name='address' id='address' placeholder="주차할 지역을 입력해주세요." value='${param.address }' style='margin:15px; width: 30%;'>
+                      <input type='text' name='address' id='address' placeholder="주차할 지역을 입력해주세요." value='${param.address }' style='margin:15px; width: 40%;'>
                       <button type='submit' type="button" class="btn btn-dark">검색</button>
                       <c:if test="${param.address.length() > 0 }">
                         <button type='button' 
@@ -33,7 +33,7 @@
                   </DIV>
                   <%-- ******************** 검색 종료 ******************** --%>
                 
-                <table class="table">
+                <table class="table table-hover">
                 <colgroup>
                   <col style="width: 20%;"></col>
                   <col style="width: 30%;"></col>
@@ -59,10 +59,11 @@
                         <c:set var='price'  value="${parkVO.price }" />
                         <c:set var='cmt'  value="${parkVO.cmt }" />
                         <c:set var='file1'  value="${parkVO.file1 }" />
+                        <c:set var='memberno' value="${memberVO.memberno }" />
                         
                         <tr>
                             <td class="th_bs">
-                                <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${name }</a>
+                                <a href="./read.do?memberno=${memberno }&parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${name }</a>
                             </td>    
                             <td class="th_bs">
                                 <a href="./read.do?parkno=${parkno}&now_page=${param.now_page }&address=${param.address}">${address }</a>
@@ -80,6 +81,7 @@
             </div>
             
             <div class="col-md-6" style='border: solid 1px;'>
+            
                <!--  <img src="/ex/images/map.jpg" style='width:100%'> -->
            </div>
        </div>

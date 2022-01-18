@@ -25,7 +25,7 @@ function deletefun() {
 <div class='content_body'>
     <div class="container">
         <div class="row-fluid">
-        <form name='frm' method='POST' action='./delete.do'>
+        <form name='frm' method='POST' action='./member_delete.do'>
             <input type="hidden" name="memberno" value='${param.memberno }'>
             
             <div class='message' style="font-size: 1.2em; font-weight: bold; ">

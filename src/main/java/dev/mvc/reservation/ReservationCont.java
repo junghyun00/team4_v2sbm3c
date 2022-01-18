@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
 import dev.mvc.park.ParkProcInter;
 import dev.mvc.park.ParkVO;
 import dev.mvc.qna.Qna;
@@ -33,6 +34,7 @@ public class ReservationCont {
     @Qualifier("dev.mvc.park.ParkProc")
     private ParkProcInter parkProc;
     
+    @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
     
@@ -41,8 +43,11 @@ public class ReservationCont {
     }
     
     @RequestMapping(value = "/reservation/reservation_create.do", method = RequestMethod.GET)
-    public ModelAndView reservation_create(int parkno) {
+    public ModelAndView reservation_create(int parkno, @RequestParam(value="memberno", defaultValue="") int memberno) {
         ModelAndView mav = new ModelAndView();
+        
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
         
         ParkVO parkVO = this.parkProc.read(parkno);
         mav.addObject("parkVO", parkVO);
@@ -64,8 +69,6 @@ public class ReservationCont {
         
         mav.addObject("reserveno", reservationVO.getReserveno());
         System.out.println(reservationVO.getReserveno());   
-        
-        
             
         int cnt = this.reservationProc.reservation_create(reservationVO);
         //cnt = 0;    // else 테스트
@@ -246,10 +249,30 @@ public class ReservationCont {
     public ModelAndView my_reser_join(int memberno) {
         ModelAndView mav = new ModelAndView();
         
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
+        
         List<Park_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
         mav.addObject("list", list);
         
         mav.setViewName("/mypage/my_reser_join");
+        
+        return mav;
+    }
+    
+    
+    /**
+     * 관리자 확인용 예약 목록 Park + Reservation join
+     * @return
+     */
+    @RequestMapping(value="/admin/reser_list.do", method=RequestMethod.GET)
+    public ModelAndView reser_list() {
+        ModelAndView mav = new ModelAndView();
+        
+        List<Park_ReservationVO> list = this.reservationProc.reser_list();
+        mav.addObject("list", list);
+        
+        mav.setViewName("/admin/reser_list");
         
         return mav;
     }

@@ -13,6 +13,9 @@ public class Park {
     /** 목록 파일명 */
     public static String LIST_FILE = "park_list_search_paging.do";
     
+    /** admin 목록 파일명 */
+    public static String ADMIN_LIST_FILE = "park_list.do";
+    
     
     // Windows, VMWare, AWS cloud 절대 경로
     public static synchronized String getUploadDir() {

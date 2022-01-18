@@ -28,12 +28,12 @@
 		<div class="row-fluid">
 		    <%-- ******************** 검색 시작 ******************** --%>
             <DIV style="text-align: center; clear: both;">  
-                <form name='frm' id='frm' method='get' action='./list.do'>
+                <form name='frm' id='frm' method='get' action='./member_list.do'>
                   <input type='text' name='id' id='id' placeholder="아이디를 입력해주세요." value='${param.id }' style='margin:15px; width: 30%;'>
                   <button type='submit' type="button" class="btn btn-dark">검색</button>
                   <c:if test="${param.id.length() > 0 }">
                     <button type='button' 
-                                 onclick="location.href='./list.do?id='" class="btn btn-dark">검색 취소</button>  
+                                 onclick="location.href='./member_list.do?id='" class="btn btn-dark">검색 취소</button>  
                   </c:if>    
                 </form>
               </DIV>
@@ -42,28 +42,28 @@
        
        
        <div class="row-fluid">
-            <table class="table">
+            <table class="table table-hover">
                 <colgroup>
-                  <col style="width: 15%;"></col>
-                  <col style="width: 15%;"></col>
-                  <col style="width: 15%;"></col>
-                  <col style="width: 20%;"></col>
-                  <col style="width: 20%;"></col>
-                  <col style="width: 15%;"></col>
                   <col style="width: 10%;"></col>
+                  <col style="width: 10%;"></col>
+                  <col style="width: 15%;"></col>
+                  <col style="width: 20%;"></col>
+                  <col style="width: 15%;"></col>
+                  <col style="width: 15%;"></col>
+                  <col style="width: 15%;"></col>
                   <col style="width: 10%;"></col>
                 </colgroup>           
                 
                 <thead>  
                     <TR>
+                      <TH class="th_bs">등급</TH>
                       <TH class="th_bs">아이디</TH>
                       <TH class="th_bs">성명</TH>
                       <TH class="th_bs">비밀번호</TH>
                       <TH class="th_bs">주소</TH>
                       <TH class="th_bs">전화번호</TH>
                       <TH class="th_bs">이메일</TH>
-                      <TH class="th_bs">수정</TH>
-                      <TH class="th_bs">삭제</TH>
+                      <TH class="th_bs"></TH>
                     </TR>
                  </thead>
                 
@@ -76,17 +76,21 @@
                         <c:set var='address'  value="${MemberVO.address }" />
                         <c:set var='phone'  value="${MemberVO.phone }" />
                         <c:set var='email'  value="${MemberVO.email }" />
+                        <c:set var='grade'  value="${MemberVO.grade }" />
 
                         
                         <tr>   
+                            <td class="th_bs">${grade }</td>
                             <td class="th_bs">${id }</td>
                             <td class="th_bs">${name }</td>
                             <td class="th_bs">${passwd }</td>
                             <td class="th_bs">${address }</td>
                             <td class="th_bs">${phone }</td>
                             <td class="th_bs">${email }</td>
-                            <td class="th_bs"><A href="./update.do?memberno=${memberno }"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
-                            <td class="th_bs"><A href="./delete.do?memberno=${memberno }"  title="삭제"><i class="fas fa-trash-alt" ></i></A></td>
+                            <td class="th_bs">
+	                            <A href="./member_update.do?memberno=${memberno }"  title="수정"><i class="fas fa-pencil-alt"></i></A>
+	                            <A href="./member_delete.do?memberno=${memberno }"  title="삭제"><i class="fas fa-trash-alt" ></i></A>
+	                        </td>
                         </tr>
                         
                    </c:forEach>

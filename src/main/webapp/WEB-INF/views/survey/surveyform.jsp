@@ -8,8 +8,7 @@
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css"
 	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
@@ -22,11 +21,11 @@
 			<div class="col-md-12 p-3  rounded text-black ">
 				<div class="row">
 					<div class="col-md-12 border-bottom mb-3">
-						<h1>Survey</h1>
+						<h1>Survey ${memberno }</h1>
 					</div>
 					<div class="col-md-12 border-bottom">
 						<form action="" name="">
-							<input type="hidden" name="memberno" id="memberno" value=3>
+							<input type="hidden" name="memberno" id="memberno" value='${memberno }'>
 							<div class="mt-3">
 								<h5>주차 목적</h5>
 								<label class="radio-inline mr-5"> 
@@ -58,7 +57,7 @@
 								</label>
 							</div>
 							<div class="mt-3 mb-3 text-center">
-								<button type="button" class="btn btn-ligth border text-center" id="submit_btn">SUBMIT</button>
+								<button type="button" class="btn btn-dark border text-center" id="submit_btn">SUBMIT</button>
 							</div>
 						</form>
 					</div>

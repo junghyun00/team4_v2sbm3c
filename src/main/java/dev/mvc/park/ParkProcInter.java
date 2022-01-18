@@ -29,6 +29,16 @@ public interface ParkProcInter {
      */
     public String pagingBox(int search_count, int now_page, String address);
     
+
+    /**
+     * admin용 페이지 목록 문자열 생성
+     * @param now_page 현재 페이지
+     * @param address 검색어
+     * @return
+     */
+    public String admin_pagingBox(int search_count, int now_page, String address);
+    
+
     
     /**
      * 주차장 등록

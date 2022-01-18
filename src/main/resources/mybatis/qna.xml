@@ -60,8 +60,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE qnano = #{qnano}
     </select>
     
+    <!-- 회원별 등록한 QNA 목록 -->
+    <select id="my_qna" resultType="dev.mvc.qna.QnaVO" parameterType="int">
+        SELECT qnano, memberno, title, content, img
+        FROM qna
+        WHERE memberno = #{memberno}
+        ORDER BY qnano DESC
+    </select>
+    
+    <!-- 글 정보 수정 -->
+    <update id="my_qna_update" parameterType="dev.mvc.qna.QnaVO">
+        UPDATE qna
+        SET title=#{title}, content=#{content}
+        WHERE qnano=#{qnano}
+    </update>
+    
     <!-- 글 삭제 -->
-    <delete id="delete" parameterType="int">
+    <delete id="my_qna_delete" parameterType="int">
     DELETE FROM qna
     WHERE qnano=#{qnano}
   </delete>

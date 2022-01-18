@@ -16,15 +16,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 회원 가입 -->
     <insert id="create" parameterType="dev.mvc.member.MemberVO">
-        INSERT INTO member(memberno, id, passwd, name, address, phone, email)
-        VALUES (member_seq.nextval, #{id}, #{passwd}, #{name}, #{address}, #{phone}, #{email})
+        INSERT INTO member(memberno, id, passwd, name, address, phone, email, grade)
+        VALUES (member_seq.nextval, #{id}, #{passwd}, #{name}, #{address}, #{phone}, #{email}, #{grade})
     </insert>
     
 
     
     <!-- id로 회원 정보 조회 -->
     <select id="readById" resultType="dev.mvc.member.MemberVO" parameterType="String">
-      SELECT memberno, id, passwd, name, address, phone, email
+      SELECT memberno, id, passwd, name, address, phone, email, grade
       FROM member
       WHERE id = #{id}
     </select>
@@ -53,12 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 회원 목록 + 검색 + 페이징 -->
-    <select id="list" resultType="dev.mvc.member.MemberVO" parameterType="HashMap">
-      SELECT memberno, id, passwd, name, address, phone, email, r
+    <select id="member_list" resultType="dev.mvc.member.MemberVO" parameterType="HashMap">
+      SELECT memberno, id, passwd, name, address, phone, email, grade, r
         FROM (
-                    SELECT memberno, id, passwd, name, address, phone, email, rownum as r
+                    SELECT memberno, id, passwd, name, address, phone, email, grade, rownum as r
                     FROM (
-                                SELECT memberno, id, passwd, name, address, phone, email
+                                SELECT memberno, id, passwd, name, address, phone, email, grade
                                 FROM member
                                     <choose>
                                         <when test="id == null or id == ''">
@@ -76,13 +76,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 회원 정보 조회 -->
     <select id ="read" resultType="dev.mvc.member.MemberVO" parameterType="int">
-        SELECT memberno, id, passwd, name, address, phone, email
+        SELECT memberno, id, passwd, name, address, phone, email, grade
         FROM member
         WHERE memberno = #{memberno}
     </select>
     
-    <!-- 회원 정보 수정 -->
-    <update id="update" parameterType="dev.mvc.member.MemberVO">
+    <!-- 관리자가 회원 정보 수정 -->
+    <update id="member_update" parameterType="dev.mvc.member.MemberVO">
+      UPDATE member 
+      SET name=#{name}, address=#{address},
+            phone=#{phone}, email=#{email}, grade=#{grade}
+      WHERE memberno=#{memberno}
+    </update>
+    
+    
+    <!-- 회원이 자기 정보 수정 -->
+    <update id="member_update1" parameterType="dev.mvc.member.MemberVO">
       UPDATE member 
       SET name=#{name}, address=#{address},
             phone=#{phone}, email=#{email}
@@ -90,11 +99,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     
+    
     <!-- 회원 삭제 -->
-    <delete id="delete" parameterType="int">
+    <delete id="member_delete" parameterType="int">
         DELETE FROM member
         WHERE memberno = #{memberno} 
     </delete>
     
+    
+    
+    <!--  현재 패스워드 검사 -->
+    <select id="passwd_check" parameterType="HashMap" resultType="int">
+      SELECT COUNT(memberno) as cnt
+      FROM member
+      WHERE memberno=#{memberno} AND passwd=#{passwd}
+    </select>
+    
+    
+    <!-- 패스워드 변경 -->
+    <update id="passwd_update" parameterType="HashMap">
+      UPDATE member
+      SET passwd=#{passwd}
+      WHERE memberno=#{memberno}
+    </update>
     
 </mapper>
