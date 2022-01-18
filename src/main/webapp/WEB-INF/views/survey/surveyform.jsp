@@ -13,6 +13,18 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
 	crossorigin="anonymous">
+    
+    <!-- script type="text/javascript">
+    function recommend_parking() {
+        var url = './survey/result/?purposepark=&preferday=&reserveperiod=&memberno=3&purposepark='${param.purposepark}'&preferday='${param.preferday}'&reserveperiod='${param.reserveperiod}';
+        var win = window.open(url, 'AI', 'width=800px, height=750px');
+
+        var x = (screen.width - 1000) / 2;
+        var y = (screen.height - 700) / 2;
+
+        win.moveTo(x, y); // 화면 중앙으로 이동
+    } 
+    </script>  -->
 </head>
 <body class="pt-5">
 	<jsp:include page="../menu/top.jsp" flush='false' />

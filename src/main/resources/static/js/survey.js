@@ -1,4 +1,5 @@
 $('#submit_btn').click(function (e) { 
+	recommend_parking();
     let purposepark = $(':radio[name="purposepark"]:checked').val();
     let preferday = $(':radio[name="preferday"]:checked').val();
     let reserveperiod = $(':radio[name="reserveperiod"]:checked').val();
@@ -30,6 +31,24 @@ $('#submit_btn').click(function (e) {
                     alert("설문에 다시 응해주세요")
                 }
             }
-        });
+        });  
+        
+       
+        
+
     }  
+    
 });
+
+ function recommend_parking() {
+     	var url = '/survey/result.do';
+  		var win = window.open(url, 'AI', 'width=800px, height=750px');
+
+  		var x = (screen.width - 1000) / 2;
+  		var y = (screen.height - 700) / 2;
+
+  		win.moveTo(x, y); // 화면 중앙으로 이동
+    }
+
+
+
