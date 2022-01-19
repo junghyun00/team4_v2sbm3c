@@ -13,33 +13,32 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 <script type="text/javascript">
-	$(function() { // 자동 실행
+$(function() { // 자동 실행
 	    $('#btn_send').on('click', send); 
 	    $('#btn_close').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
 	  });
 
-  function send() {
-    if ($('#new_passwd').val() != $('#new_passwd2').val()) {
-      msg = '· 새로운 패스워드와 패스워드 확인이 일치하지 않습니다.<br>';
-      msg += "· 새로운 패스워드를 다시 확인해주세요.<br>"; 
-      
-      $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
-      $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
-      $('#modal_content').html(msg);  // 내용
-      $('#modal_panel').modal();         // 다이얼로그 출력
-      
-      $('#btn_close').attr("data-focus", "new_passwd");
-      
-      return false; // submit 중지
-    }
-
-    $('#frm').submit();
-  }
+function send() {	
+	if ($('#new_passwd').val() != $('#new_passwd2').val()) {
+	  msg = '· 새로운 패스워드와 패스워드 확인이 일치하지 않습니다.<br>';
+	  msg += "· 새로운 패스워드를 다시 확인해주세요.<br>"; 
+	  
+	  $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+	  $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
+	  $('#modal_content').html(msg);  // 내용
+	  $('#modal_panel').modal();         // 다이얼로그 출력
+	  
+	  $('#btn_close').attr("data-focus", "new_passwd");
+	  
+	  return false; // submit 중지
+	}
+	$('#frm').submit();
+}
   
-  function setFocus() {  // focus 이동
-    var tag = $('#btn_close').attr('data-focus'); // 포커스를 적용할 태그 id 가져오기
-    $('#' + tag).focus(); // 포커스 지정
-  }
+function setFocus() {  // focus 이동
+	var tag = $('#btn_close').attr('data-focus'); // 포커스를 적용할 태그 id 가져오기
+	$('#' + tag).focus(); // 포커스 지정
+}
   
 </script> 
 
@@ -48,26 +47,26 @@
 <jsp:include page="../menu/top.jsp" flush='false' />
 
 
-	<!-- ******************** Modal 알림창 시작 ******************** -->
-	<div class="modal fade" id="modal_panel" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-		    <div class="modal-header">
-		      <h4 class="modal-title" id='modal_title'></h4>
-		      <button type="button" class="close" data-dismiss="modal">×</button>
-		    </div>
-		    <div class="modal-body">
-		      <p id='modal_content'></p>
-		    </div>
-		    <div class="modal-footer">
-		      <button type="button" id="btn_close" data-focus=""
-		                 class="btn btn-default" data-dismiss="modal">Close</button>
-		    </div>
-		  </div>
-		</div>
+<!-- ******************** Modal 알림창 시작 ******************** -->
+<div class="modal fade" id="modal_panel" role="dialog">
+	<div class="modal-dialog">
+	  <!-- Modal content-->
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h4 class="modal-title" id='modal_title'></h4>
+	      <button type="button" class="close" data-dismiss="modal">×</button>
+	    </div>
+	    <div class="modal-body">
+	      <p id='modal_content'></p>
+	    </div>
+	    <div class="modal-footer">
+	      <button type="button" id="btn_close" data-focus=""
+	                 class="btn btn-default" data-dismiss="modal">닫기</button>
+	    </div>
+	  </div>
 	</div>
-	<!-- ******************** Modal 알림창 종료 ******************** -->
+</div>
+<!-- ******************** Modal 알림창 종료 ******************** -->
  
 
 <div class='content_body'>
@@ -80,6 +79,7 @@
         </div>
             
         <DIV class='content_body'>  
+        
           <DIV style='width: 50%; margin: 0px auto;'>
             <FORM name='frm' id='frm' method='POST' action='./passwd_update.do' class="form-horizontal">
               <input type='hidden' name='memberno' id='memberno' value='${param.memberno }'>  
@@ -121,7 +121,7 @@
               
             </FORM>
           </DIV>
-        
+
         </DIV>
     </div>
 </div>

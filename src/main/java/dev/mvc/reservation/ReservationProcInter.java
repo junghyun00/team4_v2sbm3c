@@ -1,7 +1,5 @@
 package dev.mvc.reservation;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,12 +42,15 @@ public interface ReservationProcInter {
      */
     public String pagingBox(int search_count, int now_page, String address);
     
+
+
     /**
-     * 삭제
+     * 예약 삭제
      * @param reserveno
      * @return
      */
-    public int delete(int reserveno);
+    public int reser_delete(int reserveno);
+    
 
     /**
      * 회원별 예약 목록 조회
@@ -71,5 +72,24 @@ public interface ReservationProcInter {
      * @return
      */
     public List<Park_ReservationVO> reser_list();
+    
+    
+    
+    
+    /**
+     * 예약 정보 수정용 조회
+     * @param reservationVO
+     * @return
+     */
+    public ReservationVO my_reser_update_read(int reserveno);
+    
+    /**
+     * 예약 정보 수정
+     * @param reservationVO
+     * @return
+     */
+    public int my_reser_update(ReservationVO reservationVO);
+    
+
 }
 

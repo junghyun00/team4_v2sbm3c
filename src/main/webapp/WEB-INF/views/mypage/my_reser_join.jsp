@@ -15,12 +15,97 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<script type="text/javascript">
+function updatefun() {
+    alert("수정되었습니다.")
+}
+
+
+function delete_reser_ajax(reserveno) {
+    var params= "";
+    params = 'reserveno=' + reserveno;
+
+    $.ajax({
+        url: '/mypage/my_reservation_delete.do',
+        type: 'get',
+        cache: false,
+        async: true,
+        dataType: 'json',
+        data: params,
+        success: function(rdata) {
+            var reserveno = rdata.reserveno;
+            var memberno = rdata.memberno;
+            var parkno = rdata.parkno;
+            var reservedate = rdata.reservedate;
+            var reservetime = rdata.reservetime;
+            var carno = rdata.carno;
+            var notice = rdata.notice;
+
+            var reser_delete = $('#reser_delete');
+            $('#reserveno', reser_delete).val(reserveno);
+            $('#memberno', reser_delete).val(memberno);
+            $('#parkno', reser_delete).val(parkno);
+            $('#reservedate', reser_delete).val(reservedate);
+            $('#reservetime', reser_delete).val(reservetime);
+            $('#carno', reser_delete).val(carno);
+            $('#notice', reser_delete).val(notice);
+
+
+			console.log('-> reserveno:' + reserveno);
+			console.log('-> memberno:' + memberno);
+			console.log('-> parkno:' + parkno);
+			console.log('-> reservedate:' + reservedate);
+			console.log('-> reservetime:' + reservetime);
+			console.log('-> carno:' + carno);
+			console.log('-> notice:' + notice);
+
+
+            var msg = '예약을 취소하시겠습니까?'
+            $('#modal_content').attr('class', 'alert alert-danger');
+            $('#modal_title').html('예약 취소');
+            $('#modal_content').html(msg);
+            $('#modal_panel').modal();
+            
+            
+        },
+        error: function(request, status, error) {
+            console.log(error);
+        }
+    }); 
+}
+</script>
 
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
 <div class='content_body'>
+
+    <!-- ******************** Modal 알림창 시작 ******************** -->
+    <div id="modal_panel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id='modal_content'></p>  <!-- 내용 -->
+                </div>
+                <div class="modal-footer">
+                   <FORM name='reser_delete' id='reser_delete' method='POST' action='./my_reservation_delete.do'>
+                       <input type='hidden' name='reserveno' id='reserveno' >
+                       <input type='hidden' name='memberno' id='memberno' >
+                       
+                       <button  type="submit" id='submit' class="btn btn-default" >삭제</button>
+                   </FORM>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ******************** Modal 알림창 종료 ******************** -->
+
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
@@ -32,10 +117,12 @@
         <div class="row-fluid">
             <table class="table table-hover">
                 <colgroup>
+                  <col style="width: 15%;"></col>
                   <col style="width: 20%;"></col>
-                  <col style="width: 30%;"></col>
                   <col style="width: 10%;"></col>
-                  <col style="width: 30%;"></col>
+                  <col style="width: 20%;"></col>
+                  <col style="width: 8%;"></col>
+                  <col style="width: 8%;"></col>
                 </colgroup>           
                 
                 <thead>  
@@ -44,6 +131,8 @@
                       <TH class="th_bs">예약 일시</TH>
                       <TH class="th_bs">차량 번호</TH>
                       <TH class="th_bs">전달 사항</TH>
+                      <TH class="th_bs">예약 변경</TH>
+                      <TH class="th_bs">예약 취소</TH>
                     </TR>
                  </thead>
                 
@@ -58,6 +147,7 @@
                         <c:set var='reservetime'  value="${Park_ReservationVO.reservetime }" />
                         <c:set var='carno'  value="${Park_ReservationVO.carno }" />
                         <c:set var='notice'  value="${Park_ReservationVO.notice }" />
+                        <c:set var='memberno'  value="${memberVO.memberno }" />
 
                         
                         <tr>
@@ -65,6 +155,8 @@
                             <td class="th_bs">${reservedate }</td>
                             <td class="th_bs">${carno }</td>
                             <td class="th_bs">${notice }</td>
+                            <td class="th_bs"><A href="./my_reser_update.do?memberno=${memberno }&reserveno=${reserveno}"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
+                            <td class="th_bs"><A href="javascript:delete_reser_ajax(${reserveno })"  title="취소"><i class="fas fa-calendar-times"></i></A></td>
                         </tr>
                         
                    </c:forEach>

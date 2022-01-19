@@ -43,12 +43,13 @@ public interface ReservationDAOInter {
      */
     public List<ReservationVO>reservation_list_search_paging(HashMap<String, Object> map);
     
+    
     /**
-     * 삭제
+     * 예약 삭제
      * @param reserveno
      * @return
      */
-    public int delete(int reserveno);
+    public int reser_delete(int reserveno);
 
     
     /**
@@ -71,6 +72,14 @@ public interface ReservationDAOInter {
      * @return
      */
     public List<Park_ReservationVO> reser_list();
+    
+    
+    /**
+     * 예약 정보 수정
+     * @param reservationVO
+     * @return
+     */
+    public int my_reser_update(ReservationVO reservationVO);
  
 
 }
