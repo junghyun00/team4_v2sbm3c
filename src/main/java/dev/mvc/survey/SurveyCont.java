@@ -36,5 +36,13 @@ public class SurveyCont {
 		json.put("cnt", cnt);
 		return json.toString();
 	}
+	
+	@RequestMapping(value = {"/survey/result.do"}, method = RequestMethod.GET)
+	  public ModelAndView result() {
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("/survey/result");  // /WEB-INF/views/survey/result.jsp
+	    
+	    return mav;
+	  }
 
 }
