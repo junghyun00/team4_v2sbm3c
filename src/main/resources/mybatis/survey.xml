@@ -10,4 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO survey (memberno, purposepark, preferday, reserveperiod) 
 		VALUES (#{memberno}, #{purposepark}, #{preferday}, #{reserveperiod})
 	</insert>
+  
+  <select id="read" resultType="dev.mvc.survey.SurveyVO" parameterType="int">
+        SELECT memberno, purposepark, preferday, reserveperiod
+        FROM survey
+        WHERE memberno = #{memberno}
+    </select>
 </mapper>
