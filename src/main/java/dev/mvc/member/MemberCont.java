@@ -380,6 +380,32 @@ public class MemberCont {
        return mav;
      }
      
+//     /**
+//      * 패스워드를 변경 ajax
+//      * @param memberno
+//      * @return
+//      */
+//     @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
+//     @ResponseBody
+//     public String passwd_update_ajax(int memberno) {
+//         MemberVO memberVO = this.memberProc.read(memberno);
+//       //System.out.println(memberVO);
+//         
+//         JSONObject json = new JSONObject();
+//         json.put("memberno", memberVO.getMemberno());
+//         json.put("id", memberVO.getId());
+//         json.put("passwd", memberVO.getPasswd());
+//         json.put("name", memberVO.getName());
+//         json.put("address", memberVO.getAddress());
+//         json.put("phone", memberVO.getPhone());
+//         json.put("email", memberVO.getEmail());
+//         json.put("grade", memberVO.getGrade());
+//         
+//         //System.out.println(json);
+//         
+//         return json.toString();
+//     }
+     
      
      /**
       * 패스워드 변경 처리

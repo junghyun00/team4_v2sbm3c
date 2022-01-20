@@ -15,7 +15,7 @@
 <script type="text/javascript">
   function loadDefault() {
     $('#id').val('abc123');
-    $('#passwd').val('123456');
+    $('#passwd').val('12');
   }  
 </script> 
 

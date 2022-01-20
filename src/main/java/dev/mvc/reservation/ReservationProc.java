@@ -152,9 +152,10 @@ public class ReservationProc implements ReservationProcInter{
     }
     
     
-    public int delete(int reserveno) {
-      int cnt = this.reservationDAO.delete(reserveno);
-      return cnt;
+    public int reser_delete(int reserveno) {
+        int cnt = this.reservationDAO.reser_delete(reserveno);
+        
+        return cnt;
     }
     
     
@@ -184,6 +185,25 @@ public class ReservationProc implements ReservationProcInter{
         
         return list;
     }
-   
+    
+    
+    // 예약 정보 수정용 조회
+    @Override
+    public ReservationVO my_reser_update_read(int reserveno) {
+        ReservationVO reservationVO = this.reservationDAO.read(reserveno);
+        
+        return reservationVO;
+    }
+    
+    // 예약 정보 수정
+    @Override
+    public int my_reser_update(ReservationVO reservationVO) {
+        int cnt = this.reservationDAO.my_reser_update(reservationVO);
+        
+        return cnt;
+    }
+
+    
+
 
 }

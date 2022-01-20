@@ -60,7 +60,7 @@ insert into reservation(reserveno,memberno,parkno,reservedate,reservetime,carno,
 values(reservation_seq.nextval,2,2,TO_DATE('2021-12-12','yyyy-mm-dd'),TO_DATE('18:10','hh24:mi'),3313,'전달사항입니다');
 
 insert into reservation(reserveno,memberno,parkno,reservedate,reservetime,carno,notice)
-values(reservation_seq.nextval,3,3,TO_DATE('2021-12-14','yyyy-mm-dd'),TO_DATE('18:16','hh24:mi'),1234,'전달사항입니다');
+values(reservation_seq.nextval,2,11,TO_DATE('2021-01-18 07:16','yyyy-mm-dd hh24:mi'), '2021-01-18 07:16', 1234, '전달사항입니다');
 
 
 select reserveno,memberno,parkno,reservedate,reservetime,carno,notice
@@ -81,7 +81,7 @@ set carno =5523
 where carno = 3323;
 
 delete from reservation
-where memberno =1;
+where reserveno =70;
 
 
 
@@ -110,7 +110,7 @@ SELECT p.parkno as p_parkno, p.name as p_name,
            r.reservedate, r.carno, r.notice
 FROM park p, reservation r
 WHERE p.parkno = r.parkno AND r.memberno= 1
-ORDER BY r.reserveno DESC
+ORDER BY r.reserveno DESC;
 
 
 select * from reservation
@@ -120,4 +120,19 @@ SELECT p.parkno as p_parkno, p.name as p_name,
            r.reserveno, r.reservedate, r.carno, r.notice
 FROM park p, reservation r
 WHERE p.parkno = r.parkno
-ORDER BY r.reserveno DESC
+ORDER BY r.reserveno DESC;
+
+
+
+
+SELECT p.parkno as p_parkno, p.name as p_name, 
+           r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
+FROM park p, reservation r
+WHERE p.parkno = r.parkno AND r.reserveno=44;
+
+
+
+UPDATE reservation
+SET reservedate = TO_DATE('2021-05-15','YYYY-MM-DD'), reservetime = TO_DATE('05:05','HH24:MI'), carno = 1555, notice = '없다.'
+WHERE reserveno = 45;
+

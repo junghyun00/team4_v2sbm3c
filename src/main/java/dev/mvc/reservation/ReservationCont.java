@@ -8,12 +8,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
@@ -68,7 +70,7 @@ public class ReservationCont {
         ModelAndView mav = new ModelAndView();
         
         mav.addObject("reserveno", reservationVO.getReserveno());
-        System.out.println(reservationVO.getReserveno());   
+        mav.addObject("memberno", reservationVO.getMemberno());
             
         int cnt = this.reservationProc.reservation_create(reservationVO);
         //cnt = 0;    // else 테스트
@@ -76,7 +78,7 @@ public class ReservationCont {
         mav.addObject("cnt", cnt);
         
         if (cnt == 1) {
-            mav.setViewName("redirect:/reservation/reservation_info.do?reserveno=" + reservationVO.getReserveno());
+            mav.setViewName("redirect:/mypage/my_reser_join.do?memberno=" + reservationVO.getMemberno());
         } else {
             mav.setViewName("/reservation/msg");
         }
@@ -142,83 +144,73 @@ public class ReservationCont {
     }
     
     /**
-     * 삭제 폼
+     * 마이페이지 삭제 폼
      * @param reserveno
      * @return
      */
-    @RequestMapping(value="/reservation/reservation_delete.do", method=RequestMethod.GET )
-    public ModelAndView delete(int reserveno) { 
-      ModelAndView mav = new  ModelAndView();
-      
-      ReservationVO reservationVO = this.reservationProc.read(reserveno);
-      // 삭제할 정보를 조회하여 확인
-      mav.addObject("reservationVO", reservationVO);
-           
-      mav.setViewName("/reservation/reservation_delete");  // reservation/delete.jsp
-      
-      return mav; 
+    @RequestMapping(value="/mypage/my_reservation_delete.do", method=RequestMethod.GET )
+    @ResponseBody
+    public String my_reservation_delete(int reserveno) { 
+        ReservationVO reservationVO = this.reservationProc.read(reserveno);
+        
+        JSONObject json = new JSONObject();
+        json.put("reserveno", reservationVO.getReserveno());
+        json.put("memberno", reservationVO.getMemberno());
+        json.put("parkno", reservationVO.getParkno());
+        json.put("reservedate", reservationVO.getReservedate());
+        json.put("reservetime", reservationVO.getReservetime());
+        json.put("carno", reservationVO.getCarno());
+        json.put("notice", reservationVO.getNotice());
+        
+        
+        return json.toString();
     }
 
+    
     /**
-     * 삭제 처리 http://localhost:9091/reservation/delete.do
-     * 
+     * 마이페이지 삭제 처리 ajax
      * @return
      */
-    @RequestMapping(value = "/reservation/reservation_delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, ReservationVO reservationVO, 
-                                            int now_page,
-                                            @RequestParam(value="word", defaultValue="") String word) {
+    @RequestMapping(value = "/mypage/my_reservation_delete.do", method = RequestMethod.POST)
+    public ModelAndView my_reservation_delete(HttpServletRequest request, ReservationVO reservationVO) {
       ModelAndView mav = new ModelAndView();
+      
+      mav.addObject("memberno", reservationVO.getMemberno());
+      
       int reserveno = reservationVO.getReserveno();
-     
+      
       int cnt = 0;
-          // -------------------------------------------------------------------
-          // 파일 삭제 코드 시작
-          // -------------------------------------------------------------------
-          // 삭제할 파일 정보를 읽어옴.
-      ReservationVO vo = reservationProc.read(reserveno);
-//          System.out.println("contentsno: " + vo.getContentsno());
-//          System.out.println("file1: " + vo.getFile1());
-      long size1 = 0;
-      boolean sw = false;
-          
-     
-      /*
-       * String upDir = System.getProperty("user.dir") +
-       * "/src/main/resources/static/reservation/storage/"; // 절대 경로
-       */
-          // System.out.println("sw: " + sw);
-          // -------------------------------------------------------------------
-          // 파일 삭제 종료 시작
-          // -------------------------------------------------------------------
-          
-      cnt = this.reservationProc.delete(reserveno); // DBMS 삭제
-          
-          // -------------------------------------------------------------------------------------
-      System.out.println("-> reserveno: " + vo.getReserveno());
-      System.out.println("-> word: " + word);
-          
-          // 마지막 페이지의 레코드 삭제시의 페이지 번호 -1 처리
-      HashMap<String, Object> page_map = new HashMap<String, Object>();
-      page_map.put("reserveno", vo.getReserveno());
-      page_map.put("word", word);
-          // 10번째 레코드를 삭제후
-          // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
-          // 페이지수를 4 -> 3으로 감소 시켜야함.
-      if (reservationProc.search_count(page_map) % Reservation.RECORD_PER_PAGE == 0) {
-        now_page = now_page - 1;
-            
-      }
-          // -------------------------------------------------------------------------------------
-          
-      mav.addObject("now_page", now_page);
-      mav.setViewName("redirect:/reservation/reservation_list_search_paging.do"); 
-
-      mav.addObject("reserveno", reservationVO.getReserveno());
-      System.out.println("-> reserveno: " + reservationVO.getReserveno());
+      cnt = this.reservationProc.reser_delete(reserveno);
+      
+      mav.setViewName("redirect:/mypage/my_reser_join.do");
       
       return mav; // forward
     }   
+       
+    
+    
+    /**
+     * 관리자용 삭제 처리 ajax
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/admin/reservation_delete.do", method = RequestMethod.POST)
+    public ModelAndView delete_admin(HttpServletRequest request, ReservationVO reservationVO) {
+      ModelAndView mav = new ModelAndView();
+      
+      int reserveno = reservationVO.getReserveno();
+      System.out.println("reservationVO :" +reservationVO);
+      
+      mav.addObject("memberno", reservationVO.getMemberno());
+      
+      int cnt = 0;
+      cnt = this.reservationProc.reser_delete(reserveno); 
+      
+      mav.setViewName("redirect:/admin/reser_list.do");
+      
+      return mav;
+    }
+    
 
     
     /**
@@ -241,6 +233,7 @@ public class ReservationCont {
         return mav;
     }
     
+    
     /**
      * 회원별 예약 목록 Park + Reservation join
      * @return
@@ -255,7 +248,10 @@ public class ReservationCont {
         List<Park_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
         mav.addObject("list", list);
         
+        
         mav.setViewName("/mypage/my_reser_join");
+        
+        
         
         return mav;
     }
@@ -277,5 +273,63 @@ public class ReservationCont {
         return mav;
     }
     
-
+    
+    /**
+     * 예약 변경 수정
+     * @param reserveno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_reser_update.do", method=RequestMethod.GET)
+    public ModelAndView my_reser_update(int reserveno) {
+        ModelAndView mav = new ModelAndView();
+        
+        ReservationVO reservationVO = this.reservationProc.my_reser_update_read(reserveno);
+        int memberno = reservationVO.getMemberno();
+        int parkno = reservationVO.getParkno();
+        
+        
+        ParkVO parkVO = this.parkProc.read(parkno);
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
+        mav.addObject("parkVO", parkVO);
+        mav.addObject("reservationVO", reservationVO);
+        
+//        System.out.println("1. memberVO = " + memberVO);
+//        System.out.println("2. parkVO = " + parkVO);
+//        System.out.println("3. reservationVO = " + reservationVO);
+        
+        
+        
+        mav.setViewName("/mypage/my_reser_update");
+        
+        return mav;
+    }
+    
+    /**
+     * 예약 변경 수정 처리
+     * @param reserveno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_reser_update.do", method=RequestMethod.POST)
+    public ModelAndView my_reser_update(ReservationVO reservationVO) {
+        ModelAndView mav = new ModelAndView();
+        System.out.println(reservationVO);
+        
+        int cnt = this.reservationProc.my_reser_update(reservationVO);
+        System.out.println(cnt);
+        
+        
+        mav.addObject("cnt", cnt);
+        mav.addObject("parkno", reservationVO.getParkno());
+        mav.addObject("memberno", reservationVO.getMemberno());
+        mav.addObject("reserveno", reservationVO.getReserveno());
+        
+        mav.setViewName("redirect:/mypage/my_reser_join.do");
+        
+        return mav;
+    }
+    
+    
+    
+    
 }

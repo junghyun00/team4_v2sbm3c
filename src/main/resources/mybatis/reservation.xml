@@ -7,10 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.reservation.ReservationDAOInter">
 
-    <!-- 주차장 등록 -->
+    <!-- 예약 등록 TO_DATE(#{reservedate},'YYYY-MM-DD'), TO_DATE(#{reservetime},'HH24:MI')-->
     <insert id="reservation_create" parameterType="dev.mvc.reservation.ReservationVO">
-        INSERT INTO reservation(reserveno, memberno, parkno, reservedate,reservetime, carno,notice)
-        VALUES (reservation_seq.nextval, #{memberno}, #{parkno}, TO_DATE(#{reservedate},'YYYY-MM-DD'), TO_DATE(#{reservetime},'HH24:MI'), #{ carno}, #{notice})
+        INSERT INTO reservation(reserveno, memberno, parkno, reservedate, reservetime, carno, notice)
+        VALUES (reservation_seq.nextval, #{memberno}, #{parkno}, TO_DATE(#{reservedate},'YYYY-MM-DD'), TO_DATE(#{reservetime},'HH24:MI'), #{carno}, #{notice})
     </insert>
     
      <!-- 글 한 개 조회  -->
@@ -20,11 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE reserveno = #{reserveno}
     </select>
     
-        <select id="max" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
-        SELECT MAX(reserveno)
-        FROM reservation
+      <select id="max" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+      SELECT MAX(reserveno)
+      FROM reservation
 
-        </select>
+      </select>
         
        <!-- 예약 검색 레코드 개수 -->
     <select id="search_count" resultType="int" parameterType="HashMap">
@@ -63,21 +63,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- reservation 조회 -->
     <select id="reservation_list" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
-         SELECT reserveno, memberno, parkno, reservedate,reservetime, carno,notice
+         SELECT reserveno, memberno, parkno, reservedate,reservetime, carno, notice
          FROM reservation
     </select>
     
-      <!-- 글 삭제 -->
-    <delete id="delete" parameterType="int">
-    DELETE FROM reservation
-    WHERE reserveno=#{reserveno}
-  </delete>
+    
+    <!-- 예약 삭제 -->
+    <delete id="reser_delete" parameterType="int">
+      DELETE FROM reservation
+      WHERE reserveno = #{reserveno}
+    </delete>
         
     
     
     <!-- 회원별 예약 목록  -->
     <select id="my_reser" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
-        SELECT reserveno, memberno, parkno, reservedate, reservetime, carno,notice
+        SELECT reserveno, memberno, parkno, reservedate, reservetime, carno, notice
         FROM reservation
         WHERE memberno = #{memberno}
         ORDER BY memberno DESC
@@ -87,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 회원별 예약 목록 Park + Reservation join  -->
     <select id="my_reser_join" resultType="dev.mvc.reservation.Park_ReservationVO" parameterType="int">
         SELECT p.parkno as p_parkno, p.name as p_name, 
-                   r.reservedate, r.carno, r.notice
+                   r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
         FROM park p, reservation r
         WHERE p.parkno = r.parkno AND r.memberno= #{memberno}
         ORDER BY r.reserveno DESC
@@ -97,11 +98,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 관리자 확인용 예약 목록 Park + Reservation join  -->
     <select id="reser_list" resultType="dev.mvc.reservation.Park_ReservationVO">
         SELECT p.parkno as p_parkno, p.name as p_name, 
-                   r.reservedate, r.carno, r.notice
+                   r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
         FROM park p, reservation r
         WHERE p.parkno = r.parkno
         ORDER BY r.reserveno DESC
     </select>
+    
+    
+    <!-- 예약 정보 수정 -->
+    <update id="my_reser_update" parameterType="dev.mvc.reservation.ReservationVO">
+        UPDATE reservation
+        SET reservedate = TO_DATE(#{reservedate},'YYYY-MM-DD'), reservetime = TO_DATE(#{reservetime},'HH24:MI'), carno = #{carno}, notice = #{notice}
+        WHERE reserveno = #{reserveno}
+    </update>
+    
+    
+    
     
     
     </mapper>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -244,6 +245,10 @@ public class ParkCont {
         ModelAndView mav = new ModelAndView();
         
         ParkVO parkVO = this.parkProc.read_my_park_update(parkno);
+        int memberno = parkVO.getMemberno();
+        
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
         
         mav.addObject("parkVO", parkVO);
         mav.setViewName("/mypage/my_park_update");
@@ -361,27 +366,54 @@ public class ParkCont {
      * @param parkno
      * @return
      */
-    @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.GET )
-    public ModelAndView my_park_delete(int parkno) {
-        ModelAndView mav = new ModelAndView();
-        
+//    @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.GET )
+//    public ModelAndView my_park_delete(int parkno) {
+//        ModelAndView mav = new ModelAndView();
+//        
+//        ParkVO parkVO = this.parkProc.my_park_read(parkno);
+//        
+//        mav.addObject("parkVO", parkVO);
+//        mav.setViewName("/mypage/my_park_delete");
+//        
+//        return mav;
+//    }
+    
+    
+    /**
+     * 마이페이지 주차장 삭제 폼 ajax
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/mypage/my_park_delete_ajax.do", method=RequestMethod.GET )
+    @ResponseBody
+    public String my_park_delete_ajax(int parkno) {
         ParkVO parkVO = this.parkProc.my_park_read(parkno);
         
-        mav.addObject("parkVO", parkVO);
-        mav.setViewName("/mypage/my_park_delete");
-        
-        return mav;
+        JSONObject json = new JSONObject();
+        json.put("parkno", parkVO.getParkno());
+        json.put("memberno", parkVO.getMemberno());
+        json.put("name", parkVO.getName());
+        json.put("phone", parkVO.getPhone());
+        json.put("address", parkVO.getAddress());
+        json.put("area", parkVO.getArea());
+        json.put("price", parkVO.getPrice());
+        json.put("cmt", parkVO.getCmt());
+        json.put("file1", parkVO.getFile1());
+            
+        return json.toString();
     }
     
     
     /**
-     * 주차장 삭제 처리
+     * 마이페이지 주차장 삭제 처리
      * @param parkno
      * @return
      */
     @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.POST)
     public ModelAndView my_park_delete(HttpServletRequest request, ParkVO parkVO) {
         ModelAndView mav = new ModelAndView();
+        System.out.println("여기에요 여기~");
+        
         String uploadDir = this.uploadDir;
         
         int parkno = parkVO.getParkno();
@@ -396,6 +428,7 @@ public class ParkCont {
         // 삭제할 파일 정보를 읽어옴.
         ParkVO vo = parkProc.my_park_read(parkno);
         
+        
         String file1 = vo.getFile1();
         long size1 = 0;
         boolean sw = false;
@@ -406,6 +439,7 @@ public class ParkCont {
         // -------------------------------------------------------------------
         
         cnt = this.parkProc.my_park_delete(parkno);
+        System.out.println(cnt);
         
         //mav.addObject("cnt", cnt);
         //mav.addObject("parkno", parkVO.getParkno());
@@ -587,6 +621,7 @@ public class ParkCont {
      * @param parkno
      * @return
      */
+    /*
     @RequestMapping(value="/admin/park_delete.do", method=RequestMethod.GET )
     public ModelAndView admin_park_delete(int parkno) {
         ModelAndView mav = new ModelAndView();
@@ -598,10 +633,39 @@ public class ParkCont {
         
         return mav;
     }
+    */
     
     
     /**
-     * 주차장 삭제 처리
+     * 관리자용 주차장 삭제 폼 ajax
+     * @param parkno
+     * @return
+     */
+    @RequestMapping(value="/admin/park_delete_ajax.do", method=RequestMethod.GET )
+    @ResponseBody
+    public String admin_park_delete_ajax(int parkno) {
+        ParkVO parkVO = this.parkProc.my_park_read(parkno);
+        //System.out.println(parkVO);
+        
+        
+        JSONObject json = new JSONObject();
+        json.put("parkno", parkVO.getParkno());
+        json.put("memberno", parkVO.getMemberno());
+        json.put("name", parkVO.getName());
+        json.put("phone", parkVO.getPhone());
+        json.put("address", parkVO.getAddress());
+        json.put("area", parkVO.getArea());
+        json.put("price", parkVO.getPrice());
+        json.put("cmt", parkVO.getCmt());
+        json.put("file1", parkVO.getFile1());
+        
+        //System.out.println(json);
+        
+        return json.toString();
+    }
+    
+    /**
+     * 관리자용 주차장 삭제 처리
      * @param parkno
      * @return
      */
@@ -613,14 +677,15 @@ public class ParkCont {
         int parkno = parkVO.getParkno();
         
         mav.addObject("memberno", parkVO.getMemberno());
-        System.out.println("memberno" + parkVO.getMemberno());
+        //System.out.println("memberno = " + parkVO.getMemberno());
         
         int cnt = 0;
         // -------------------------------------------------------------------
         // 파일 삭제 코드 시작
         // -------------------------------------------------------------------
         // 삭제할 파일 정보를 읽어옴.
-        ParkVO vo = parkProc.my_park_read(parkno);
+        ParkVO vo = this.parkProc.my_park_read(parkno);
+        //System.out.println("vo = "+vo);
         
         String file1 = vo.getFile1();
         long size1 = 0;
@@ -636,16 +701,12 @@ public class ParkCont {
         //mav.addObject("cnt", cnt);
         //mav.addObject("parkno", parkVO.getParkno());
         
-        
         mav.setViewName("redirect:/admin/park_list.do");
         
         
         return mav;
         
     }
-    
-    
-    
     
     
     
