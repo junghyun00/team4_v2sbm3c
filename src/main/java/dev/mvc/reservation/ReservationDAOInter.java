@@ -80,6 +80,8 @@ public interface ReservationDAOInter {
      * @return
      */
     public int my_reser_update(ReservationVO reservationVO);
- 
+    
+    
+    public Park_ReservationVO my_reser_join_read(int reserveno);
 
 }

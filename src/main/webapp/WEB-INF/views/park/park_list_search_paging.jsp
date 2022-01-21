@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,51 +26,52 @@
 
 <script type="text/javascript">
 
-$(function() {
-	// 초기 위치를 서울 중심 으로 설정, 좌표 객체 생성
-	var Startlatlng = new google.maps.LatLng(37.53020259711349, 127.00127306458398);
-	// 초기 위치 지도 출력
-	$("#map_canvas").gmap({
-	  "center" : Startlatlng,  // 지도 중심을 좌표 중심으로 이동
-	  "zoom" : 13        // 1 ~ 21
-	});
 
-// 	var address = document.getElementById('address')
-// 	alert(address)
-});
+// $(function() {
+// 	var map = new google.maps.Map(document.getElementById('map_canvas'))
+	
+// 	// 초기 위치를 서울 중심 으로 설정, 좌표 객체 생성
+// 	var Startlatlng = new google.maps.LatLng(37.53020259711349, 127.00127306458398);
+	
+// 	// 초기 위치 지도 출력
+// 	$("#map_canvas").gmap({
+// 	  "center" : Startlatlng,  // 지도 중심을 좌표 중심으로 이동
+// 	  "zoom" : 13        // 1 ~ 21
+// 	});
 
-
-
-
-
-// function search_place(address) {
-// 	console.log('-> address:' + address);
-// // 	address = address.replace(/\(/gi, '&#40');
-// //     address = address.replace(/\)/gi, '&#41');
-// //     alert('address () 변환: ' + address); //return;
-
-// //     var url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCooY7K9qsN4Bjm4_vMBZLw2fmzB29CwC0';
-// //     var params = '&address=' + address;
-// //     $.get(url, params, response_map, 'json');
-// }
+// 	var slist = '${list}';
+// 	maps(slist);
+    
+// });
 
 
-//Ajax 요청 처리
-// function response_map(data) {
-// 	var latlng = new google.maps.LatLng(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng)
-// 	 // 마커 지정
-//     var markerBlue = "https://www.google.com/intl/en_us/mapfiles/ms/icons/blue-dot.png";
-//     // 지도 출력
-//     $("#map_canvas").gmap({
-//       "center" : latlng,
-//       "zoom" : 16
-//     }); // 1 ~ 21
-//     // 마커 출력
-//     $("#map_canvas").gmap("addMarker", {
-//       "position" : latlng,
-//       "icon" : markerBlue
-//     });
-// }
+
+var map;
+var markerArray = [];
+var coordinates = [];
+
+function initialize(){
+	var maddress = '${list}';
+	alert(maddress);
+	
+	// 지도 출력 옵션
+    var mapOptions = {
+	  streetViewControl : false,
+      mapTypeControl : true, // 지도 출력 종류 선택
+      mapTypeId : google.maps.MapTypeId.ROADMAP // 일반 지도
+    }
+
+    // 지도를 출력할 DIV 객체 추출
+    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+
+}
+
+
+
+
+window.onload = initialize; // 시작 함수 지정 및 호출
+
 </script>
 
 

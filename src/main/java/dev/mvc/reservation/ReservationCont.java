@@ -246,8 +246,15 @@ public class ReservationCont {
         mav.addObject("memberVO", memberVO);
         
         List<Park_ReservationVO> list = this.reservationProc.my_reser_join(memberno);
-        mav.addObject("list", list);
         
+//        String date = getSubReservedate(); 
+//        
+//        mav.addObject("date", date);
+//        System.out.println(date);
+        
+        
+        mav.addObject("list", list);
+        System.out.println(list);
         
         mav.setViewName("/mypage/my_reser_join");
         
