@@ -18,6 +18,7 @@ public class SurveyCont {
 	@Qualifier("dev.mvc.park.SurveyPorc")
 	private SurveyProcInter surveyproc;
 
+	// http://localhost:9091/survey/surveyform.do
 	@RequestMapping(value = "/survey.do", method = RequestMethod.GET)
 	public ModelAndView survey() {
 		ModelAndView mav = new ModelAndView();
@@ -26,6 +27,7 @@ public class SurveyCont {
 
 		return mav;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/survey_create.do", method = RequestMethod.GET)
 	public String survey_create(SurveyVO surveyvo) {
@@ -37,12 +39,27 @@ public class SurveyCont {
 		return json.toString();
 	}
 	
-	@RequestMapping(value = {"/survey/result.do"}, method = RequestMethod.GET)
+	// http://localhost:9091/survey/result.do
+	@RequestMapping(value = "/survey/result.do", method = RequestMethod.GET)
 	  public ModelAndView result() {
 	    ModelAndView mav = new ModelAndView();
 	    mav.setViewName("/survey/result");  // /WEB-INF/views/survey/result.jsp
 	    
 	    return mav;
 	  }
+	
+    @RequestMapping(value = "/survey/result.do", method = RequestMethod.POST)
+    public ModelAndView survey_result(int memberno) {
+
+        ModelAndView mav = new ModelAndView();
+        
+        SurveyVO surveyVO = this.surveyproc.read(memberno);
+        
+        mav.addObject("surveyVO", surveyVO);
+        
+        mav.setViewName("/survey/result");
+        
+        return mav;
+    }
 
 }

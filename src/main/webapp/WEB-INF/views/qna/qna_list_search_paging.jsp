@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var='answerno' value="${answerVO.answerno }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,7 @@
                     </form>
                   </DIV>
                   <DIV style='margin:15px; width: 100%;'>
-                  <button type="submit" type="button" id='submit' class='btn btn-dark' style='float:right' onclick="location.href='/qna/qna_create.do'">QNA 등록</button>
+                  <button type="submit" type="button" id='submit' class='btn btn-dark' style='float:right' onclick="location.href='/qna/qna_create.do?memberno=${memberno}'">QNA 등록</button>
                   </DIV>
                   <%-- ******************** 검색 종료 ******************** --%>
                 
@@ -60,13 +61,13 @@
                         <c:set var='title'  value="${qnaVO.title }" />
                         <c:set var='content'  value="${qnaVO.content }" />
                         <c:set var='img'  value="${qnaVO.img }" />
-                        
+                            
                         <tr>
                             <td class="th_bs">${memberno }</td>
                             <td class="th_bs">
-                            <a href="./read.do?qnano=${qnano}&now_page=${param.now_page }&title=${param.title}">${title }</a>
+                            <a href="./read.do?qnano=${qnano}&now_page=${param.now_page }&title=${param.title}&answerno=${param.answerno}">${title }</a>
                             </td>
-                            <td class="th_bs"><A href="./my_qna_update.do?qnano=${qnano }"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
+                            <td class="th_bs"><A href="./my_qna_update.do?qnano=${qnano }&memberno=${memberno}"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
                             <td class="th_bs"><A href="./my_qna_delete.do?qnano=${qnano }" title="삭제"><i class="fas fa-trash-alt" ></i></A></td>
                         </tr>
                         

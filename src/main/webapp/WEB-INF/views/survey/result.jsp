@@ -13,20 +13,19 @@
     <script type="text/javascript">
         $(function() {
         	send(); // Django ajax 호출
-            $('#btn_previous').on('click', function() { history.back(); });   // 이전
             $('#btn_close').on('click', function() { window.close(); });      // 윈도우 닫기
         });
-
+        
         function send() {
-            var data = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
-            // alert('params: ' + params);  // 수신 데이터 확인
+            var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+            alert('params: ' + params);  // 수신 데이터 확인
             $.ajax({
               url: 'http://localhost:8000/recommend_parking/end_ajax/',  // Spring Boot -> Django 호출
               type: 'get',  // get or post
               cache: false, // 응답 결과 임시 저장 취소
               async: true,  // true: 비동기 통신
               dataType: 'json', // 응답 형식: json, html, xml...
-              data: data,      // 데이터
+              data: params,      // 데이터
               success: function(rdata) { // 응답이 온경우
                 if (rdata.index == 0) {        // 노상주차장 추천 필요
                     $('#parking1').css('display','');
@@ -69,9 +68,9 @@
 
 <DIV style='display: none;'>
     <form name='frm' id='frm'>
-        <input type='hidden' name=purposepark value='${param.purposepark }'>
+        <input type='hidden' name='purposepark' value='${param.purposepark }'>
         <input type='hidden' name='preferday' value='${param.preferday }'>
-        <input type='hidden' name='reserveperiod' value='${param.reserveperiod }'>
+        <input type='hidden' name='reserveperiod' value='${param.reserveperiod }'>                                                                                      
     </form>
 </DIV>
 
@@ -115,7 +114,6 @@
     <form id='frm' name='frm' action='' method='GET'>
         <br>
         <DIV style="text-align:center;">
-            <button type='button' id='btn_previous' class="btn btn-primary">이전</button>
             <button type='button' id='btn_close' class="btn btn-primary">닫기</button>
         </DIV>
     </form>
