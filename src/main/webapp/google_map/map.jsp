@@ -15,7 +15,7 @@
  
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
   
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCooY7K9qsN4Bjm4_vMBZLw2fmzB29CwC0&sensor=true" type="text/javascript"></script>
+<script src="https://maps.google.com/maps/api/js?key=&sensor=true" type="text/javascript"></script>
 <script src="./jquery.fn.gmap.js" type="text/javascript"></script>
 <script src="./jquery.ui.map.extensions.js" type="text/javascript"></script>
  
