@@ -6,6 +6,16 @@
 function logoutfun() {
     alert("로그아웃 되었습니다.")
 }
+
+function chatting() {
+    var url = '/chatbot/chatting.do';
+    var win = window.open(url, '챗봇', 'width=700px, height=630px');
+
+    var x = (screen.width - 700) / 2;
+    var y = (screen.height - 630) / 2;
+
+    win.moveTo(x, y); // 화면 중앙으로 이동
+}
 </script>
 
 
@@ -23,7 +33,8 @@ function logoutfun() {
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do?memberno=${memberno }'">주차 목록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do?memberno=${memberno }'">주차 등록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do?memberno=${memberno }'" >QNA </button>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/chatbot.do?memberno=${memberno }'" >챗봇 </button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="javascript: chatting()" >챗봇 </button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/recommend/recommend_surveyform.do?memberno=${memberno }'" >주차장 추천 </button>
             
          </li>
       </ul>
@@ -54,7 +65,7 @@ function logoutfun() {
 					        <li><button class="dropdown-item" onclick="location.href='/mypage/me_update.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내 정보 변경 </button></li>
 					        <li><button class="dropdown-item" onclick="location.href='/mypage/passwd_update.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">비밀번호 변경 </button></li>
 							<li><button class="dropdown-item" onclick="location.href='/mypage/my_reser_join.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내가 예약한 주차장</button></li>
-							<li><button class="dropdown-item" onclick="location.href='/mypage/my_park.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
+							<li><button class="dropdown-item" onclick="recommend_parking()" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
 					    </ul>
 				</span>
 			 <button class="btn btn-dark pt-2" onclick="location.href='/member/logout.do', logoutfun() " id="login_btn"> ${sessionScope.id } 로그아웃</button>
