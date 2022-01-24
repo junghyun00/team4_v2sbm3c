@@ -295,6 +295,13 @@ public class ParkProc implements ParkProcInter{
         return str.toString(); 
     }
 
+
+    @Override
+    public List<ParkVO> only_address() {
+        List <ParkVO> list = this.parkDAO.only_address();
+        return list;
+    }
+
    
 
     

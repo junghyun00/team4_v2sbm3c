@@ -105,4 +105,21 @@ public interface ParkProcInter {
      * @return
      */
     public int my_park_delete(int parkno);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public List<ParkVO> only_address();
 }
