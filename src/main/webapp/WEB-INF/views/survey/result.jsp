@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BLOG</title>
-    <link href="{% static '/css/style.css' %}" rel="Stylesheet" type="text/css">
+    <link href="/css/style.css" rel="Stylesheet" type="text/css">
     <script type="text/JavaScript"
                  src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -19,14 +19,19 @@
         function send() {
             var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
             alert('params: ' + params);  // 수신 데이터 확인
+           /*  return; */
+            
             $.ajax({
               url: 'http://localhost:8000/recommend_parking/end_ajax/',  // Spring Boot -> Django 호출
               type: 'get',  // get or post
-              cache: false, // 응답 결과 임시 저장 취소
-              async: true,  // true: 비동기 통신
+              // cache: false, // 응답 결과 임시 저장 취소
+              // async: true,  // true: 비동기 통신
               dataType: 'json', // 응답 형식: json, html, xml...
               data: params,      // 데이터
               success: function(rdata) { // 응답이 온경우
+                 /*  alert("rdata: " + rdata);
+                  alert("rdata: " + rdata.index); */
+                  
                 if (rdata.index == 0) {        // 노상주차장 추천 필요
                     $('#parking1').css('display','');
                 } else if(rdata.index == 1) { // 노외주차장 추천 필요
@@ -35,8 +40,8 @@
                     $('#parking3').css('display','');
                 } 
 
-                $('#panel').html("");  // animation gif 삭제
-                $('#panel').css('display', 'none'); // 숨겨진 태그의 출력
+/*                 $('#panel').html("");  // animation gif 삭제
+                $('#panel').css('display', 'none'); // 숨겨진 태그의 출력 */
 
                 // --------------------------------------------------
                 // 분류 정보에 따른 상품 이미지 SELECT
@@ -44,8 +49,10 @@
               },
               // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우
               error: function(request, status, error) { // callback 함수
-                console.log(error);
+                  alert('error: ' + error);
+                  console.log(error);
               }
+              
             });
 
             $('#panel').show(); // 숨겨진 태그의 출력
@@ -68,9 +75,9 @@
 
 <DIV style='display: none;'>
     <form name='frm' id='frm'>
-        <input type='hidden' name='purposepark' value='${param.purposepark }'>
-        <input type='hidden' name='preferday' value='${param.preferday }'>
-        <input type='hidden' name='reserveperiod' value='${param.reserveperiod }'>                                                                                      
+        <input type='text' name='purposepark' value='${param.purposepark }'>
+        <input type='text' name='preferday' value='${param.preferday }'>
+        <input type='text' name='reserveperiod' value='${param.reserveperiod }'>                                                                                      
     </form>
 </DIV>
 
@@ -111,7 +118,7 @@
         </DIV>
     </DIV>
 
-    <form id='frm' name='frm' action='' method='GET'>
+    <form id='frm2' name='frm2' action='' method='GET'>
         <br>
         <DIV style="text-align:center;">
             <button type='button' id='btn_close' class="btn btn-primary">닫기</button>

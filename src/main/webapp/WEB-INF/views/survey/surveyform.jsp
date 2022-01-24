@@ -34,19 +34,8 @@
                success: function (response) {
                    if(response.cnt == 1){
                        alert("설문에 응해주셔서 감사합니다");
-                       // location.href = "/";
+                       location.href = "/";
 
-                	   $.ajax({
-                           type: "GET",
-                           url: "/survey/result.do",
-                           cache: false, // 응답 결과 임시 저장 취소
-                           async: true,  // true: 비동기 통신
-                           data: params,
-                           dataType: "JSON",
-                           success: function (response) {
-                        	   var msg = "";
-                           }
-                       }); 
                    } else{
                        alert("설문에 다시 응해주세요");
                    }
@@ -54,8 +43,8 @@
            }); 
 
 
-
-    	   var url = '/survey/result.do';
+           
+    	   var url = '/survey/result.do?' + params;
     	   var win = window.open(url, 'AI', 'width=800px, height=750px');
 
     	   var x = (screen.width - 1000) / 2;

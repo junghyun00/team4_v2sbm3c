@@ -15,15 +15,16 @@ COMMENT ON COLUMN SURVEY.MEMBERNO is '회원 번호';
 COMMENT ON COLUMN SURVEY.PURPOSEPARK is '주차 목적';
 COMMENT ON COLUMN SURVEY.PREFERDAY is '선호 요일';
 COMMENT ON COLUMN SURVEY.RESERVEPERIOD is '예약 기간';
+COMMENT ON COLUMN SURVEY.RDATE is '설문조사 생성일';
 
 CREATE SEQUENCE SURVEY_SEQ INCREMENT BY 1 START WITH 1 MAXVALUE 999999999 MINVALUE 1 CACHE 2;
 
-INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod) 
-VALUES (1,1,1,2,2);
-INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod) 
-VALUES (2,2,3,1,1);
-INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod) 
-VALUES (3,3,2,1,2);
+INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod,rdate) 
+VALUES (1,1,1,2,2,sysdate);
+INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod,rdate) 
+VALUES (2,2,3,1,1,sysdate);
+INSERT INTO survey (surveyno,memberno,purposepark,preferday,reserveperiod,rdate) 
+VALUES (3,3,2,1,2,sysdate);
 
 DELETE FROM survey
 WHERE surveyno = 1;

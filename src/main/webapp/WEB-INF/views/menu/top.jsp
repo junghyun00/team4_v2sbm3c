@@ -23,6 +23,7 @@ function logoutfun() {
             <button class="btn btn-dark pt-2" id="manage_btn"  onclick="location.href='/park/park_list_search_paging.do?memberno=${memberno }'">주차 목록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do?memberno=${memberno }'">주차 등록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do?memberno=${memberno }'" >QNA </button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/chatbot.do?memberno=${memberno }'" >챗봇 </button>
             
          </li>
       </ul>
