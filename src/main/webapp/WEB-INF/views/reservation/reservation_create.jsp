@@ -46,7 +46,7 @@
                     <input type="hidden" name="memberno" value="${memberno}" required="required">   <!-- 이건 나중에 수정 -->
                     <input type="hidden" name="parkno" value="${parkno}" required="required">
 	                <span style="font-size: 1.5em; font-weight: bold; ">${name }</span><br><br>
-	                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${price }원 ]</span><br><br><br>
+	                <span style="font-size: 1.0em; font-weight: bold;">30분 당 가격 [ ${price }원 ]</span><br><br><br>
                     <table class="table table-bordered">
                         <tbody>
                                 <tr>

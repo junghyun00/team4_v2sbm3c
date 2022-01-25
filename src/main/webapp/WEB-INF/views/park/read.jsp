@@ -47,7 +47,7 @@
                 <span style="font-size: 1.0em; font-weight: bold;">주소 [ ${address } ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">구역번호 [ ${area } ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 전화번호 [ ${phone } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${price }원 ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">30분 당 가격 [ ${price }원 ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
                 <button type='button' onclick="location.href='/reservation/reservation_create.do?memberno=${memberno }&parkno=${parkno}'"  class="btn btn-dark">예약</button>
                 <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>

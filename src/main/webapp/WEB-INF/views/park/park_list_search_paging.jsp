@@ -206,7 +206,7 @@ window.onload = initialize; // 시작 함수 지정 및 호출
                     <TR>
                       <TH class="th_bs">주차장 이름</TH>
                       <TH class="th_bs">주소</TH>
-                      <TH class="th_bs">1시간 당 <br>가격</TH>
+                      <TH class="th_bs">30분 당 <br>가격</TH>
                     </TR>
                  </thead>
                 
