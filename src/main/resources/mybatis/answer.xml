@@ -10,4 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT INTO answer(answerno, qnano, adminno, content)
         VALUES (answer_seq.nextval, #{qnano}, #{adminno}, #{content})
     </insert>
+    
+    <!-- 글 조회  -->
+    <select id="answer_read"  resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+        SELECT answerno, qnano, adminno, content
+        FROM answer
+        WHERE qnano=#{qnano} and rownum=1 order by answerno desc 
+    </select>
 </mapper>

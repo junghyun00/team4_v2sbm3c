@@ -9,17 +9,17 @@ grade    NUMBER NOT NULL
 */
 
 public class ReviewVO {
-    /** 후기 번호 */
+    /** �썑湲� 踰덊샇 */
     private int reviewno;
-    /** 주차장 번호 */
+    /** 二쇱감�옣 踰덊샇 */
     private int parkno;
-    /** 회원 번호 */
+    /** �쉶�썝 踰덊샇 */
     private int memberno;
-    /** 댓글 */
+    /** �뙎湲� */
     private String cmt;
-    /** 평점 */
+    /** �룊�젏 */
     private int grade;
-    
+    private String cmt_date;
     
     
     public int getReviewno() {
@@ -51,6 +51,12 @@ public class ReviewVO {
     }
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+    public String cmt_date() {
+        return cmt_date;
+    }
+    public void cmt_date(String cmt_date) {
+        this.cmt_date = cmt_date;
     }
     
     

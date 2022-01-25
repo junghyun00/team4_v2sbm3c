@@ -1,5 +1,8 @@
 package dev.mvc.review;
 
-public interface ReviewProcInter {
+import java.util.List;
 
+public interface ReviewProcInter {
+	public int review_create(ReviewVO reviewvo);
+	public List<ReviewlistVO> listcmt_by_parkno(int parkno);
 }

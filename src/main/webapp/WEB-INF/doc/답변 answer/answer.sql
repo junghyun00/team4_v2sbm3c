@@ -40,3 +40,6 @@ where content = '1시간 범위 내에서 주차요금을 면제하고 1시간 �
 
 delete from answer where content like '%체크카드%'; -- 답변 내용에서 답변에 체크카드가 포함된 리스트 삭제
 
+SELECT answerno, qnano, adminno, content
+        FROM answer
+        WHERE qnano=1 and rownum=1 order by answerno desc; 

@@ -89,6 +89,8 @@ WHERE r >= 1 AND r <= 3;
 -- 등급 컬럼 추가
 alter table member add (grade NUMBER);
 
+delete from member where memberno=1;
+
 
 
 

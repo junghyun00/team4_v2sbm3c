@@ -15,6 +15,12 @@ public class AnswerProc implements AnswerProcInter{
         int cnt = this.answerDAO.answer_create(answerVO);
         return cnt;
     }
+
+    @Override
+    public AnswerVO answer_read(int answerno) {
+        AnswerVO answerVO = this.answerDAO.answer_read(answerno);
+        return answerVO;
+    }
     
 
 }

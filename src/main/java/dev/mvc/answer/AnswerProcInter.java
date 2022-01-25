@@ -10,6 +10,6 @@ public interface AnswerProcInter {
      */
     public int answer_create(AnswerVO answerVO);
     
-    
+    public AnswerVO answer_read(int answerno);
 
 }

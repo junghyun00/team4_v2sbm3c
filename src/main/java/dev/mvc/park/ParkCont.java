@@ -19,7 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
-
+import dev.mvc.review.ReviewProcInter;
+import dev.mvc.review.ReviewlistVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -32,6 +33,10 @@ public class ParkCont {
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
+    
+	@Autowired
+	@Qualifier("dev.mvc.review.Reviewproc")
+	private ReviewProcInter reviewproc;
     
     
     /** 업로드 파일 절대 경로 */
@@ -60,13 +65,13 @@ public class ParkCont {
         if (memberProc.isMember(session)) {
             HashMap<String, Object> map = new HashMap<String, Object>(); 
             map.put("address", address); // #{address}
-            map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+            map.put("now_page", now_page);  // �럹�씠吏��뿉 異쒕젰�븷 �젅肄붾뱶�쓽 踰붿쐞瑜� �궛異쒗븯湲곗쐞�빐 �궗�슜
             map.put("memberno", memberno);
 
             MemberVO memberVO = this.memberProc.read(memberno);
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
-            
+
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
@@ -116,10 +121,7 @@ public class ParkCont {
         } else {
             mav.setViewName("/member/login_need"); 
         }
-        
-        
-        
-        
+         
         return mav;
     }
     
@@ -147,7 +149,7 @@ public class ParkCont {
         file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
         System.out.println("file1"+ file1);
         
-        long size1 = mf.getSize(); // 파일 크기
+        long size1 = mf.getSize();  // 파일 크기
         System.out.println("size1"+ size1);
         
         if (size1 > 0) { // 파일 크기 체크
@@ -192,6 +194,8 @@ public class ParkCont {
         MemberVO memberVO = this.memberProc.read(memberno);
         mav.addObject("memberVO", memberVO);
         
+        List<ReviewlistVO> cmtlist = this.reviewproc.listcmt_by_parkno(parkno);
+        mav.addObject("cmtlist", cmtlist);
         
         ParkVO parkVO = this.parkProc.read(parkno);
         mav.addObject("parkVO", parkVO);
@@ -421,8 +425,6 @@ public class ParkCont {
     @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.POST)
     public ModelAndView my_park_delete(HttpServletRequest request, ParkVO parkVO) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("여기에요 여기~");
-        
         String uploadDir = this.uploadDir;
         
         int parkno = parkVO.getParkno();
@@ -571,7 +573,7 @@ public class ParkCont {
         String uploadDir = this.uploadDir;
         
         
-        ParkVO vo = parkProc.my_park_read(parkVO.getParkno());  // 삭제할 파일 정보 읽어옴
+        ParkVO vo = parkProc.my_park_read(parkVO.getParkno()); // 삭제할 파일 정보 읽어옴
         
         mav.addObject("memberno", parkVO.getMemberno());
         System.out.println("memberno" + parkVO.getMemberno());

@@ -22,9 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberCont {
+	
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
-    private MemberProcInter memberProc = null;
+    private MemberProcInter memberProc;
     
     public MemberCont(){
         System.out.println("-> MemberCont created.");
@@ -341,6 +342,7 @@ public class MemberCont {
     
      
      
+
      /**
       * 회원 삭제 처리
       * @param memberVO
@@ -380,31 +382,31 @@ public class MemberCont {
        return mav;
      }
      
-//     /**
-//      * 패스워드를 변경 ajax
-//      * @param memberno
-//      * @return
-//      */
-//     @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
-//     @ResponseBody
-//     public String passwd_update_ajax(int memberno) {
-//         MemberVO memberVO = this.memberProc.read(memberno);
-//       //System.out.println(memberVO);
-//         
-//         JSONObject json = new JSONObject();
-//         json.put("memberno", memberVO.getMemberno());
-//         json.put("id", memberVO.getId());
-//         json.put("passwd", memberVO.getPasswd());
-//         json.put("name", memberVO.getName());
-//         json.put("address", memberVO.getAddress());
-//         json.put("phone", memberVO.getPhone());
-//         json.put("email", memberVO.getEmail());
-//         json.put("grade", memberVO.getGrade());
-//         
-//         //System.out.println(json);
-//         
-//         return json.toString();
-//     }
+//   /**
+//   * 패스워드를 변경 ajax
+//   * @param memberno
+//   * @return
+//   */
+//  @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
+//  @ResponseBody
+//  public String passwd_update_ajax(int memberno) {
+//      MemberVO memberVO = this.memberProc.read(memberno);
+//    //System.out.println(memberVO);
+//      
+//      JSONObject json = new JSONObject();
+//      json.put("memberno", memberVO.getMemberno());
+//      json.put("id", memberVO.getId());
+//      json.put("passwd", memberVO.getPasswd());
+//      json.put("name", memberVO.getName());
+//      json.put("address", memberVO.getAddress());
+//      json.put("phone", memberVO.getPhone());
+//      json.put("email", memberVO.getEmail());
+//      json.put("grade", memberVO.getGrade());
+//      
+//      //System.out.println(json);
+//      
+//      return json.toString();
+//  }
      
      
      /**

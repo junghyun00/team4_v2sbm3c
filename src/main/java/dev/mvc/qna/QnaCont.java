@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.answer.AnswerProcInter;
+import dev.mvc.answer.AnswerVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
@@ -29,6 +31,10 @@ public class QnaCont {
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
+    
+    @Autowired
+    @Qualifier("dev.mvc.answer.AnswerProc")
+    private AnswerProcInter answerProc;
 
     /** 업로드 파일 절대 경로 */
     private String uploadDir = Qna.getUploadDir();
@@ -157,8 +163,11 @@ public class QnaCont {
         ModelAndView mav = new ModelAndView();
 
         QnaVO qnaVO = this.qnaProc.read(qnano);
+        AnswerVO answerVO = this.answerProc.answer_read(qnano);
+        
         mav.addObject("qnaVO", qnaVO);
-
+        mav.addObject("answerVO", answerVO);
+        
         mav.setViewName("/qna/read");
 
         return mav;

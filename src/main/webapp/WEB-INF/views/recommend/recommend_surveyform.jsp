@@ -28,7 +28,7 @@
 
            $.ajax({
                type: "GET",
-               url: "/survey_create.do",
+               url: "/recommend_create.do",
                data: params,
                dataType: "JSON",
                success: function (response) {
@@ -42,9 +42,7 @@
                }
            }); 
 
-
-           
-    	   var url = '/survey/result.do?' + params;
+    	   var url = '/recommend/result.do?' + params;
     	   var win = window.open(url, 'AI', 'width=800px, height=750px');
 
     	   var x = (screen.width - 1000) / 2;
@@ -64,11 +62,11 @@
 			<div class="col-md-12 p-3  rounded text-black ">
 				<div class="row">
 					<div class="col-md-12 border-bottom mb-3">
-						<h1>Survey ${memberno }</h1>
+						<h1>Survey ${memberVO.memberno }</h1>
 					</div>
 					<div class="col-md-12 border-bottom">
 						<form name="frm" id='frm'>
-							<input type="hidden" name="memberno" id="memberno" value='${memberno }'>
+							<input type="hidden" name="memberno" id="memberno" value='${memberVO.memberno }'>
 
                                   
 							<div class="mt-3">
