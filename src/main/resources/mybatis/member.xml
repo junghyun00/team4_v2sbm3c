@@ -20,13 +20,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         VALUES (member_seq.nextval, #{id}, #{passwd}, #{name}, #{address}, #{phone}, #{email}, #{grade})
     </insert>
     
-
-    
     <!-- id로 회원 정보 조회 -->
     <select id="readById" resultType="dev.mvc.member.MemberVO" parameterType="String">
       SELECT memberno, id, passwd, name, address, phone, email, grade
       FROM member
       WHERE id = #{id}
+    </select>
+    
+    <select id="readByMemberno" resultType="dev.mvc.member.MemberVO" parameterType="int">
+      SELECT memberno, id, passwd, name, address, phone, email, grade
+      FROM member
+      WHERE memberno = #{memberno}
     </select>
     
     <!-- 로그인 -->
