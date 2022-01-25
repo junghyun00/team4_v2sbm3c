@@ -61,7 +61,7 @@
 	            </div>
 	
 	            <div class="row" style='margin:40px auto;'>
-	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차장 가격*</label>
+	                <label class="col-md-2" style='color:#555555;; font-weight: bold; '>주차 30분 당 가격*</label>
 	                <div class="col-md-10">
 	                    <input type='text' name='price' placeholder='1시간 당 가격을 입력해주세요. ' required="required" 
 	                       class="form-control" style='width: 50%;'>

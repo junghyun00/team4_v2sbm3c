@@ -39,7 +39,7 @@ public class ParkCont {
 	private ReviewProcInter reviewproc;
     
     
-    /** �뾽濡쒕뱶 �뙆�씪 �젅�� 寃쎈줈 */
+    /** 업로드 파일 절대 경로 */
     private String uploadDir = Park.getUploadDir();
     
     
@@ -49,7 +49,7 @@ public class ParkCont {
     
     
     /**
-     * 紐⑸줉 + 寃��깋 + �럹�씠吏�
+     * 목록 + 검색 + 페이징
      * @param address
      * @param now_page
      * @return
@@ -71,7 +71,11 @@ public class ParkCont {
             MemberVO memberVO = this.memberProc.read(memberno);
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> c6f91e05c69cb8240082f53f8b125d22e626e695
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
@@ -104,7 +108,7 @@ public class ParkCont {
     }
     
     /**
-     * �벑濡� �뤌
+     * 등록 폼
      * @return
      */
     @RequestMapping(value = "/park/park_create.do", method = RequestMethod.GET)
@@ -127,7 +131,7 @@ public class ParkCont {
     
     
     /**
-     * �벑濡� 泥섎━
+     * 등록 처리
      * @param request
      * @param parkVO
      * @return
@@ -139,21 +143,21 @@ public class ParkCont {
         mav.addObject("memberno", parkVO.getMemberno());
         
         // ------------------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 �떆�옉
+        // 파일 전송 코드 시작
         // ------------------------------------------------------------------------------
-        String file1 = "";    // �썝蹂� �뙆�씪紐� image
-        String uploadDir = this.uploadDir;   // �뙆�씪 �뾽濡쒕뱶 寃쎈줈
+        String file1 = "";    // 원본 파일명 image
+        String uploadDir = this.uploadDir;   // 파일 업로드 경로
         
         MultipartFile mf = parkVO.getFile1MF();
         
-        file1 = Tool.getFname(mf.getOriginalFilename()); // �썝蹂� �닚�닔 �뙆�씪紐� �궛異�
+        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
         System.out.println("file1"+ file1);
         
-        long size1 = mf.getSize(); // �뙆�씪 �겕湲�
+        long size1 = mf.getSize();  // 파일 크기
         System.out.println("size1"+ size1);
         
-        if (size1 > 0) { // �뙆�씪 �겕湲� 泥댄겕
-            // �뙆�씪 ���옣 �썑 �뾽濡쒕뱶�맂 �뙆�씪紐낆씠 由ы꽩�맖
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨
             file1 = Upload.saveFileSpring(mf, uploadDir);
             System.out.println("file1"+ file1);
         }
@@ -162,12 +166,12 @@ public class ParkCont {
         parkVO.setFile1(file1);
 
         // ------------------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 醫낅즺
+        // 파일 전송 코드 종료
         // ------------------------------------------------------------------------------
         mav.addObject("parkno", parkVO.getParkno());
         
         int cnt = this.parkProc.park_create(parkVO);
-        //cnt = 0;    // else �뀒�뒪�듃
+        //cnt = 0;    // else 테스트
         
         mav.addObject("cnt", cnt);
         
@@ -182,7 +186,7 @@ public class ParkCont {
     
     
     /**
-     * 湲� �븳 媛� 議고쉶
+     * 글 한 개 조회
      * @param parkno
      * @return
      */
@@ -209,7 +213,7 @@ public class ParkCont {
 
     
    /**
-    *  �쉶�썝蹂� �벑濡앺븳 二쇱감�옣 紐⑸줉
+    *  회원별 등록한 주차장 목록
     * @param parkno
     * @return
     */
@@ -229,7 +233,7 @@ public class ParkCont {
     
     
     /**
-     * �쉶�썝蹂� �벑濡앺븳 二쇱감�옣 紐⑸줉 議고쉶
+     * 회원별 등록한 주차장 목록 조회
      * @param parkno
      * @return
      */
@@ -249,7 +253,7 @@ public class ParkCont {
     
     
     /**
-     * 二쇱감�옣 �젙蹂� �닔�젙�뤌
+     * 주차장 정보 수정폼
      * @param parkno
      * @return
      */
@@ -270,7 +274,7 @@ public class ParkCont {
     }
     
     /**
-     * 二쇱감�옣 �젙蹂� �닔�젙 泥섎━
+     * 주차장 정보 수정 처리
      * @param parkVO
      * @return
      */
@@ -293,7 +297,7 @@ public class ParkCont {
     
     
     /**
-     * 二쇱감�옣 �씠誘몄� �뙆�씪 �닔�젙 �뤌
+     * 주차장 이미지 파일 수정 폼
      * @param parkno
      * @return
      */
@@ -310,7 +314,7 @@ public class ParkCont {
     }
     
     /**
-     * 二쇱감�옣 �씠誘몄� �뙆�씪 �닔�젙 泥섎━
+     * 주차장 이미지 파일 수정 처리
      * @param parkVO
      * @return
      */
@@ -320,7 +324,7 @@ public class ParkCont {
         String uploadDir = this.uploadDir;
         
         
-        ParkVO vo = parkProc.my_park_read(parkVO.getParkno());  // �궘�젣�븷 �뙆�씪 �젙蹂� �씫�뼱�샂
+        ParkVO vo = parkProc.my_park_read(parkVO.getParkno());  // 삭제할 파일 정보 읽어옴
         
         mav.addObject("memberno", parkVO.getMemberno());
         System.out.println("memberno" + parkVO.getMemberno());
@@ -328,27 +332,27 @@ public class ParkCont {
         
         int cnt = 0;
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 肄붾뱶 �떆�옉
+        // 파일 삭제 코드 시작
         // -------------------------------------------------------------------
         String file1 = vo.getFile1();
         long size1 = 0;
         boolean sw = false;
         
-        sw = Tool.deleteFile(uploadDir, file1);  // Folder�뿉�꽌 1嫄댁쓽 �뙆�씪 �궘�젣
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 醫낅즺 
+        // 파일 삭제 종료 
         // -------------------------------------------------------------------
         // -------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 �떆�옉
+        // 파일 전송 코드 시작
         // -------------------------------------------------------------------
         file1 = "";
         MultipartFile mf = parkVO.getFile1MF();
         
         file1 = mf.getOriginalFilename();
-        size1 = mf.getSize(); // �뙆�씪 �겕湲�
+        size1 = mf.getSize(); // 파일 크기
         
-        if (size1 > 0) { // �뙆�씪 �겕湲� 泥댄겕
-            // �뙆�씪 ���옣 �썑 �뾽濡쒕뱶�맂 �뙆�씪紐낆씠 由ы꽩�맖
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨
             file1 = Upload.saveFileSpring(mf, uploadDir);
             System.out.println("file1"+ file1);
         }
@@ -356,7 +360,7 @@ public class ParkCont {
 
         parkVO.setFile1(file1);
         // -------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 醫낅즺
+        // 파일 전송 코드 종료
         // -------------------------------------------------------------------
         cnt = this.parkProc.my_park_update_file(parkVO);
         
@@ -375,7 +379,7 @@ public class ParkCont {
                                                             
     
     /**
-     * 二쇱감�옣 �궘�젣 �뤌
+     * 주차장 삭제 폼
      * @param parkno
      * @return
      */
@@ -393,7 +397,7 @@ public class ParkCont {
     
     
     /**
-     * 留덉씠�럹�씠吏� 二쇱감�옣 �궘�젣 �뤌 ajax
+     * 마이페이지 주차장 삭제 폼 ajax
      * @param parkno
      * @return
      */
@@ -418,15 +422,13 @@ public class ParkCont {
     
     
     /**
-     * 留덉씠�럹�씠吏� 二쇱감�옣 �궘�젣 泥섎━
+     * 마이페이지 주차장 삭제 처리
      * @param parkno
      * @return
      */
     @RequestMapping(value="/mypage/my_park_delete.do", method=RequestMethod.POST)
     public ModelAndView my_park_delete(HttpServletRequest request, ParkVO parkVO) {
         ModelAndView mav = new ModelAndView();
-        System.out.println("�뿬湲곗뿉�슂 �뿬湲�~");
-        
         String uploadDir = this.uploadDir;
         
         int parkno = parkVO.getParkno();
@@ -436,9 +438,9 @@ public class ParkCont {
         
         int cnt = 0;
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 肄붾뱶 �떆�옉
+        // 파일 삭제 코드 시작
         // -------------------------------------------------------------------
-        // �궘�젣�븷 �뙆�씪 �젙蹂대�� �씫�뼱�샂.
+        // 삭제할 파일 정보를 읽어옴.
         ParkVO vo = parkProc.my_park_read(parkno);
         
         
@@ -446,9 +448,9 @@ public class ParkCont {
         long size1 = 0;
         boolean sw = false;
         
-        sw = Tool.deleteFile(uploadDir, file1);  // Folder�뿉�꽌 1嫄댁쓽 �뙆�씪 �궘�젣
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 醫낅즺 �떆�옉
+        // 파일 삭제 종료 시작
         // -------------------------------------------------------------------
         
         cnt = this.parkProc.my_park_delete(parkno);
@@ -470,9 +472,9 @@ public class ParkCont {
     
     
     
-    ///////////////// admin �슜///////////////////////
+    ///////////////// admin 용///////////////////////
     /**
-     * 紐⑸줉 + 寃��깋 + �럹�씠吏�
+     * 목록 + 검색 + 페이징
      * @param address
      * @param now_page
      * @return
@@ -485,17 +487,17 @@ public class ParkCont {
         
         HashMap<String, Object> map = new HashMap<String, Object>(); 
         map.put("address", address); // #{address}
-        map.put("now_page", now_page);  // �럹�씠吏��뿉 異쒕젰�븷 �젅肄붾뱶�쓽 踰붿쐞瑜� �궛異쒗븯湲곗쐞�빐 �궗�슜
+        map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
         
-        // 寃��깋 紐⑸줉
+        // 검색 목록
         List<ParkVO> list = parkProc.park_list_search_paging(map);
         mav.addObject("list", list);
         
-        // 寃��깋 �젅肄붾뱶 媛쒖닔
+        // 검색 레코드 개수
         int search_count = parkProc.search_count(map);
         mav.addObject("search_count", search_count);
         
-        // �럹�씠吏� 紐⑸줉 臾몄옄�뿴 �깮�꽦
+        // 페이지 목록 문자열 생성
         String paging = parkProc.admin_pagingBox(search_count, now_page, address);
         mav.addObject("paging", paging);
         mav.addObject("now_page", now_page);
@@ -508,7 +510,7 @@ public class ParkCont {
     
     
     /**
-     * 二쇱감�옣 �젙蹂� �닔�젙�뤌
+     * 주차장 정보 수정폼
      * @param parkno
      * @return
      */
@@ -525,7 +527,7 @@ public class ParkCont {
     }
     
     /**
-     * 二쇱감�옣 �젙蹂� �닔�젙 泥섎━
+     * 주차장 정보 수정 처리
      * @param parkVO
      * @return
      */
@@ -548,7 +550,7 @@ public class ParkCont {
     
     
     /**
-     * 二쇱감�옣 �씠誘몄� �뙆�씪 �닔�젙 �뤌
+     * 주차장 이미지 파일 수정 폼
      * @param parkno
      * @return
      */
@@ -565,7 +567,7 @@ public class ParkCont {
     }
     
     /**
-     * 二쇱감�옣 �씠誘몄� �뙆�씪 �닔�젙 泥섎━
+     * 주차장 이미지 파일 수정 처리
      * @param parkVO
      * @return
      */
@@ -575,7 +577,7 @@ public class ParkCont {
         String uploadDir = this.uploadDir;
         
         
-        ParkVO vo = parkProc.my_park_read(parkVO.getParkno());  // �궘�젣�븷 �뙆�씪 �젙蹂� �씫�뼱�샂
+        ParkVO vo = parkProc.my_park_read(parkVO.getParkno()); // 삭제할 파일 정보 읽어옴
         
         mav.addObject("memberno", parkVO.getMemberno());
         System.out.println("memberno" + parkVO.getMemberno());
@@ -583,27 +585,27 @@ public class ParkCont {
         
         int cnt = 0;
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 肄붾뱶 �떆�옉
+        // 파일 삭제 코드 시작
         // -------------------------------------------------------------------
         String file1 = vo.getFile1();
         long size1 = 0;
         boolean sw = false;
         
-        sw = Tool.deleteFile(uploadDir, file1);  // Folder�뿉�꽌 1嫄댁쓽 �뙆�씪 �궘�젣
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 醫낅즺 
+        // 파일 삭제 종료 
         // -------------------------------------------------------------------
         // -------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 �떆�옉
+        // 파일 전송 코드 시작
         // -------------------------------------------------------------------
         file1 = "";
         MultipartFile mf = parkVO.getFile1MF();
         
         file1 = mf.getOriginalFilename();
-        size1 = mf.getSize(); // �뙆�씪 �겕湲�
+        size1 = mf.getSize(); // 파일 크기
         
-        if (size1 > 0) { // �뙆�씪 �겕湲� 泥댄겕
-            // �뙆�씪 ���옣 �썑 �뾽濡쒕뱶�맂 �뙆�씪紐낆씠 由ы꽩�맖
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨
             file1 = Upload.saveFileSpring(mf, uploadDir);
             System.out.println("file1"+ file1);
         }
@@ -611,7 +613,7 @@ public class ParkCont {
 
         parkVO.setFile1(file1);
         // -------------------------------------------------------------------
-        // �뙆�씪 �쟾�넚 肄붾뱶 醫낅즺
+        // 파일 전송 코드 종료
         // -------------------------------------------------------------------
         cnt = this.parkProc.my_park_update_file(parkVO);
         
@@ -630,7 +632,7 @@ public class ParkCont {
                                                             
     
     /**
-     * 二쇱감�옣 �궘�젣 �뤌
+     * 주차장 삭제 폼
      * @param parkno
      * @return
      */
@@ -650,7 +652,7 @@ public class ParkCont {
     
     
     /**
-     * 愿�由ъ옄�슜 二쇱감�옣 �궘�젣 �뤌 ajax
+     * 관리자용 주차장 삭제 폼 ajax
      * @param parkno
      * @return
      */
@@ -678,7 +680,7 @@ public class ParkCont {
     }
     
     /**
-     * 愿�由ъ옄�슜 二쇱감�옣 �궘�젣 泥섎━
+     * 관리자용 주차장 삭제 처리
      * @param parkno
      * @return
      */
@@ -694,9 +696,9 @@ public class ParkCont {
         
         int cnt = 0;
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 肄붾뱶 �떆�옉
+        // 파일 삭제 코드 시작
         // -------------------------------------------------------------------
-        // �궘�젣�븷 �뙆�씪 �젙蹂대�� �씫�뼱�샂.
+        // 삭제할 파일 정보를 읽어옴.
         ParkVO vo = this.parkProc.my_park_read(parkno);
         //System.out.println("vo = "+vo);
         
@@ -704,9 +706,9 @@ public class ParkCont {
         long size1 = 0;
         boolean sw = false;
         
-        sw = Tool.deleteFile(uploadDir, file1);  // Folder�뿉�꽌 1嫄댁쓽 �뙆�씪 �궘�젣
+        sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
         // -------------------------------------------------------------------
-        // �뙆�씪 �궘�젣 醫낅즺 �떆�옉
+        // 파일 삭제 종료 시작
         // -------------------------------------------------------------------
         
         cnt = this.parkProc.my_park_delete(parkno);

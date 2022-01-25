@@ -37,7 +37,6 @@ public class ParkProc implements ParkProcInter{
         
         // 시작 rownum 결정
         int start_num = begin_of_page + 1;
-        
         //  종료 rownum
         int end_num = begin_of_page + Park.RECORD_PER_PAGE;
         

@@ -82,4 +82,6 @@ public interface ParkDAOInter {
     public List<ParkVO> only_address();
     
     
+    
+    
 }

@@ -79,7 +79,7 @@ function updatefun() {
                 </div>
     
                 <div class="form-group" style='margin-top:30px;'>
-                    <label class="col-md-6" style='color:#555555;; font-weight: bold; '>주차장 가격 (숫자만 입력해주세요)</label>
+                    <label class="col-md-6" style='color:#555555;; font-weight: bold; '>주차 30분 당 가격 (숫자만 입력해주세요)</label>
                     <div class="col-md-10">
                         <input type='text' name='price' value='${price }'  required="required" 
                            class="form-control" style='width: 50%;'>

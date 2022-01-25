@@ -33,7 +33,7 @@ public class MemberCont {
     
     
     /**
-     * id 以묐났 泥댄겕, JSON 異쒕젰
+     * id 중복 체크, JSON 출력
      * @param id
      * @return
      */
@@ -51,7 +51,7 @@ public class MemberCont {
     
     
     /**
-     * �벑濡� �뤌
+     * 등록 폼
      * @return
      */
      @RequestMapping(value="/member/create.do", method=RequestMethod.GET )
@@ -65,7 +65,7 @@ public class MemberCont {
     
     
      /**
-      * �벑濡� 泥섎━
+      * 등록 처리
       * @param memberVO
       * @return
       */
@@ -73,7 +73,7 @@ public class MemberCont {
      public ModelAndView create(MemberVO memberVO){
          ModelAndView mav = new ModelAndView();
          
-         memberVO.setGrade(20); // 湲곕낯 �쉶�썝 媛��엯 �벑濡� 20 吏��젙   愿�由ъ옄 = 10, �씪諛� �쉶�썝 = 20
+         memberVO.setGrade(20); // 기본 회원 가입 등록 20 지정   관리자 = 10, 일반 회원 = 20
          
          int cnt= memberProc.create(memberVO);
          
@@ -93,7 +93,7 @@ public class MemberCont {
      
      
      /**
-      * 濡쒓렇�씤 �뤌
+      * 로그인 폼
       * @return
       */
      // http://localhost:9091/member/login.do 
@@ -105,14 +105,14 @@ public class MemberCont {
        Cookie[] cookies = request.getCookies();
        Cookie cookie = null;
 
-       String ck_id = ""; // id ���옣
-       String ck_id_save = ""; // id ���옣 �뿬遺�瑜� 泥댄겕
-       String ck_passwd = ""; // passwd ���옣
-       String ck_passwd_save = ""; // passwd ���옣 �뿬遺�瑜� 泥댄겕
+       String ck_id = ""; // id 저장
+       String ck_id_save = ""; // id 저장 여부를 체크
+       String ck_passwd = ""; // passwd 저장
+       String ck_passwd_save = ""; // passwd 저장 여부를 체크
 
        if (cookies != null) {
          for (int i=0; i < cookies.length; i++){
-           cookie = cookies[i]; // 荑좏궎 媛앹껜 異붿텧
+           cookie = cookies[i]; // 쿠키 객체 추출
            
            if (cookie.getName().equals("ck_id")){
              ck_id = cookie.getValue(); 
@@ -138,14 +138,14 @@ public class MemberCont {
       
      
      /**
-      * Cookie 湲곕컲 濡쒓렇�씤 泥섎━
-      * @param request Cookie瑜� �씫湲곗쐞�빐 �븘�슂
-      * @param response Cookie瑜� �벐湲곗쐞�빐 �븘�슂
-      * @param session 濡쒓렇�씤 �젙蹂대�� 硫붾え由ъ뿉 湲곕줉
-      * @param id  �쉶�썝 �븘�씠�뵒
-      * @param passwd �쉶�썝 �뙣�뒪�썙�뱶
-      * @param id_save �쉶�썝 �븘�씠�뵒 Cookie�뿉 ���옣 �뿬遺�
-      * @param passwd_save �뙣�뒪�썙�뱶 Cookie�뿉 ���옣 �뿬遺�
+      * Cookie 기반 로그인 처리
+      * @param request Cookie를 읽기위해 필요
+      * @param response Cookie를 쓰기위해 필요
+      * @param session 로그인 정보를 메모리에 기록
+      * @param id  회원 아이디
+      * @param passwd 회원 패스워드
+      * @param id_save 회원 아이디 Cookie에 저장 여부
+      * @param passwd_save 패스워드 Cookie에 저장 여부
       * @return
       */
      // http://localhost:9091/member/login.do 
@@ -165,31 +165,31 @@ public class MemberCont {
        map.put("passwd", passwd);
        
        int count = memberProc.login(map);
-       //count = 0;  // else �뀒�뒪�듃
+       //count = 0;  // else 테스트
        
-       if (count == 1) { // 濡쒓렇�씤 �꽦怨�
-         // System.out.println(id + " 濡쒓렇�씤 �꽦怨�");
+       if (count == 1) { // 로그인 성공
+         // System.out.println(id + " 로그인 성공");
          MemberVO memberVO = memberProc.readById(id);
-         session.setAttribute("memberno", memberVO.getMemberno()); // �꽌踰꾩쓽 硫붾え由ъ뿉 湲곕줉
+         session.setAttribute("memberno", memberVO.getMemberno()); // 서버의 메모리에 기록
          session.setAttribute("id", id);
          session.setAttribute("name", memberVO.getName());
          session.setAttribute("grade", memberVO.getGrade());
          
          // -------------------------------------------------------------------
-         // id 愿��젴 荑좉린 ���옣
+         // id 관련 쿠기 저장
          // -------------------------------------------------------------------
-         if (id_save.equals("Y")) { // id瑜� ���옣�븷 寃쎌슦, Checkbox瑜� 泥댄겕�븳 寃쎌슦
+         if (id_save.equals("Y")) { // id를 저장할 경우, Checkbox를 체크한 경우
            Cookie ck_id = new Cookie("ck_id", id);
-           ck_id.setPath("/");  // root �뤃�뜑�뿉 荑좏궎瑜� 湲곕줉�븿�쑝濡� 紐⑤뱺 寃쎈줈�뿉�꽌 荑좉린 �젒洹� 媛��뒫
-           ck_id.setMaxAge(60 * 60 * 72 * 10); // 30 day, 珥덈떒�쐞
-           response.addCookie(ck_id); // id ���옣
-         } else { // N, id瑜� ���옣�븯吏� �븡�뒗 寃쎌슦, Checkbox瑜� 泥댄겕 �빐�젣�븳 寃쎌슦
+           ck_id.setPath("/");  // root 폴더에 쿠키를 기록함으로 모든 경로에서 쿠기 접근 가능
+           ck_id.setMaxAge(60 * 60 * 72 * 10); // 30 day, 초단위
+           response.addCookie(ck_id); // id 저장
+         } else { // N, id를 저장하지 않는 경우, Checkbox를 체크 해제한 경우
            Cookie ck_id = new Cookie("ck_id", "");
            ck_id.setPath("/");
            ck_id.setMaxAge(0);
-           response.addCookie(ck_id); // id ���옣
+           response.addCookie(ck_id); // id 저장
          }
-         // id瑜� ���옣�븷吏� �꽑�깮�븯�뒗  CheckBox 泥댄겕 �뿬遺�
+         // id를 저장할지 선택하는  CheckBox 체크 여부
          Cookie ck_id_save = new Cookie("ck_id_save", id_save);
          ck_id_save.setPath("/");
          ck_id_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
@@ -197,20 +197,20 @@ public class MemberCont {
          // -------------------------------------------------------------------
 
          // -------------------------------------------------------------------
-         // Password 愿��젴 荑좉린 ���옣
+         // Password 관련 쿠기 저장
          // -------------------------------------------------------------------
-         if (passwd_save.equals("Y")) { // �뙣�뒪�썙�뱶 ���옣�븷 寃쎌슦
+         if (passwd_save.equals("Y")) { // 패스워드 저장할 경우
            Cookie ck_passwd = new Cookie("ck_passwd", passwd);
            ck_passwd.setPath("/");
            ck_passwd.setMaxAge(60 * 60 * 72 * 10); // 30 day
            response.addCookie(ck_passwd);
-         } else { // N, �뙣�뒪�썙�뱶瑜� ���옣�븯吏� �븡�쓣 寃쎌슦
+         } else { // N, 패스워드를 저장하지 않을 경우
            Cookie ck_passwd = new Cookie("ck_passwd", "");
            ck_passwd.setPath("/");
            ck_passwd.setMaxAge(0);
            response.addCookie(ck_passwd);
          }
-         // passwd瑜� ���옣�븷吏� �꽑�깮�븯�뒗  CheckBox 泥댄겕 �뿬遺�
+         // passwd를 저장할지 선택하는  CheckBox 체크 여부
          Cookie ck_passwd_save = new Cookie("ck_passwd_save", passwd_save);
          ck_passwd_save.setPath("/");
          ck_passwd_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
@@ -218,7 +218,7 @@ public class MemberCont {
          // -------------------------------------------------------------------
          System.out.println("-> return_url: " + return_url);
          
-         if (return_url.length() > 0) { // �쁾
+         if (return_url.length() > 0) { // ★
            mav.setViewName("redirect:" + return_url);  
          } else {
            mav.setViewName("redirect:/");
@@ -233,14 +233,14 @@ public class MemberCont {
      
      
      /**
-      * 濡쒓렇�븘�썐 泥섎━
+      * 로그아웃 처리
       * @param session
       * @return
       */
      @RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
      public ModelAndView logout(HttpSession session){
        ModelAndView mav = new ModelAndView();
-       session.invalidate(); // 紐⑤뱺 session 蹂��닔 �궘�젣
+       session.invalidate(); // 모든 session 변수 삭제
        
        mav.setViewName("redirect:/");
        
@@ -249,7 +249,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝 紐⑸줉 + 寃��깋 + �럹�씠吏�
+      * 회원 목록 + 검색 + 페이징
       * @param address
       * @param now_page
       * @return
@@ -262,17 +262,17 @@ public class MemberCont {
          
          HashMap<String, Object> map = new HashMap<String, Object>(); 
          map.put("id", id); // #{address}
-         map.put("now_page", now_page);  // �럹�씠吏��뿉 異쒕젰�븷 �젅肄붾뱶�쓽 踰붿쐞瑜� �궛異쒗븯湲곗쐞�빐 �궗�슜
+         map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
          
-         // 寃��깋 紐⑸줉
+         // 검색 목록
          List<MemberVO> list = memberProc.member_list(map);
          mav.addObject("list", list);
          
-         // 寃��깋 �젅肄붾뱶 媛쒖닔
+         // 검색 레코드 개수
          int search_count = memberProc.search_count(map);
          mav.addObject("search_count", search_count);
          
-         // �럹�씠吏� 紐⑸줉 臾몄옄�뿴 �깮�꽦
+         // 페이지 목록 문자열 생성
          String paging = memberProc.pagingBox(search_count, now_page, id);
          mav.addObject("paging", paging);
          mav.addObject("now_page", now_page);
@@ -285,7 +285,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝 議고쉶
+      * 회원 조회
       * @param memberno
       * @return
       */
@@ -304,7 +304,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝 �젙蹂� �닔�젙 泥섎━
+      * 회원 정보 수정 처리
       * @param memberVO
       * @return
       */
@@ -325,7 +325,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝 �궘�젣
+      * 회원 삭제
       * @param memberno
       * @return
       */
@@ -342,8 +342,9 @@ public class MemberCont {
     
      
      
+
      /**
-      * �쉶�썝 �궘�젣 泥섎━
+      * 회원 삭제 처리
       * @param memberVO
       * @return
       */
@@ -365,7 +366,7 @@ public class MemberCont {
      
      
      /**
-      * �뙣�뒪�썙�뱶瑜� 蹂�寃쏀빀�땲�떎.
+      * 패스워드를 변경합니다.
       * @param memberno
       * @return
       */
@@ -381,38 +382,38 @@ public class MemberCont {
        return mav;
      }
      
-//     /**
-//      * �뙣�뒪�썙�뱶瑜� 蹂�寃� ajax
-//      * @param memberno
-//      * @return
-//      */
-//     @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
-//     @ResponseBody
-//     public String passwd_update_ajax(int memberno) {
-//         MemberVO memberVO = this.memberProc.read(memberno);
-//       //System.out.println(memberVO);
-//         
-//         JSONObject json = new JSONObject();
-//         json.put("memberno", memberVO.getMemberno());
-//         json.put("id", memberVO.getId());
-//         json.put("passwd", memberVO.getPasswd());
-//         json.put("name", memberVO.getName());
-//         json.put("address", memberVO.getAddress());
-//         json.put("phone", memberVO.getPhone());
-//         json.put("email", memberVO.getEmail());
-//         json.put("grade", memberVO.getGrade());
-//         
-//         //System.out.println(json);
-//         
-//         return json.toString();
-//     }
+//   /**
+//   * 패스워드를 변경 ajax
+//   * @param memberno
+//   * @return
+//   */
+//  @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.GET)
+//  @ResponseBody
+//  public String passwd_update_ajax(int memberno) {
+//      MemberVO memberVO = this.memberProc.read(memberno);
+//    //System.out.println(memberVO);
+//      
+//      JSONObject json = new JSONObject();
+//      json.put("memberno", memberVO.getMemberno());
+//      json.put("id", memberVO.getId());
+//      json.put("passwd", memberVO.getPasswd());
+//      json.put("name", memberVO.getName());
+//      json.put("address", memberVO.getAddress());
+//      json.put("phone", memberVO.getPhone());
+//      json.put("email", memberVO.getEmail());
+//      json.put("grade", memberVO.getGrade());
+//      
+//      //System.out.println(json);
+//      
+//      return json.toString();
+//  }
      
      
      /**
-      * �뙣�뒪�썙�뱶 蹂�寃� 泥섎━
-      * @param memberno �쉶�썝 踰덊샇
-      * @param current_passwd �쁽�옱 �뙣�뒪�썙�뱶
-      * @param new_passwd �깉濡쒖슫 �뙣�뒪�썙�뱶
+      * 패스워드 변경 처리
+      * @param memberno 회원 번호
+      * @param current_passwd 현재 패스워드
+      * @param new_passwd 새로운 패스워드
       * @return
       */
      @RequestMapping(value="/mypage/passwd_update.do", method=RequestMethod.POST)
@@ -424,30 +425,30 @@ public class MemberCont {
        mav.addObject("id", memberVO.getId());
        
        
-       // �쁽�옱 �뙣�뒪�썙�뱶 寃��궗
+       // 현재 패스워드 검사
        HashMap<Object, Object> map = new HashMap<Object, Object>();
        map.put("memberno", memberno);
        map.put("passwd", current_passwd);
        
        int cnt = memberProc.passwd_check(map);
-       int update_cnt = 0; // 蹂�寃쎈맂 �뙣�뒪�썙�뱶 �닔
+       int update_cnt = 0; // 변경된 패스워드 수
        
        
-       if (cnt == 1) { // �쁽�옱 �뙣�뒪�썙�뱶媛� �씪移섑븯�뒗 寃쎌슦
-         map.put("passwd", new_passwd); // �깉濡쒖슫 �뙣�뒪�썙�뱶瑜� ���옣
-         update_cnt = memberProc.passwd_update(map); // �뙣�뒪�썙�뱶 蹂�寃� 泥섎━
-         //update_cnt=0;   // update_cnt�쓽 else �뀒�뒪�듃
+       if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+         map.put("passwd", new_passwd); // 새로운 패스워드를 저장
+         update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
+         //update_cnt=0;   // update_cnt의 else 테스트
          
          if (update_cnt == 1) {
-             mav.addObject("code", "passwd_update_success");   // �뙣�뒪�썙�뱶 蹂�寃� �꽦怨�
+             mav.addObject("code", "passwd_update_success");   // 패스워드 변경 성공
          } else {
-             cnt =0;    // �뙣�뒪�썙�뱶�뒗 �씪移섑뻽�쑝�굹 蹂�寃쎌� �떎�뙣�븿
-             mav.addObject("code", "passwd_update_fail");   // �뙣�뒪�썙�뱶 蹂�寃� �떎�뙣
+             cnt =0;    // 패스워드는 일치했으나 변경은 실패함
+             mav.addObject("code", "passwd_update_fail");   // 패스워드 변경 실패
          }
          
-         mav.addObject("update_cnt", update_cnt);  // 蹂�寃쎈맂 �뙣�뒪�썙�뱶�쓽 媛��닔    
+         mav.addObject("update_cnt", update_cnt);  // 변경된 패스워드의 갯수    
        } else {
-           mav.addObject("code", "passwd_fail");   // �뙣�뒪�썙�뱶媛� �씪移섑븯吏� �븡�뒗 寃쎌슦
+           mav.addObject("code", "passwd_fail");   // 패스워드가 일치하지 않는 경우
        }
        
        mav.addObject("url", "/mypage/msg");  
@@ -460,7 +461,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝�씠 �옄湲� �젙蹂� �닔�젙
+      * 회원이 자기 정보 수정
       * @param memberno
       * @return
       */
@@ -480,7 +481,7 @@ public class MemberCont {
      
      
      /**
-      * �쉶�썝�씠 �옄湲� �젙蹂� �닔�젙 泥섎━
+      * 회원이 자기 정보 수정 처리
       * @param memberVO
       * @return
       */

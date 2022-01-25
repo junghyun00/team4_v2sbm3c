@@ -21,64 +21,93 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 
-
 <script type="text/javascript">
 
+$("#submit_search").click(function() {
+    console.log("클릭");
+    alert("gg");
+
+    var list = '${list}';   // 페이징 된 리스트
+    console.log("list : "+ list);
+    var list2 = '${list2}';  // 페이징 안 된 이름, 주소 리스트
+    console.log("list2 : "+ list2);
+});
+
+
+
 // 지도에 마커를 표시하려면 주소 배열이 필요해서 주소 배열, 목록 만들기
-var list = '${list}';
-var park_count = '${search_count}';
+var list = '${list}';   // 페이징 된 리스트
+var list2 = '${list2}';  // 페이징 안 된 이름, 주소 리스트
+// console.log("list2 : "+list2);
 
-var split1 = list.split(", ");
-//document.writeln(split1.length+ "<br>");
 
+var list2_park_count = '${search_count}';
+// console.log("list2_park_count : ", list2_park_count);
+
+var park_su = '${park_su}';
+// console.log("park_su : ", park_su);
+                
+                
+var split1 = list2.split(", ");
+// console.log("split1 : ", split1);
+                
+//////////////////주차장 이름 name_list에 배열로 저장/////////////////////
+var name_list = [];
+for(var i = 1; i <= list2_park_count; i++) {
+    var num1 = 2+(i-1)*11;
+
+//     console.log("split1[num1] : ", split1[num1]);
+    var split1num1 = split1[num1];
+//     console.log("split1num1 : ", split1num1);
+    
+    var split3 = split1num1.split("=");
+//     console.log("split3[0] : ", split3[0]);
+//     console.log("split3[1] : ", split3[1]);
+
+    name_list[i-1] = split3[1];          
+}
+console.log(name_list);
+
+
+//////////////////주차장 주소 address_list에 배열로 저장/////////////////////
 var address_list = [];
-for(var i = 1; i <= park_count; i++) {
+for(var i = 1; i <= list2_park_count; i++) {
     var num = 4+(i-1)*11;
 
-    //console.log("split1[num] : ", split1[num]);
+//     console.log("split1[num] : ", split1[num]);
     var split1num = split1[num];
-    //console.log("split1num : ", split1num);
+//     console.log("split1num : ", split1num);
     
     var split2 = split1num.split("=");
-    //console.log("split2[0] : ", split2[0]);
-    //console.log("split2[1] : ", split2[1]);
-    //document.writeln(i + ". " + split2[1] + "<br>");
+//     console.log("split2[0] : ", split2[0]);
+//     console.log("split2[1] : ", split2[1]);
 
     address_list[i-1] = split2[1];          
 }
-// console.log(address_list);
-/////////////                 완성                        ///////////////
+console.log(address_list);
+///////////                 완성                        ///////////////
 
 
 var map;
 var markersArray = [];   // 마커 배열
 var coordinates = [];   // 좌표 배열
-
-
-
+var infowindow = new google.maps.InfoWindow();
 
 function initialize() {
-	var url = 'https://maps.googleapis.com/maps/api/geocode/json?key=';
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?key=';
     var param = [];
 
-
-	
-    for (var i = 0; i < 2; i++) {
-    	const addr = address_list[i];
-//     	console.log(i, ". addr : " , addr);
-    	
-    	var address = addr.replace(/\(/gi, '&#40');
-    	address = address.replace(/\)/gi, '&#41');    // 주소에 있는 괄호 없앰
-//     	console.log('address : ', address);
-
-    	
-    	
-
-    	var params = '&address=' + address;
-    	console.log('params ', params);
+    for (var i = 0; i < list2_park_count; i++) {
+        const addr = address_list[i];
+//      console.log(i, ". addr : " , addr);
+        
+        address = addr.replace(/\(/gi, '&#40');
+        address = addr.replace(/\)/gi, '&#41');    // 주소에 있는 괄호 없앰
+//      console.log('address : ', address);
 
 
-//         param[i] = address;
+        var params = '&address=' + address;
+        console.log('params ', params);
 
         $.ajax({
             type: "GET",
@@ -88,109 +117,132 @@ function initialize() {
           });
         
     }
-
-
-    console.log('param', param);
-    console.log(typeof(param));
     
-}
-
-
-
-
+}            
+                
+                
 function response_map(data){ 
-	console.log("response_map 함수로 들어옴");
+    console.log("response_map 함수로 들어옴");
     // 전송된 위도, 경도를 설정
     var latlng = new google.maps.LatLng(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
-//     console.log("latlng"+latlng);
-//     console.log(typeof(latlng));
+    console.log("latlng"+latlng);
     
-    coordinates.push(latlng);
-//     console.log(typeof(coordinates));
-//     console.log(coordinates);
-//     alert(coordinates);
-//     console.log("coordinates"+coordinates);
-
-
-//     console.log("coordinates[0] : "+coordinates[0]);
-//     console.log("coordinates[1] : "+coordinates[1]);
-//     console.log("----------------------------------------");
-
-
-
-
-
-
-
-
 
 
  // 지도 출력 옵션
-//     var mapOptions = {
-//       streetViewControl : false,
-//       mapTypeControl : true, // 지도 출력 종류 선택
-//       mapTypeId : google.maps.MapTypeId.ROADMAP // 일반 지도
-//       // mapTypeId : google.maps.MapTypeId.SATELLITE // 위성 지도
-//     }
+var mapOptions = {
+  streetViewControl : false,
+  mapTypeControl : true, // 지도 출력 종류 선택
+  mapTypeId : google.maps.MapTypeId.ROADMAP, // 일반 지도
+}
     
-//     // 지도를 출력할 DIV 객체 추출
-//     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+// 지도를 출력할 DIV 객체 추출
+map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
-//     // 마커를 지도에 묶기(출력)위해서 저장소에 마커의 수만큼 
-// //     coordinates 배열에 있는 좌표 객체를 저장 
-//     bounds = new google.maps.LatLngBounds();
-//     for (var i = 0; i < 5; i++) {
-//       bounds.extend(coordinates);
-//     }
-//     map.fitBounds(bounds);
-//     addMarker(latlng);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+coordinates.push(latlng);
+    //  console.log(typeof(coordinates));
+    //  console.log(coordinates);
+    //  alert(coordinates);
+//   console.log("coordinates"+coordinates);
+//   console.log("coordinates.length : "+coordinates.length);
     
+//   for (var i=0; i<coordinates.length; i++) {
+//       console.log("coordinates["+i+"] : "+coordinates[i]);
+//       console.log("----------------------------------------");
+//   }
+ 
 
-    
-//     var markerBlue = "https://www.google.com/intl/en_us/mapfiles/ms/icons/blue-dot.png";
-//     // 지도 출력
-//     $("#map_canvas").gmap({
-//       "center" : latlng,
-//       "zoom" : 16
-//     }); // 1 ~ 21
-//     // 마커 출력
-//     $("#map_canvas").gmap("addMarker", {
-//       "position" : latlng,
-//       "icon" : markerBlue
-//     });
-    
+bounds = new google.maps.LatLngBounds();
+for (var i = 0; i < coordinates.length; i++) {
+    bounds.extend(coordinates[i]);
+}
+map.fitBounds(bounds); // 마커가 전부 출력되도록 중심점과 사이즈 자동 조절
+for (var i = 0; i < coordinates.length; i++) {
+    addMarker(coordinates[i]);
+  }
+                    
+             
 }
 
 
-// 지도에 마커출력
-// function addMarker(latlng) {
-//   marker = new google.maps.Marker({
-//     position : latlng,
-//     map : map
-// });
-// markersArray.push(marker);
+function addMarker(latlng) {
+    marker = new google.maps.Marker({
+      position : latlng,
+      map : map
+      });
+    markersArray.push(marker);
+    
+    google.maps.event.addListener(marker, 'click', function(event) {
+        popInfoWindow(latlng);
+    });
 
-// }
+}
 
-
+function popInfoWindow(latlng) {
+    console.log("popInfoWindow 들어옴");
+       
+                    
+    var geocoder = new google.maps.Geocoder(); // 주소와 좌표 변환
+    map.setCenter(latlng);
+    addMarker(latlng); //마커출력
+    geocoder.geocode({'latLng' : latlng // 좌표 지정
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) { // 구굴 맵 지원 여부
+        if (results[0]) {              
+            var lat = latlng.lat();
+            var lng = latlng.lng();
+            
+            
+            var cont='';
+            // alert(latlng.lat() + ", " + latlng.lng());
+            var address = results[0].formatted_address;
+            
+            // 주소에서 대한민국 추출
+            var space_position = address.indexOf(' ');
+            address = address.substring(space_position);
+            address_s = address.substr(1);
+            
+            
+            
+    //         console.log("name_list : "+name_list[0]);
+    //         console.log("name_list : "+name_list[2]);
+    //         console.log("address_list : "+address_list[0]);
+    //         console.log("address_list : "+address_list[0]);
+    //         console.log("address_list : "+address_list[0].length);
+            console.log("address_s : "+address_s);  
+    //         console.log("address_s : "+address_s.length);  
+    
+    
+            for (var j=0; j<address_list.length; j++) {
+                if (address_list[j] == address_s) {
+                    cont = '<div id="content">';
+                    cont += '<br><div id="address">';
+                    cont += '<b>'+ name_list[j] +'</b><br>';
+                    cont += '<br></div>';
+                    cont += '<p><b>주소 :</b> ' + address_s + '</p>';
+                    cont += '</div>';
+                } else {
+//                     console.log("구글 지도의 주소와 주차장 주소가 일치하지 않아 인포창을 띄울 수 없음");
+                }
+            }
+                       
+            infowindow.setContent(cont);
+            infowindow.open(map, marker);
+            } else {
+              alert("No results found");
+            }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+}
+                
+                
 window.onload = initialize; // 시작 함수 지정 및 호출
 
+
 </script>
+
 
 
 </head>
@@ -262,7 +314,6 @@ window.onload = initialize; // 시작 함수 지정 및 호출
 					<DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
 					<!-- 페이지 목록 출력 부분 종료 -->
             </div>
-            
             <div class="col-md-6" style='border: solid 1px;'>
                 <div id="map_canvas" style='width: 100%; height: 500px'></div>
            </div>
