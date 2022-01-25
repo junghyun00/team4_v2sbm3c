@@ -13,4 +13,5 @@ public class ReviewlistVO {
 	public int grade;
 	public String cmt_date;
 	public int memberno;
+	public int reviewno;
 }
