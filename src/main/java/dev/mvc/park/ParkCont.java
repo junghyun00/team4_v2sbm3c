@@ -60,55 +60,35 @@ public class ParkCont {
                                                                      @RequestParam(value = "memberno", defaultValue = "1") int memberno,
                                                                      @RequestParam(value = "parkno", defaultValue = "1") int parkno,
                                                                      HttpSession session) {
-        ModelAndView mav = new ModelAndView(); 
+    	ModelAndView mav = new ModelAndView(); 
         
         if (memberProc.isMember(session)) {
             HashMap<String, Object> map = new HashMap<String, Object>(); 
             map.put("address", address); // #{address}
-            map.put("now_page", now_page);  // �럹�씠吏��뿉 異쒕젰�븷 �젅肄붾뱶�쓽 踰붿쐞瑜� �궛異쒗븯湲곗쐞�빐 �궗�슜
+            map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
             map.put("memberno", memberno);
 
             MemberVO memberVO = this.memberProc.read(memberno);
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
             
-<<<<<<< HEAD
-            // 寃��깋 紐⑸줉
-=======
-            
-//            ParkVO parkVO = this.parkProc.read(parkno);
-//            mav.addObject("parkVO", parkVO);
-//            int address = parkVO.getAddress();
-            // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//            List<ParkVO> address_list = parkProc.only_address();
-//            System.out.println(address_list);
-            
-            
-//            mav.addObject("address_list", address_list);
-//            String address_list1 = address_list.toString();
-//            System.out.println(address_list1);
-//            mav.addObject("address_list1", address_list1);
-         // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            
             // 검색 목록
->>>>>>> 8f60ebe993f485928ffbd74895929653cc7c186a
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
-            //System.out.println(list.contains(address));
-//            String address_list = list.get(0).toString();
-//            System.out.println(address_list);
+            System.out.println(list);
+
+            List<ParkVO> list2 = parkProc.only_address();
+            mav.addObject("list2", list2);
+
+            int park_su = Park.RECORD_PER_PAGE;
+            mav.addObject("park_su", park_su);
+
             
-            
-            
-            
-            
-            
-            
-            // 寃��깋 �젅肄붾뱶 媛쒖닔
+            // 검색 레코드 개수
             int search_count = parkProc.search_count(map);
             mav.addObject("search_count", search_count);
             
-            // �럹�씠吏� 紐⑸줉 臾몄옄�뿴 �깮�꽦
+            // 페이지 목록 문자열 생성
             String paging = parkProc.pagingBox(search_count, now_page, address);
             mav.addObject("paging", paging);
             mav.addObject("now_page", now_page);
