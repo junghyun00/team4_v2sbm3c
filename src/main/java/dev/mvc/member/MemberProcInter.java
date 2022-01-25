@@ -32,14 +32,14 @@ public interface MemberProcInter {
      */
     public MemberVO readById(String id);
     
+    public MemberVO readByMemberno(int memberno);
+    
     /**
      * 로그인 처리
      * @param map
      * @return
      */
     public int login(Map<String, Object> map);
-    
-    
     
     /**
      * 회원 검색 레코드 개수

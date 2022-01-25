@@ -29,6 +29,8 @@ public interface MemberDAOInter {
      */
     public MemberVO readById(String id);
     
+    public MemberVO readByMemberno(int memberno);
+    
     /**
      * 로그인 처리
      * @param map

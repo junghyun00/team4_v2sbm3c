@@ -257,6 +257,12 @@ public class MemberProc implements MemberProcInter {
         return sw;
     }
 
+    @Override
+    public MemberVO readByMemberno(int memberno) {
+        MemberVO memberVO = this.memberDAO.readByMemberno(memberno);
+        return memberVO;
+    }
+
     
 
     

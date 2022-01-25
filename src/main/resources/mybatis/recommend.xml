@@ -7,12 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.recommend.RecommendDAOInter">
 	<!-- 설문 조사 저장 -->
 	<insert id="recommend_create" parameterType="dev.mvc.recommend.RecommendVO">
-		INSERT INTO recom (recommendno, memberno, purposepark, preferday, reserveperiod, rdate) 
+		INSERT INTO recom (recommendno, memberno, purposepark, preferday, reserveperiod, redate) 
 		VALUES (recom_seq.nextval, #{memberno}, #{purposepark}, #{preferday}, #{reserveperiod}, sysdate)
 	</insert>
   
   <select id="read" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
-        SELECT recommendno, memberno, purposepark, preferday, reserveperiod, rdate
+        SELECT recommendno, memberno, purposepark, preferday, reserveperiod, redate
         FROM recom
         WHERE memberno = #{memberno}
     </select>

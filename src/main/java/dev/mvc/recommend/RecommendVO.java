@@ -13,5 +13,5 @@ public class RecommendVO {
     private int purposepark;
     private int preferday;
     private int reserveperiod;
-    private String rdate;
+    private String redate;
 }

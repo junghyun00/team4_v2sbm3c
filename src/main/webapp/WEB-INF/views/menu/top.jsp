@@ -34,7 +34,7 @@ function chatting() {
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/park/park_create.do?memberno=${memberno }'">주차 등록</button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/qna/qna_list_search_paging.do?memberno=${memberno }'" >QNA </button>
             <button class="btn btn-dark pt-2" id="manage_btn" onclick="javascript: chatting()" >챗봇 </button>
-            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/recommend/recommend_surveyform.do?memberno=${memberno }'" >주차장 추천 </button>
+            <button class="btn btn-dark pt-2" id="manage_btn" onclick="location.href='/recommend_surveyform.do?memberno=${memberno }'" >주차장 추천 </button>
             
          </li>
       </ul>

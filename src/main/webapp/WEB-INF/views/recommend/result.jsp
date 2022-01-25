@@ -18,7 +18,7 @@
         
         function send() {
             var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
-            alert('params: ' + params);  // 수신 데이터 확인
+/*             alert('params: ' + params);  // 수신 데이터 확인 */
            /*  return; */
             
             $.ajax({
