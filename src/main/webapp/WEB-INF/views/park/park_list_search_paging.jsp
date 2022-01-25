@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<!-- AIzaSyAiE6sdFk5FOF_VTE8eXZnjvM2IeZ5zZu8 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, width=device-width" />
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyAiE6sdFk5FOF_VTE8eXZnjvM2IeZ5zZu8&sensor=false" type="text/javascript"></script>
+<script src="https://maps.google.com/maps/api/js?key=&sensor=false" type="text/javascript"></script>
 <script src="../google_map/jquery.fn.gmap.js" type="text/javascript"></script>
 <script src="../google_map/jquery.ui.map.extensions.js" type="text/javascript"></script>
 
@@ -60,7 +60,7 @@ var coordinates = [];   // 좌표 배열
 var infowindow = new google.maps.InfoWindow();
 
 function initialize() {
-    var url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAiE6sdFk5FOF_VTE8eXZnjvM2IeZ5zZu8';
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?key=';
     var param = [];
 
     for (var i = 0; i < list2_park_count; i++) {

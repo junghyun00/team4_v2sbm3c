@@ -115,7 +115,8 @@ FROM (
                         where (address like '%%' OR name like '%%')
             )
 )
-WHERE r >= 1 AND r <= 3;
+WHERE r >= 1 AND r <= 6
+ORDER BY parkno DESC;
 
 
 

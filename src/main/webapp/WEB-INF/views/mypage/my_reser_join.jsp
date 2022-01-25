@@ -120,9 +120,9 @@ function delete_reser_ajax(reserveno) {
                 <colgroup>
                   <col style="width: 15%;"></col>
                   <col style="width: 22%;"></col>
-                  <col style="width: 18%;"></col>
+                  <col style="width: 15%;"></col>
                   <col style="width: 10%;"></col>
-                  <col style="width: 20%;"></col>
+                  <col style="width: 15%;"></col>
                   <col style="width: 10%;"></col>
                 </colgroup>           
                 

@@ -24,7 +24,7 @@
 
        function recommend_parking() {
            var params = $('#frm').serialize();
-    	   alert(params); 
+//     	   alert(params); 
 
            $.ajax({
                type: "GET",
@@ -64,7 +64,7 @@
 			<div class="col-md-12 p-3  rounded text-black ">
 				<div class="row">
 					<div class="col-md-12 border-bottom mb-3">
-						<h1>Survey ${memberno }</h1>
+						<h1>Survey</h1>
 					</div>
 					<div class="col-md-12 border-bottom">
 						<form name="frm" id='frm'>

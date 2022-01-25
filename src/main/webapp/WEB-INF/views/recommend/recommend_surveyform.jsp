@@ -24,7 +24,7 @@
 
        function recommend_parking() {
            var params = $('#frm').serialize();
-    	   alert(params); 
+//     	   alert(params); 
 
            $.ajax({
                type: "GET",
