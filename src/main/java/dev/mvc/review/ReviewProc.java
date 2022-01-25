@@ -21,5 +21,11 @@ public class ReviewProc implements ReviewProcInter{
 		List<ReviewlistVO> cmtlist = this.reviewdao.listcmt_by_parkno(parkno);
 		return cmtlist;
 	}
+
+	@Override
+	public int review_delete(int reviewno) {
+		int cnt = this.reviewdao.review_delete(reviewno);
+		return cnt;
+	}
 	
 }

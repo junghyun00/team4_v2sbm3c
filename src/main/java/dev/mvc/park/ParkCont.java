@@ -60,18 +60,18 @@ public class ParkCont {
                                                                      @RequestParam(value = "memberno", defaultValue = "1") int memberno,
                                                                      @RequestParam(value = "parkno", defaultValue = "1") int parkno,
                                                                      HttpSession session) {
-        ModelAndView mav = new ModelAndView(); 
+    	ModelAndView mav = new ModelAndView(); 
         
         if (memberProc.isMember(session)) {
             HashMap<String, Object> map = new HashMap<String, Object>(); 
             map.put("address", address); // #{address}
-            map.put("now_page", now_page);  
+            map.put("now_page", now_page);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
             map.put("memberno", memberno);
 
             MemberVO memberVO = this.memberProc.read(memberno);
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
-
+            
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);

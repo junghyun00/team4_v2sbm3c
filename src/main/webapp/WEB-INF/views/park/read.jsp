@@ -102,7 +102,7 @@
 	</div>
 	<div class="container mt-2 pt-3">
 		<c:forEach var="cmtlist" items="${cmtlist}" >
-			<div class="row mt-2">
+			<div class="row mt-2 review_parent" id=${cmtlist.reviewno }>
 				<div class="col-md-2">
 					<i class="fas fa-user" style="margin-right: 7px;"></i>${cmtlist.id }
 				</div>
@@ -133,9 +133,6 @@
 				<c:choose>
 					<c:when test="${memberno eq param.memberno}">
 						<div class="col-md-1 text-center">
-							<a href="#" id="review_edit"><i class="far fa-edit" style="font-size: 1rem;"></i></a>
-						</div>
-						<div class="col-md-1 text-center">
 							<a href="#" id="review_delete"><i class="far fa-trash-alt" style="font-size: 1rem;"></i></a>
 						</div>
 					</c:when>
@@ -146,12 +143,6 @@
 					${cmtlist.cmt }
 				</div>		
 			</div>
-			<div class="row p-0 mt-3" id="review_edit_box" style="display: none;">
-				<div class="col-md-12 text-center">
-					<textarea class="form-control" name="cmt" id="cmt" rows="2"></textarea>
-					<button type="button" class="btn btn-dark mt-2" style="text-align: center;" id="revire_edit_submit">수정</button>
-				</div>
-			</div> 
 		</c:forEach>
 	</div>
 </div>
