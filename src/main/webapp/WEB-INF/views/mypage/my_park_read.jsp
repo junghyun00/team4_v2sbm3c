@@ -50,7 +50,7 @@
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
                 
                 
-                <button type='button' onclick="location.href='/mypage/my_park.do?memberno=${memberno }'" class="btn btn-dark">목록</button><br>
+                <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
             </div>
 
             

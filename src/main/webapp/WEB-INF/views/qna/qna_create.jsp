@@ -26,40 +26,33 @@
 	        </div>
         </div>
         <div class="row-fluid">
-            <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./qna_create.do' class="form-horizontal"
-             enctype="multipart/form-data">
-                <input type="hidden" name="memberno" value="${memberVO.memberno}">   <!-- 이건 나중에 수정 -->
+			<form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./qna_create.do' class="form-horizontal"
+			 enctype="multipart/form-data">
+                <input type="hidden" name="memberno" value="${memberVO.memberno}">
   
-    <div class="form-group">
-       <label class="control-label col-md-2">글 제목</label>
-       <div class="col-md-10">
-         <input type='text' name='title' value='' required="required" 
-                   autofocus="autofocus" class="form-control" style='width: 100%;'>
-       </div>
-    </div>
+			    <div class="form-group">
+			       <label class="control-label col-md-2">글 제목</label>
+			       <div class="col-md-10">
+			         <input type='text' name='title' value='' required="required" 
+			                   autofocus="autofocus" class="form-control" style='width: 100%;'>
+			       </div>
+			    </div>
+		    
+			    <div class="form-group">
+			       <label class="control-label col-md-2">글 내용</label>
+			       <div class="col-md-10">
+			         <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'></textarea>
+			       </div>
+			    </div>
     
-    <div class="form-group">
-       <label class="control-label col-md-2">글 내용</label>
-       <div class="col-md-10">
-         <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'></textarea>
-       </div>
-    </div>
     
-    <!--  <div class="form-group">
-       <label class="control-label col-md-2">이미지</label>
-       <div class="col-md-10">
-         <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                    value='' placeholder="파일 선택">
-       </div>
-    </div>    -->
-    
-    <div class="content_body_bottom">
-      <button type="submit" class='btn btn-dark'>등록</button>
-      <button type="button" onclick="location.href='./qna_list_search_paging.do'" class='btn btn-dark'>목록</button>
+			    <div class="content_body_bottom">
+			      <button type="submit" class='btn btn-dark'>등록</button>
+			      <button type="button" onclick="location.href='./qna_list_search_paging.do'" class='btn btn-dark'>목록</button>
+			    </div>
+			</form>
+        </div>
     </div>
-</form>
-</DIV>
-</div>
 </DIV>
 
 <jsp:include page="../menu/bottom.jsp" flush='false' />

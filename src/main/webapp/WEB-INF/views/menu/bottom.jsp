@@ -5,7 +5,7 @@
   
   <%-- 화면 하단 메뉴 --%>
   <DIV class='copyright'>
-    Powered by 주차장 하단.
+    Powered by AI & Web 기반 주차 예약 추천 및 챗봇 시스템
   </DIV>
   
 </DIV> <%-- container_main 종료 --%>

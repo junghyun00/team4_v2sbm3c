@@ -9,15 +9,15 @@ grade    NUMBER NOT NULL
 */
 
 public class ReviewVO {
-    /** �썑湲� 踰덊샇 */
+    /** 후기 번호 */
     private int reviewno;
-    /** 二쇱감�옣 踰덊샇 */
+    /** 주차장 번호 */
     private int parkno;
-    /** �쉶�썝 踰덊샇 */
+    /** 회원 번호 */
     private int memberno;
-    /** �뙎湲� */
+    /** 댓글 */
     private String cmt;
-    /** �룊�젏 */
+    /** 평점 */
     private int grade;
     private String cmt_date;
     
