@@ -15,4 +15,12 @@ public class SurveyProc implements SurveyProcInter{
 		return cnt;
 	}
 
+    @Override
+    public SurveyVO read(int memberno) {
+        SurveyVO surveyVO = this.surveydao.read(memberno);
+        return surveyVO;
+    }
+
+  
+
 }

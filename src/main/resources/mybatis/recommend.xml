@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.recommend.RecommendDAOInter">
+	<!-- 설문 조사 저장 -->
+	<insert id="recommend_create" parameterType="dev.mvc.recommend.RecommendVO">
+		INSERT INTO recom (recommendno, memberno, purposepark, preferday, reserveperiod, rdate) 
+		VALUES (recom_seq.nextval, #{memberno}, #{purposepark}, #{preferday}, #{reserveperiod}, sysdate)
+	</insert>
+  
+  <select id="read" resultType="dev.mvc.recommend.RecommendVO" parameterType="int">
+        SELECT recommendno, memberno, purposepark, preferday, reserveperiod, rdate
+        FROM recom
+        WHERE memberno = #{memberno}
+    </select>
+</mapper>

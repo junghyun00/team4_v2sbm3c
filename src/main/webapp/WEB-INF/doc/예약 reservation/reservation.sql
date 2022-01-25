@@ -1,38 +1,22 @@
-CREATE TABLE team4.reservation (
+CREATE TABLE reservation ( 
     reserveno   NUMBER NOT NULL,
     memberno    NUMBER NOT NULL,
     parkno      NUMBER NOT NULL,
     reservedate DATE NOT NULL,
     reservetime DATE NOT NULL,
     carno       NUMBER NOT NULL,
-    notice      VARCHAR2(150 BYTE)
-);
+    notice      VARCHAR2(150 BYTE),
+  FOREIGN KEY(memberno) REFERENCES member(memberno)
+); 
 
-COMMENT ON COLUMN team4.reservation.reserveno IS
-    '예약 번호';
-
-COMMENT ON COLUMN team4.reservation.memberno IS
-    '회원 번호';
-
-COMMENT ON COLUMN team4.reservation.parkno IS
-    '주차장 번호';
-
-COMMENT ON COLUMN team4.reservation.reservedate IS
-    '예약 일시';
-
-COMMENT ON COLUMN team4.reservation.reservetime IS
-    '예약 시간';
-
-COMMENT ON COLUMN team4.reservation.carno IS
-    '차 번호';
-
-COMMENT ON COLUMN team4.reservation.notice IS
-    '전달 사항';
-
-CREATE UNIQUE INDEX team4.reservation_pk ON
-    team4.reservation (
-        reserveno
-    ASC );
+COMMENT ON TABLE reservation is '예약 테이블';
+COMMENT ON COLUMN reservation.reserveno is '예약 번호';
+COMMENT ON COLUMN reservation.memberno is '회원 번호';
+COMMENT ON COLUMN reservation.parkno is '주차 번호';
+COMMENT ON COLUMN reservation.reservedate is '예약 일시';
+COMMENT ON COLUMN reservation.reservetime is '예약 시간';
+COMMENT ON COLUMN reservation.carno is '차 번호';
+COMMENT ON COLUMN reservation.notice is '전달 사항';
 
 CREATE SEQUENCE reservation_seq
   START WITH 1              -- 시작 번호
@@ -41,15 +25,6 @@ CREATE SEQUENCE reservation_seq
   CACHE 2                       -- 2번은 메모리에서만 계산
   NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
 
-ALTER TABLE team4.reservation ADD CONSTRAINT reservation_pk PRIMARY KEY ( reserveno );
-
-ALTER TABLE team4.reservation
-    ADD CONSTRAINT parkno FOREIGN KEY ( parkno )
-        REFERENCES team4.park ( parkno );
-
-ALTER TABLE team4.reservation
-    ADD FOREIGN KEY ( memberno )
-        REFERENCES team4.member ( memberno );
 
   
 insert into reservation(reserveno,memberno,parkno,reservedate,reservetime,carno,notice)
@@ -85,11 +60,6 @@ where reserveno =70;
 
 
 
-
-
-
-
-
 SELECT reserveno, memberno, parkno, reservedate, reservetime, carno,notice
 FROM reservation
 WHERE memberno = 1
@@ -97,15 +67,9 @@ ORDER BY memberno DESC;
 
 
 
--- reservation + park
-SELECT p.parkno as p_park, p.name as p_name, p.memberno as p_memberno,
-             r.reserveno, r.memberno, r.parkno, r.reservedate, r.carno, r.notice
-FROM park p, reservation r
-WHERE p.parkno = r.parkno and r.memberno=1
-ORDER BY r.reserveno desc;
-
 
 -- reservation + park join
+-- 회원 번호가 1번인 회원이 한 예약 목록
 SELECT p.parkno as p_parkno, p.name as p_name, 
            r.reservedate, r.carno, r.notice
 FROM park p, reservation r
@@ -113,9 +77,11 @@ WHERE p.parkno = r.parkno AND r.memberno= 1
 ORDER BY r.reserveno DESC;
 
 
-select * from reservation
+select * from reservation;
+
 
 -- reservation + park join
+-- 전체 예약 목록
 SELECT p.parkno as p_parkno, p.name as p_name, 
            r.reserveno, r.reservedate, r.carno, r.notice
 FROM park p, reservation r
@@ -124,14 +90,15 @@ ORDER BY r.reserveno DESC;
 
 
 
-
+-- reservation + park join
+-- 회원 번호가 1번인 회원이 한 39번 예약
 SELECT p.parkno as p_parkno, p.name as p_name, 
            r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
 FROM park p, reservation r
-WHERE p.parkno = r.parkno AND r.reserveno=44;
+WHERE p.parkno = r.parkno AND r.memberno = 1 AND r.reserveno=39;
 
 
-
+-- 수정
 UPDATE reservation
 SET reservedate = TO_DATE('2021-05-15','YYYY-MM-DD'), reservetime = TO_DATE('05:05','HH24:MI'), carno = 1555, notice = '없다.'
 WHERE reserveno = 45;

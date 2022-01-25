@@ -39,7 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                         <when test="address == null or address == ''">
                                         </when>
                                         <otherwise>
-                                            WHERE (address LIKE '%' || #{address} || '%')
+                                            WHERE (address LIKE '%' || #{address} || '%'
+                                                        OR name LIKE '%' || #{address} || '%')
                                         </otherwise>
                                     </choose>
                       )
@@ -99,6 +100,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         DELETE FROM park
         WHERE parkno = #{parkno} 
     </delete>
-
+    
+    
+    
+    <!-- 주소만 select -->
+    <select id="only_address" resultType="dev.mvc.park.ParkVO">
+        SELECT address
+        FROM park
+    </select>
     
 </mapper>

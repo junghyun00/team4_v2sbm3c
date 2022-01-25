@@ -2,7 +2,7 @@ package dev.mvc.park;
 
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -57,7 +57,8 @@ public class ParkCont {
     @RequestMapping(value = "/park/park_list_search_paging.do", method = RequestMethod.GET)
     public ModelAndView park_list_search_paging(@RequestParam(value="address", defaultValue="") String address,
                                                                      @RequestParam(value = "now_page", defaultValue = "1") int now_page, 
-                                                                     @RequestParam(value = "memberno", defaultValue = "1") int memberno, 
+                                                                     @RequestParam(value = "memberno", defaultValue = "1") int memberno,
+                                                                     @RequestParam(value = "parkno", defaultValue = "1") int parkno,
                                                                      HttpSession session) {
         ModelAndView mav = new ModelAndView(); 
         
@@ -71,9 +72,37 @@ public class ParkCont {
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
             
+<<<<<<< HEAD
             // 寃��깋 紐⑸줉
+=======
+            
+//            ParkVO parkVO = this.parkProc.read(parkno);
+//            mav.addObject("parkVO", parkVO);
+//            int address = parkVO.getAddress();
+            // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//            List<ParkVO> address_list = parkProc.only_address();
+//            System.out.println(address_list);
+            
+            
+//            mav.addObject("address_list", address_list);
+//            String address_list1 = address_list.toString();
+//            System.out.println(address_list1);
+//            mav.addObject("address_list1", address_list1);
+         // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            
+            // 검색 목록
+>>>>>>> 8f60ebe993f485928ffbd74895929653cc7c186a
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
+            //System.out.println(list.contains(address));
+//            String address_list = list.get(0).toString();
+//            System.out.println(address_list);
+            
+            
+            
+            
+            
+            
             
             // 寃��깋 �젅肄붾뱶 媛쒖닔
             int search_count = parkProc.search_count(map);
@@ -88,12 +117,11 @@ public class ParkCont {
         } else {
             mav.setViewName("/member/login_need"); 
         }
-        
+
 
         return mav;
         
     }
-    
     
     /**
      * �벑濡� �뤌
@@ -715,6 +743,7 @@ public class ParkCont {
     
     
     
+    
+    
 }
-
 

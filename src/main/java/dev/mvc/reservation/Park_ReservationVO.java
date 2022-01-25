@@ -81,6 +81,22 @@ public class Park_ReservationVO {
     }
     
     
+//    // substring을 이용한 날짜 시간 합치기
+//    public String getSubReservedate() {
+//        String date = getReservedate();
+//        String rdate = date.substring(0, 10);
+//        System.out.println(rdate);
+//        return rdate;
+//        
+//    }
+//    public String getSubReservetime() {
+//        String time = getReservedate();
+//        String rtime = time.substring(10);
+//        System.out.println(rtime);
+//        return rtime;
+//    }
+    
+    
     @Override
     public String toString() {
         return "Park_ReservationVO [p_parkno=" + p_parkno + ", p_name=" + p_name + ", reserveno=" + reserveno
