@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 
 
@@ -152,7 +153,13 @@ function delete_reser_ajax(reserveno) {
                         
                         <tr>
                             <td class="th_bs">${p_name} </td>    
-                            <td class="th_bs">${reservedate }</td>
+                            <td class="th_bs">
+                                <c:set var="date"  value="${reservedate }" />
+                                <c:set var="time"  value="${reservetime }" />
+                                ${fn:substring(date, 0, 10) }
+                                ${fn:substring(time, 10, 18) }
+                            </td>
+                            
                             <td class="th_bs">${carno }</td>
                             <td class="th_bs">${notice }</td>
                             <td class="th_bs"><A href="./my_reser_update.do?memberno=${memberno }&reserveno=${reserveno}"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
@@ -163,6 +170,8 @@ function delete_reser_ajax(reserveno) {
                 </tbody>
                 </table>
         </div>
+        
+<%--         <fmt:formatDate value="${reservedate }" pattern="yyyy.MM.dd" /> --%>
     </div>
 </div>
  

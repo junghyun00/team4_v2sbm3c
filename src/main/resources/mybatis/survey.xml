@@ -7,7 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.survey.SurveyDAOinter">
 	<!-- 설문 조사 저장 -->
 	<insert id="survey_create" parameterType="dev.mvc.survey.SurveyVO">
-		INSERT INTO survey (memberno, purposepark, preferday, reserveperiod) 
-		VALUES (#{memberno}, #{purposepark}, #{preferday}, #{reserveperiod})
+		INSERT INTO survey (surveyno, memberno, purposepark, preferday, reserveperiod, rdate) 
+		VALUES (survey_seq.nextval, #{memberno}, #{purposepark}, #{preferday}, #{reserveperiod}, sysdate)
 	</insert>
+  
+  <select id="read" resultType="dev.mvc.survey.SurveyVO" parameterType="int">
+        SELECT surveyno, memberno, purposepark, preferday, reserveperiod, rdate
+        FROM survey
+        WHERE memberno = #{memberno}
+    </select>
 </mapper>

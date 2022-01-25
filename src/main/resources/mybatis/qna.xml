@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
     <!-- qna 등록 -->
     <insert id="qna_create" parameterType="dev.mvc.qna.QnaVO">
-        INSERT INTO qna(qnano, memberno, title, content, img)
-        VALUES (qna_seq.nextval, #{memberno}, #{title}, #{content}, #{img})
+        INSERT INTO qna(qnano, memberno, title, content)
+        VALUES (qna_seq.nextval, #{memberno}, #{title}, #{content})
     </insert>
     
     <!-- qna 검색 레코드 개수 -->
@@ -27,11 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- qna 목록 + 검색 + 페이징 -->
     <select id="qna_list_search_paging" resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
-        SELECT qnano, memberno, title, content, img, r
+        SELECT qnano, memberno, title, content, r
         FROM (
-                    SELECT qnano, memberno, title, content, img, rownum as r
+                    SELECT qnano, memberno, title, content, rownum as r
                     FROM (
-                                SELECT qnano, memberno, title, content, img
+                                SELECT qnano, memberno, title, content
                                 FROM qna
                                     <choose>
                                         <when test="title == null or title == ''">
@@ -55,14 +55,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
    <!-- 글 조회  -->
     <select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
-        SELECT qnano, memberno, title, content, img
+        SELECT qnano, memberno, title, content
         FROM qna
         WHERE qnano = #{qnano}
     </select>
     
     <!-- 회원별 등록한 QNA 목록 -->
     <select id="my_qna" resultType="dev.mvc.qna.QnaVO" parameterType="int">
-        SELECT qnano, memberno, title, content, img
+        SELECT qnano, memberno, title, content
         FROM qna
         WHERE memberno = #{memberno}
         ORDER BY qnano DESC

@@ -13,4 +13,5 @@ public class SurveyVO {
 	private int purposepark;
 	private int preferday;
 	private int reserveperiod;
+	private String rdate;
 }

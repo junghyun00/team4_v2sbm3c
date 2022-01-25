@@ -21,14 +21,14 @@
   <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-	        <h4>○○님의 QNA 등록</h4>
+	        <h4>${memberVO.id }(${memberVO.name })님의 QNA 등록</h4>
 	        <div style='border-bottom: solid 3px #555555; '></div>
 	        </div>
         </div>
         <div class="row-fluid">
             <form style='margin:20px 10px 10px 50px; ' name='frm' method='POST' action='./qna_create.do' class="form-horizontal"
              enctype="multipart/form-data">
-                <input type="hidden" name="memberno" value="1">   <!-- 이건 나중에 수정 -->
+                <input type="hidden" name="memberno" value="${memberVO.memberno}">   <!-- 이건 나중에 수정 -->
   
     <div class="form-group">
        <label class="control-label col-md-2">글 제목</label>
@@ -45,13 +45,13 @@
        </div>
     </div>
     
-    <div class="form-group">
+    <!--  <div class="form-group">
        <label class="control-label col-md-2">이미지</label>
        <div class="col-md-10">
          <input type='file' class="form-control" name='file1MF' id='file1MF' 
                     value='' placeholder="파일 선택">
        </div>
-    </div>   
+    </div>    -->
     
     <div class="content_body_bottom">
       <button type="submit" class='btn btn-dark'>등록</button>

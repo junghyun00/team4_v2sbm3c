@@ -203,6 +203,13 @@ public class ReservationProc implements ReservationProcInter{
         return cnt;
     }
 
+
+    @Override
+    public Park_ReservationVO my_reser_join_read(int reserveno) {
+        Park_ReservationVO park_reservationVO = this.reservationDAO.my_reser_join_read(reserveno);
+        return park_reservationVO;
+    }
+
     
 
 

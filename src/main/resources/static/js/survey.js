@@ -1,6 +1,9 @@
 $('#submit_btn').click(function (e) { 
-	recommend_parking();
-    let purposepark = $(':radio[name="purposepark"]:checked').val();
+   var params = $('#frm').serialize();
+   // alert(params); return;
+
+
+ /*   let purposepark = $(':radio[name="purposepark"]:checked').val();
     let preferday = $(':radio[name="preferday"]:checked').val();
     let reserveperiod = $(':radio[name="reserveperiod"]:checked').val();
     let memberno = $('#memberno').val()
@@ -18,10 +21,10 @@ $('#submit_btn').click(function (e) {
                     "purposepark" : purposepark, 
                     "preferday": preferday, 
                     "reserveperiod": reserveperiod}
-        $.ajax({
+ */       $.ajax({
             type: "GET",
             url: "/survey_create.do",
-            data: data,
+            data: params,
             dataType: "JSON",
             success: function (response) {
                 if(response.cnt == 1){
@@ -33,14 +36,11 @@ $('#submit_btn').click(function (e) {
             }
         });  
         
-       
-        
+        recommend_parking(); 
 
-    }  
-    
-});
+    });
 
- function recommend_parking() {
+ 	function recommend_parking() {
      	var url = '/survey/result.do';
   		var win = window.open(url, 'AI', 'width=800px, height=750px');
 

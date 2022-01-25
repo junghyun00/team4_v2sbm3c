@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.answer.AnswerProcInter;
+import dev.mvc.answer.AnswerVO;
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -28,6 +31,10 @@ public class QnaCont {
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
+    
+    @Autowired
+    @Qualifier("dev.mvc.answer.AnswerProc")
+    private AnswerProcInter answerProc;
 
     /** 업로드 파일 절대 경로 */
     private String uploadDir = Qna.getUploadDir();
@@ -70,8 +77,6 @@ public class QnaCont {
             mav.setViewName("/member/login_need"); 
         }
 
-        
-
         return mav;
 
     }
@@ -82,9 +87,11 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value = "/qna/qna_create.do", method = RequestMethod.GET)
-    public ModelAndView qna_create() {
+    public ModelAndView qna_create(@RequestParam(value = "memberno", defaultValue = "1") int memberno) {
         ModelAndView mav = new ModelAndView();
 
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
         mav.setViewName("/qna/qna_create");
 
         return mav;
@@ -104,39 +111,40 @@ public class QnaCont {
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 시작
         // ------------------------------------------------------------------------------
-        String file1 = ""; // 원본 파일명 image
-        String uploadDir = this.uploadDir; // 파일 업로드 경로
-
-        MultipartFile mf = qnaVO.getFile1MF();
-
-        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
-
-        System.out.println("file1" + file1);
-
-        long size1 = mf.getSize(); // 파일 크기
-        System.out.println("size1" + size1);
-
-        if (size1 > 0) { // 파일 크기 체크
-            // 파일 저장 후 업로드된 파일명이 리턴됨
-            file1 = Upload.saveFileSpring(mf, uploadDir);
-            System.out.println("file1" + file1);
-        }
-
-        qnaVO.setImg(file1);
+//        String file1 = ""; // 원본 파일명 image
+//        String uploadDir = this.uploadDir; // 파일 업로드 경로
+//
+//        MultipartFile mf = qnaVO.getFile1MF();
+//
+//        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+//
+//        System.out.println("file1" + file1);
+//
+//        long size1 = mf.getSize(); // 파일 크기
+//        System.out.println("size1" + size1);
+//
+//        if (size1 > 0) { // 파일 크기 체크
+//            // 파일 저장 후 업로드된 파일명이 리턴됨
+//            file1 = Upload.saveFileSpring(mf, uploadDir);
+//            System.out.println("file1" + file1);
+//        }
+//
+//        qnaVO.setImg(file1);
 
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 종료
         // ------------------------------------------------------------------------------
         System.out.println("-> qnano:" + qnaVO.getQnano());
         mav.addObject("qnano", qnaVO.getQnano());
-
+        
         int cnt = this.qnaProc.qna_create(qnaVO);
         // cnt = 0; // else 테스트
 
+        mav.addObject("memberno", qnaVO.getMemberno());
         mav.addObject("cnt", cnt);
 
         if (cnt == 1) {
-            mav.setViewName("redirect:/qna/qna_list_search_paging.do");
+            mav.setViewName("redirect:/qna/qna_list_search_paging.do?memberno=" + qnaVO.getMemberno());
         } else {
             mav.setViewName("/qna/msg");
         }
@@ -155,8 +163,11 @@ public class QnaCont {
         ModelAndView mav = new ModelAndView();
 
         QnaVO qnaVO = this.qnaProc.read(qnano);
+        AnswerVO answerVO = this.answerProc.answer_read(qnano);
+        
         mav.addObject("qnaVO", qnaVO);
-
+        mav.addObject("answerVO", answerVO);
+        
         mav.setViewName("/qna/read");
 
         return mav;
@@ -205,12 +216,15 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value = "/qna/my_qna_update.do", method = RequestMethod.GET)
-    public ModelAndView update(int qnano) {
+    public ModelAndView update(int qnano, @RequestParam(value = "memberno", defaultValue = "1") int memberno) {
         ModelAndView mav = new ModelAndView();
 
+        MemberVO memberVO = this.memberProc.read(memberno);
+        mav.addObject("memberVO", memberVO);
         QnaVO qnaVO = this.qnaProc.read(qnano);
-        mav.addObject("qnaVO", qnaVO);
         
+        mav.addObject("qnaVO", qnaVO);
+        mav.addObject("memberno", qnaVO.getMemberno());
         mav.setViewName("/qna/my_qna_update");
 
         return mav;
@@ -230,6 +244,7 @@ public class QnaCont {
         
         mav.addObject("cnt", cnt);
         mav.addObject("qnano", qnaVO.getQnano());
+        mav.addObject("memberno", qnaVO.getMemberno());
 
         mav.setViewName("redirect:/qna/qna_list_search_paging.do");
         

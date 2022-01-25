@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.answer.AnswerDAOInter">
+    <!-- answer 등록 -->
+    <insert id="answer_create" parameterType="dev.mvc.answer.AnswerVO">
+        INSERT INTO answer(answerno, qnano, adminno, content)
+        VALUES (answer_seq.nextval, #{qnano}, #{adminno}, #{content})
+    </insert>
+    
+    <!-- 글 조회  -->
+    <select id="answer_read"  resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+        SELECT answerno, qnano, adminno, content
+        FROM answer
+        WHERE qnano=#{qnano} and rownum=1 order by answerno desc 
+    </select>
+</mapper>
