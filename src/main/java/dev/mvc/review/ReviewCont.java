@@ -29,5 +29,13 @@ public class ReviewCont {
         json.put("cnt", cnt);
         return json.toString();
     }
+	@ResponseBody
+    @RequestMapping(value = "/review/delete.do", method = RequestMethod.POST)
+    public String review_delete(int reviewno) {
+		int cnt = this.reviewproc.review_delete(reviewno);
+        JSONObject json = new JSONObject();
+        json.put("cnt", cnt);
+        return json.toString();
+    }
 	
 }

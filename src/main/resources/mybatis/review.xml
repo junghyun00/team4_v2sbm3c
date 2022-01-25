@@ -10,8 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(review_seq.nextval, #{parkno},#{memberno},#{cmt},#{grade},sysdate) 
 	</insert>
 	<select id="listcmt_by_parkno" parameterType="int" resultType="dev.mvc.review.ReviewlistVO">
-		select id, review.cmt_date, review.cmt, review.grade, review.memberno
+		select id, review.cmt_date, review.cmt, review.grade, review.memberno, review.reviewno
 		from member, review
 		where member.memberno = review.memberno and review.parkno = #{parkno}
 	</select>
+	<delete id="review_delete" parameterType="int">
+		delete from review 
+		where reviewno = #{reviewno}
+	</delete>
 </mapper>
