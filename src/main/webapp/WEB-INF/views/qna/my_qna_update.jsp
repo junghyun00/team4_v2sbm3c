@@ -55,7 +55,7 @@ function updatefun() {
                     <label class="col-md-2" style='color:#555555;; font-weight: bold; '>글 내용</label>
                     <div class="col-md-10">
                         <textarea name='content' required="required" 
-                           class="form-control" rows="12" style='width: 100%;'></textarea>
+                           class="form-control" rows="12" style='width: 100%;'>${content }</textarea>
                     </div>
                 </div>
     
@@ -69,5 +69,7 @@ function updatefun() {
         
     </div>
 </div>
+
+<jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
 </html>

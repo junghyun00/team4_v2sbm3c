@@ -65,7 +65,7 @@ function chatting() {
 					        <li><button class="dropdown-item" onclick="location.href='/mypage/me_update.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내 정보 변경 </button></li>
 					        <li><button class="dropdown-item" onclick="location.href='/mypage/passwd_update.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">비밀번호 변경 </button></li>
 							<li><button class="dropdown-item" onclick="location.href='/mypage/my_reser_join.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내가 예약한 주차장</button></li>
-							<li><button class="dropdown-item" onclick="recommend_parking()" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
+							<li><button class="dropdown-item" onclick="location.href='/mypage/my_park.do?memberno=${memberno }'" style="color:#fff; background-color: #545a5e;">내가 등록한 주차장</button></li>
 					    </ul>
 				</span>
 			 <button class="btn btn-dark pt-2" onclick="location.href='/member/logout.do', logoutfun() " id="login_btn"> ${sessionScope.id } 로그아웃</button>

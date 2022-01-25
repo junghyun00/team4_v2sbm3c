@@ -119,21 +119,22 @@ function delete_reser_ajax(reserveno) {
             <table class="table table-hover">
                 <colgroup>
                   <col style="width: 15%;"></col>
-                  <col style="width: 20%;"></col>
+                  <col style="width: 22%;"></col>
+                  <col style="width: 18%;"></col>
                   <col style="width: 10%;"></col>
                   <col style="width: 20%;"></col>
-                  <col style="width: 8%;"></col>
-                  <col style="width: 8%;"></col>
+                  <col style="width: 10%;"></col>
                 </colgroup>           
                 
                 <thead>  
                     <TR>
                       <TH class="th_bs">예약한 주차장</TH>
+                      <TH class="th_bs">주차장 주소</TH>
                       <TH class="th_bs">예약 일시</TH>
                       <TH class="th_bs">차량 번호</TH>
                       <TH class="th_bs">전달 사항</TH>
-                      <TH class="th_bs">예약 변경</TH>
-                      <TH class="th_bs">예약 취소</TH>
+                      <TH class="th_bs">예약<br>변경 및 취소</TH>
+
                     </TR>
                  </thead>
                 
@@ -141,6 +142,7 @@ function delete_reser_ajax(reserveno) {
                    <c:forEach var="Park_ReservationVO" items="${list }">
                         <c:set var='p_parkno' value="${Park_ReservationVO.p_parkno }" />
                         <c:set var='p_name' value="${Park_ReservationVO.p_name }" />
+                        <c:set var='p_address' value="${Park_ReservationVO.p_address }" />
                         <c:set var='reserveno'  value="${Park_ReservationVO.reserveno }" />
                         <c:set var='memberno'  value="${Park_ReservationVO.memberno }" />
                         <c:set var='parkno'  value="${Park_ReservationVO.parkno }" />
@@ -152,7 +154,9 @@ function delete_reser_ajax(reserveno) {
 
                         
                         <tr>
-                            <td class="th_bs">${p_name} </td>    
+                            <td class="th_bs">
+                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${p_name}</a> </td>    
+                            <td class="th_bs">${p_address} </td>
                             <td class="th_bs">
                                 <c:set var="date"  value="${reservedate }" />
                                 <c:set var="time"  value="${reservetime }" />
@@ -162,8 +166,10 @@ function delete_reser_ajax(reserveno) {
                             
                             <td class="th_bs">${carno }</td>
                             <td class="th_bs">${notice }</td>
-                            <td class="th_bs"><A href="./my_reser_update.do?memberno=${memberno }&reserveno=${reserveno}"  title="수정"><i class="fas fa-pencil-alt"></i></A></td>
-                            <td class="th_bs"><A href="javascript:delete_reser_ajax(${reserveno })"  title="취소"><i class="fas fa-calendar-times"></i></A></td>
+                            <td class="th_bs">
+		                        <A href="./my_reser_update.do?memberno=${memberno }&reserveno=${reserveno}"  title="수정"><i class="fas fa-pencil-alt"></i></A>
+		                        <A href="javascript:delete_reser_ajax(${reserveno })"  title="취소"><i class="fas fa-calendar-times"></i></A>
+                            </td>
                         </tr>
                         
                    </c:forEach>

@@ -56,7 +56,11 @@ set carno =5523
 where carno = 3323;
 
 delete from reservation
-where reserveno =70;
+where reserveno =48;
+
+
+
+
 
 
 
@@ -82,7 +86,7 @@ select * from reservation;
 
 -- reservation + park join
 -- 전체 예약 목록
-SELECT p.parkno as p_parkno, p.name as p_name, 
+SELECT p.parkno as p_parkno, p.name as p_name, p.address as p_address, 
            r.reserveno, r.reservedate, r.carno, r.notice
 FROM park p, reservation r
 WHERE p.parkno = r.parkno
@@ -92,10 +96,11 @@ ORDER BY r.reserveno DESC;
 
 -- reservation + park join
 -- 회원 번호가 1번인 회원이 한 39번 예약
-SELECT p.parkno as p_parkno, p.name as p_name, 
-           r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
+SELECT p.parkno as p_parkno, p.name as p_name, p.address as p_address, 
+            p.phone as p_phone, p.area as p_area, p.cmt as p_cmt, p.file1 as p_file1, 
+            r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice, r.parkno, r.memberno
 FROM park p, reservation r
-WHERE p.parkno = r.parkno AND r.memberno = 1 AND r.reserveno=39;
+WHERE p.parkno = r.parkno AND r.memberno = 2 AND r.reserveno=48;
 
 
 -- 수정

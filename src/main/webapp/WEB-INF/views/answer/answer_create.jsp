@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var='title'  value="${qnaVO.title }" />
+<c:set var='content'  value="${qnaVO.content }" />
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,8 @@
                 <input type="hidden" name="qnano" value="${qnaVO.qnano }">
   
     <div class="form-group">
-            <h4>${title }</h4>
+            <h4>제목 [ ${title } ] </h4><br><br>
+            <h5>질문 [ ${content } ] </h5>
     </div><br><br><br>
     
     <div class="form-group">

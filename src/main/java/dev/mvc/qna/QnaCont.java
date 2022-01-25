@@ -48,17 +48,16 @@ public class QnaCont {
      */
     @RequestMapping(value = "/qna/qna_list_search_paging.do", method = RequestMethod.GET)
     public ModelAndView qna_list_search_paging(@RequestParam(value = "title", defaultValue = "") String title,
-                                                                    @RequestParam(value = "now_page", defaultValue = "1") int now_page, 
+                                                                    @RequestParam(value = "now_page", defaultValue = "1") int now_page,
                                                                     HttpSession session) {
-        System.out.println("--> now_page: " + now_page);
-
         ModelAndView mav = new ModelAndView();
         
         if (memberProc.isMember(session)) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("title", title); // #{title}
             map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-
+            
+            
             // 검색 목록
             List<QnaVO> list = qnaProc.qna_list_search_paging(map);
             mav.addObject("list", list);
@@ -108,33 +107,6 @@ public class QnaCont {
     public ModelAndView qna_create(HttpServletRequest request, QnaVO qnaVO) {
         ModelAndView mav = new ModelAndView();
 
-        // ------------------------------------------------------------------------------
-        // 파일 전송 코드 시작
-        // ------------------------------------------------------------------------------
-//        String file1 = ""; // 원본 파일명 image
-//        String uploadDir = this.uploadDir; // 파일 업로드 경로
-//
-//        MultipartFile mf = qnaVO.getFile1MF();
-//
-//        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
-//
-//        System.out.println("file1" + file1);
-//
-//        long size1 = mf.getSize(); // 파일 크기
-//        System.out.println("size1" + size1);
-//
-//        if (size1 > 0) { // 파일 크기 체크
-//            // 파일 저장 후 업로드된 파일명이 리턴됨
-//            file1 = Upload.saveFileSpring(mf, uploadDir);
-//            System.out.println("file1" + file1);
-//        }
-//
-//        qnaVO.setImg(file1);
-
-        // ------------------------------------------------------------------------------
-        // 파일 전송 코드 종료
-        // ------------------------------------------------------------------------------
-        System.out.println("-> qnano:" + qnaVO.getQnano());
         mav.addObject("qnano", qnaVO.getQnano());
         
         int cnt = this.qnaProc.qna_create(qnaVO);

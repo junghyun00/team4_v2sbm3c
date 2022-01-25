@@ -80,13 +80,13 @@
 									<input type="radio" name="purposepark" id='purposepark2' class="purposepark" value='2'>주변 방문
 								</label>  
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="purposepark" id='purposepark3' class="purposepark" value='3' checked="checked">일반 주차
+									<input type="radio" name="purposepark" id='purposepark3' class="purposepark" value='3'>일반 주차
 								</label> 
 							</div>
 							<div class="mt-3">
 								<h5>선호 요일</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1' checked="checked">평일
+									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1' >평일
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="preferday" id='preferday2' class="preferday" value='2'>주말
@@ -98,7 +98,7 @@
 									<input type="radio" name="reserveperiod" id='reserveperiod1' class="reserveperiod" value='1'>장기
 								</label>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="reserveperiod" id='reserveperiod2' class="reserveperiod" value='2' checked="checked">단기
+									<input type="radio" name="reserveperiod" id='reserveperiod2' class="reserveperiod" value='2'>단기
 								</label>
 							</div>
 							<div class="mt-3 mb-3 text-center">

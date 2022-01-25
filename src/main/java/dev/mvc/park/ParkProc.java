@@ -200,7 +200,9 @@ public class ParkProc implements ParkProcInter{
     // 주차장 삭제
     @Override
     public int my_park_delete(int parkno) {
+        System.out.println("gggg");
         int cnt = this.parkDAO.my_park_delete(parkno);
+        System.out.println("proc cnt : "+cnt);
         
         return cnt;
     }
@@ -296,8 +298,8 @@ public class ParkProc implements ParkProcInter{
 
 
     @Override
-    public List<ParkVO> only_address() {
-        List <ParkVO> list = this.parkDAO.only_address();
+    public List<ParkVO> only_address(String address) {
+        List <ParkVO> list = this.parkDAO.only_address(address);
         return list;
     }
 

@@ -92,9 +92,6 @@ public interface ReservationProcInter {
     
     
     
-    
-    
-    public Park_ReservationVO my_reser_join_read(int reserveno);
 
 }
 
