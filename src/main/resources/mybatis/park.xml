@@ -105,8 +105,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 주소만 select -->
     <select id="only_address" resultType="dev.mvc.park.ParkVO">
-        SELECT address
+        SELECT name, address
         FROM park
     </select>
+    
+    
+    
+    
+    
+    
     
 </mapper>

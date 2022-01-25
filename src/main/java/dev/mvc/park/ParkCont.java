@@ -67,33 +67,17 @@ public class ParkCont {
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
             
-            
-//            ParkVO parkVO = this.parkProc.read(parkno);
-//            mav.addObject("parkVO", parkVO);
-//            int address = parkVO.getAddress();
-            // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//            List<ParkVO> address_list = parkProc.only_address();
-//            System.out.println(address_list);
-            
-            
-//            mav.addObject("address_list", address_list);
-//            String address_list1 = address_list.toString();
-//            System.out.println(address_list1);
-//            mav.addObject("address_list1", address_list1);
-         // 여기 추가함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
-            //System.out.println(list.contains(address));
-//            String address_list = list.get(0).toString();
-//            System.out.println(address_list);
-            
-            
-            
-            
-            
-            
+            System.out.println(list);
+
+            List<ParkVO> list2 = parkProc.only_address();
+            mav.addObject("list2", list2);
+
+            int park_su = Park.RECORD_PER_PAGE;
+            mav.addObject("park_su", park_su);
+
             
             // 검색 레코드 개수
             int search_count = parkProc.search_count(map);

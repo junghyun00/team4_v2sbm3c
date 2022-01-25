@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 
 <c:set var='reserveno' value="${reservationVO.reserveno }" />
@@ -46,7 +47,15 @@ function reser_update() {
                 <input type="hidden" name="parkno" value="${parkno}" required="required">
                 <span style="font-size: 1.5em; font-weight: bold; ">${parkVO.name }</span><br><br>
                 <span style="font-size: 1.2em; font-weight: bold;">${parkVO.address }</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${parkVO.price }원 ]</span><br><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${parkVO.price }원 ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">
+                    원래 예약 일시 [ 
+                    <c:set var="date"  value="${reservedate }" />
+                    <c:set var="time"  value="${reservetime }" />
+                    ${fn:substring(date, 0, 10) }
+                    ${fn:substring(time, 10, 16) } ]
+                </span>
+                <br><br><br>
                 <table class="table table-bordered">
                     <tbody>
                             <tr>

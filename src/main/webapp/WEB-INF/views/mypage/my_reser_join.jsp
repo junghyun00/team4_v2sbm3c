@@ -157,7 +157,7 @@ function delete_reser_ajax(reserveno) {
                                 <c:set var="date"  value="${reservedate }" />
                                 <c:set var="time"  value="${reservetime }" />
                                 ${fn:substring(date, 0, 10) }
-                                ${fn:substring(time, 10, 18) }
+                                ${fn:substring(time, 10, 16) }
                             </td>
                             
                             <td class="th_bs">${carno }</td>
