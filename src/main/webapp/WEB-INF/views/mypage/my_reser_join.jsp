@@ -155,8 +155,9 @@ function delete_reser_ajax(reserveno) {
                         
                         <tr>
                             <td class="th_bs">
-                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${p_name}</a> </td>    
-                            <td class="th_bs">${p_address} </td>
+                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${p_name}</a></td>    
+                            <td class="th_bs">
+                                <a href="./my_park_read.do?memberno=${memberno }&parkno=${parkno}">${p_address}</a></td>
                             <td class="th_bs">
                                 <c:set var="date"  value="${reservedate }" />
                                 <c:set var="time"  value="${reservetime }" />

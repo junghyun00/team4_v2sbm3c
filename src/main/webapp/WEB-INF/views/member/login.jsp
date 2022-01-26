@@ -68,7 +68,7 @@
 		      <div class="content_body_bottom" style='text-align: center;'>
 		          <button type="submit" class="btn btn-dark btn-md">로그인</button>
 		          <button type='button' onclick="location.href='./create.do'" class="btn btn-dark btn-md">회원가입</button>
-		          <button type='button' onclick="loadDefault();" class="btn btn-dark btn-md">테스트 계정</button>
+		          <button type='button' onclick="loadDefault();" class="btn btn-dark btn-md">관리자 계정</button>
 		      </div>   
 		      
 		    </FORM>

@@ -53,13 +53,13 @@
 		<div class="row-fluid">
 			<table class="table">
 		        <colgroup>
-		          <col style="width: 10%;"></col>
 		          <col style="width: 75%;"></col>
+		          <col style="width: 10%;"></col>
+		          <col style="width: 10%;"></col>
 		        </colgroup>           
 		        
 		        <thead>  
 		            <TR>
-		              <TH class="th_bs">회원 번호</TH>
 		              <TH class="th_bs">QNA 제목</TH>
 		              <TH class="th_bs">수정</TH>
 		              <TH class="th_bs">삭제</TH>
@@ -74,7 +74,6 @@
 		                <c:set var='content'  value="${qnaVO.content }" />
 		                    
 		                <tr>
-		                    <td class="th_bs">${memberno }</td>
 		                    <td class="th_bs">
 		                    <a href="./read.do?qnano=${qnano}&now_page=${param.now_page }&title=${param.title}&answerno=${param.answerno}">${title }</a>
 		                    </td>

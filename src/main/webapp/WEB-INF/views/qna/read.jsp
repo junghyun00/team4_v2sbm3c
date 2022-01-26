@@ -24,9 +24,9 @@
     <div class="container" >
             
             <div class="col-md-12" ><br>
-                <span style="font-size: 1.0em; font-weight: bold;">제목 [ ${title } ]</span><br><br><br><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">내용 [ ${content } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">답변 [ ${answerVO.content } ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">제목 [ ${title } ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">내용 [ ${content } ]</span><br><br><hr>
+                <span style="font-size: 1.0em; font-weight: bold;">답변 <br><br> ${answerVO.content } </span><br><br>
                 
                 
                 <c:choose>
