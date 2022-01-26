@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css"
@@ -24,11 +24,10 @@
 
        function recommend_parking() {
            var params = $('#frm').serialize();
-    	   alert(params); 
 
            $.ajax({
                type: "GET",
-               url: "/recommend_create.do",
+               url: "/recommend/recommend_create.do",
                data: params,
                dataType: "JSON",
                success: function (response) {
@@ -62,29 +61,28 @@
 			<div class="col-md-12 p-3  rounded text-black ">
 				<div class="row">
 					<div class="col-md-12 border-bottom mb-3">
-						<h1>Survey ${memberVO.memberno }</h1>
+						<h1>Survey </h1>
 					</div>
 					<div class="col-md-12 border-bottom">
 						<form name="frm" id='frm'>
-							<input type="hidden" name="memberno" id="memberno" value='${memberVO.memberno }'>
-
-                                  
+							<input type="hidden" name="memberno" id="memberno" value='${memberno }'>
+     
 							<div class="mt-3">
 								<h5>주차 목적</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="purposepark" id='purposepark1' class="purposepark" value='1'>시설 이용
+									<input type="radio" name="purposepark" id='purposepark1' class="purposepark" value='1' checked='checked'>시설 이용
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="purposepark" id='purposepark2' class="purposepark" value='2'>주변 방문
 								</label>  
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="purposepark" id='purposepark3' class="purposepark" value='3' checked="checked">일반 주차
+									<input type="radio" name="purposepark" id='purposepark3' class="purposepark" value='3'>일반 주차
 								</label> 
 							</div>
 							<div class="mt-3">
 								<h5>선호 요일</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1' checked="checked">평일
+									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1' checked='checked'>평일
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="preferday" id='preferday2' class="preferday" value='2'>주말
@@ -93,10 +91,10 @@
 							<div class="mt-3">
 								<h5>예약 기간</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="reserveperiod" id='reserveperiod1' class="reserveperiod" value='1'>장기
+									<input type="radio" name="reserveperiod" id='reserveperiod1' class="reserveperiod" value='1' checked='checked'>장기
 								</label>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="reserveperiod" id='reserveperiod2' class="reserveperiod" value='2' checked="checked">단기
+									<input type="radio" name="reserveperiod" id='reserveperiod2' class="reserveperiod" value='2'>단기
 								</label>
 							</div>
 							<div class="mt-3 mb-3 text-center">

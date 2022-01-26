@@ -29,6 +29,8 @@ public interface MemberDAOInter {
      */
     public MemberVO readById(String id);
     
+    public MemberVO readByMemberno(int memberno);
+    
     /**
      * 濡쒓렇�씤 泥섎━
      * @param map

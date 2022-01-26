@@ -87,8 +87,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 회원별 예약 목록 Park + Reservation join  -->
     <select id="my_reser_join" resultType="dev.mvc.reservation.Park_ReservationVO" parameterType="int">
-        SELECT p.parkno as p_parkno, p.name as p_name, 
-                   r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
+        SELECT p.parkno as p_parkno, p.name as p_name, p.address as p_address, p.phone as p_phone, p.area as p_area, p.cmt as p_cmt, p.file1 as p_file1, p.price as p_price,
+                   r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice, r.parkno, r.memberno
         FROM park p, reservation r
         WHERE p.parkno = r.parkno AND r.memberno= #{memberno}
         ORDER BY r.reserveno DESC
@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 관리자 확인용 예약 목록 Park + Reservation join  -->
     <select id="reser_list" resultType="dev.mvc.reservation.Park_ReservationVO">
-        SELECT p.parkno as p_parkno, p.name as p_name, 
+        SELECT p.parkno as p_parkno, p.name as p_name, p.address as p_address, 
                    r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
         FROM park p, reservation r
         WHERE p.parkno = r.parkno
@@ -113,15 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <!-- 회원별 예약 목록 Park + Reservation join  read -->
-    <select id="my_reser_join_read" resultType="dev.mvc.reservation.Park_ReservationVO" parameterType="int">
-        SELECT p.parkno as p_parkno, p.name as p_name, 
-                   r.reserveno, r.reservedate, r.reservetime, r.carno, r.notice
-        FROM park p, reservation r
-        WHERE p.parkno = r.parkno AND r.memberno= #{memberno} AND r.reserveno = #{reserveno}
-        ORDER BY r.reserveno DESC
-    </select>
-    
+
     
     
     </mapper>

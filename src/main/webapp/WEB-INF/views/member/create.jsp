@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -145,7 +145,7 @@ function create_memberfun() {
                 <div class="row" style='margin:40px auto;'>
                     <label for="id" class="col-md-2" style='color:#555555; font-weight: bold; '>ID*</label>
                     <div class="col-md-10">
-                        <input type='text' class="form-control" name='id' id='id' value='user' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
+                        <input type='text' class="form-control" name='id' id='id' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
 				        <button type='button' id="btn_checkID" class="btn btn-secondary btn-sm">중복확인</button>
 				        <SPAN id='id_span'></SPAN> <!-- ID 중복 관련 메시지 -->    
                     </div>
@@ -154,21 +154,21 @@ function create_memberfun() {
                 <div class="row" style='margin:40px auto;'>
 			      <label for="passwd" class="col-md-2" style='color:#555555; font-weight: bold; '>패스워드*</label>    
 			      <div class="col-md-10">
-			        <input type='password' class="form-control" name='passwd' id='passwd' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+			        <input type='password' class="form-control" name='passwd' id='passwd' required="required" style='width: 30%;' placeholder="패스워드">
 			      </div>
 			    </div>
 			    
 			    <div class="row" style='margin:40px auto;'>
 			      <label for="passwd2" class="col-md-2" style='color:#555555; font-weight: bold; '>패스워드 확인*</label>    
 			      <div class="col-md-10">
-			        <input type='password' class="form-control" name='passwd2' id='passwd2' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+			        <input type='password' class="form-control" name='passwd2' id='passwd2'  required="required" style='width: 30%;' placeholder="패스워드">
 			      </div>
 			    </div>   
     
                 <div class="row" style='margin:40px auto;'>
 			      <label for="mname" class="col-md-2" style='color:#555555; font-weight: bold; ' >성명*</label>    
 			      <div class="col-md-10">
-			        <input type='text' class="form-control" name='name' id='name' value='왕눈이' 
+			        <input type='text' class="form-control" name='name' id='name'
 			                   value='' required="required" style='width: 30%;' placeholder="성명">
 			      </div>
 			    </div>   
@@ -176,7 +176,7 @@ function create_memberfun() {
 			    <div class="row" style='margin:40px auto;'>
 			      <label for="tel" class="col-md-2" style='color:#555555; font-weight: bold; '>전화번호*</label>    
 			      <div class="col-md-10">
-			        <input type='text' class="form-control" name='phone' id='phone' value='010-0000-0000'
+			        <input type='text' class="form-control" name='phone' id='phone' 
 			                   value='' required="required" style='width: 30%;' placeholder="전화번호"> 예) 010-0000-0000
 			      </div>
 			    </div>
@@ -185,7 +185,7 @@ function create_memberfun() {
                   <label for="mname" class="col-md-2" style='color:#555555; font-weight: bold; '>이메일</label>    
                   <div class="col-md-10">
                     <input type='text' class="form-control" name='email' id='email' 
-                               value='email value'  style='width: 30%;' placeholder="e-mail">
+                                 style='width: 30%;' placeholder="e-mail">
                   </div>
                 </div>   
                 
@@ -193,7 +193,7 @@ function create_memberfun() {
 			      <label for="address1" class="col-md-2" style='color:#555555; font-weight: bold; '>주소</label>    
 			      <div class="col-md-10">
 			        <input type='text' class="form-control" name='address' id='address' 
-			                   value='주소1' style='width: 80%;' placeholder="주소">
+			                   style='width: 80%;' placeholder="주소">
 			      </div>
 			    </div> 
                 

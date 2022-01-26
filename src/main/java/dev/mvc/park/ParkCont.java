@@ -77,7 +77,7 @@ ModelAndView mav = new ModelAndView();
             mav.addObject("list", list);
             System.out.println(list);
 
-            List<ParkVO> list2 = parkProc.only_address();
+            List<ParkVO> list2 = parkProc.only_address(address);
             mav.addObject("list2", list2);
 
             int park_su = Park.RECORD_PER_PAGE;
@@ -284,7 +284,7 @@ ModelAndView mav = new ModelAndView();
         mav.addObject("parkno", parkVO.getParkno());
         mav.addObject("memberno", parkVO.getMemberno());
         
-        mav.setViewName("redirect:/mypage/my_park_read.do");
+        mav.setViewName("redirect:/mypage/my_park.do");
         
         return mav;
         
@@ -364,7 +364,7 @@ ModelAndView mav = new ModelAndView();
         mav.addObject("parkno", parkVO.getParkno());
         mav.addObject("memberno", parkVO.getMemberno());
         
-        mav.setViewName("redirect:/mypage/my_park_read.do");
+        mav.setViewName("redirect:/mypage/my_park.do");
         
         return mav;
         
@@ -400,7 +400,8 @@ ModelAndView mav = new ModelAndView();
     @RequestMapping(value="/mypage/my_park_delete_ajax.do", method=RequestMethod.GET )
     @ResponseBody
     public String my_park_delete_ajax(int parkno) {
-        ParkVO parkVO = this.parkProc.my_park_read(parkno);
+        ParkVO parkVO = this.parkProc.read(parkno);
+        System.out.println(parkVO);
         
         JSONObject json = new JSONObject();
         json.put("parkno", parkVO.getParkno());
@@ -438,6 +439,7 @@ ModelAndView mav = new ModelAndView();
         // -------------------------------------------------------------------
         // 삭제할 파일 정보를 읽어옴.
         ParkVO vo = parkProc.my_park_read(parkno);
+        System.out.println("여기는1");
         
         
         String file1 = vo.getFile1();
@@ -445,12 +447,13 @@ ModelAndView mav = new ModelAndView();
         boolean sw = false;
         
         sw = Tool.deleteFile(uploadDir, file1);  // Folder에서 1건의 파일 삭제
+        System.out.println("여기는2");
         // -------------------------------------------------------------------
         // 파일 삭제 종료 시작
         // -------------------------------------------------------------------
         
         cnt = this.parkProc.my_park_delete(parkno);
-        System.out.println(cnt);
+        System.out.println("cnt : "+cnt);
         
         //mav.addObject("cnt", cnt);
         //mav.addObject("parkno", parkVO.getParkno());

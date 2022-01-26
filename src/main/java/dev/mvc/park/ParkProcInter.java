@@ -121,5 +121,5 @@ public interface ParkProcInter {
     
     
     
-    public List<ParkVO> only_address();
+    public List<ParkVO> only_address(String address);
 }

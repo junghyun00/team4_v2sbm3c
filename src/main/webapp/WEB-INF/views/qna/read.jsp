@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,27 +22,29 @@
 
 <div class='content_body' style='margin:70px;'>
     <div class="container" >
-      <!--  <div class="row" >
-            <div class="col-md-6" >
-                <c:set var="file1" value="${file1.toLowerCase() }" />
-	                <c:choose>
-		              <c:when test="${file1.endsWith('jpg') || file1.endsWith('png') || file1.endsWith('gif')}">
-		                  <IMG src="/qna/storage/${file1 }" style="width: 80%;"> 
-		              </c:when>
-		               <c:otherwise> 
-		                <IMG src="/qna/images/none1.png" style="margin: 0px 0px 0px 20px; width: 90%;"> 
-		              </c:otherwise>
-		            </c:choose>  
-            </div> -->
             
             <div class="col-md-12" ><br>
-                <span style="font-size: 1.0em; font-weight: bold;">제목 [ ${title } ]</span><br><br><br><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">내용 [ ${content } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">답변 [ ${answerVO.content } ]</span><br><br>
-              
+                <span style="font-size: 1.0em; font-weight: bold;">제목 [ ${title } ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">내용 [ ${content } ]</span><br><br><hr>
+                <span style="font-size: 1.0em; font-weight: bold;">답변 <br><br> ${answerVO.content } </span><br><br>
                 
-                <button type='button' onclick="location.href='/answer/answer_create.do?qnano=${qnaVO.qnano}'" class="btn btn-dark">답변</button>
-                <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
+                
+                <c:choose>
+		            <c:when test="${sessionScope.grade == 20}"> <%-- 회원인 경우 --%>
+		                <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
+					</c:when>
+					<c:otherwise>
+					    <c:choose>
+					        <c:when test="${sessionScope.grade == 10}">     <!-- 관리자인 경우 -->
+					            <button type='button' onclick="location.href='/answer/answer_create.do?qnano=${qnaVO.qnano}'" class="btn btn-dark">답변</button>
+					            <button type='button' onclick="history.back();" class="btn btn-dark">돌아가기</button><br>
+					        </c:when>
+					      </c:choose>
+					</c:otherwise>
+                </c:choose>
+                
+                
+                
             </div>
   
         </div>

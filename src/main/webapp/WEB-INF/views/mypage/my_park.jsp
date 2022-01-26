@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -58,20 +58,21 @@ function delete_park_ajax(parkno) {
             $('#modal_content').html(msg);
             $('#modal_panel').modal();
             
-//             console.log('-> parkno:' + parkno);
-//             console.log('-> memberno:' + memberno);
-//             console.log('-> name:' + name);
-//             console.log('-> phone:' + phone);
-//             console.log('-> address:' + address);
-//             console.log('-> area:' + area);
-//             console.log('-> price:' + price);
-//             console.log('-> cmt:' + cmt);
-//             console.log('-> file1:' + file1);
+            console.log('-> parkno:' + parkno);
+            console.log('-> memberno:' + memberno);
+            console.log('-> name:' + name);
+            console.log('-> phone:' + phone);
+            console.log('-> address:' + address);
+            console.log('-> area:' + area);
+            console.log('-> price:' + price);
+            console.log('-> cmt:' + cmt);
+            console.log('-> file1:' + file1);
             
         },
         error: function(request, status, error) {
             console.log(error);
         }
+
     }); 
 }
 </script>
@@ -96,16 +97,10 @@ function delete_park_ajax(parkno) {
                     <p id='modal_content'></p>  <!-- 내용 -->
                 </div>
                 <div class="modal-footer">
-                   <FORM name='frm_delete' id='frm_delete' method='POST' action='./my_park_delete.do'>
+<!--                    <FORM name='frm_delete' id='frm_delete' method='POST' action='./my_park_delete.do'> -->
+                        <FORM name='frm_delete' id='frm_delete' method='POST' action='./my_park_delete.do'>
                        <input type='hidden' name='parkno' id='parkno' >
                        <input type='hidden' name='memberno' id='memberno' >
-                       <input type='hidden' name='name' id='name' >
-                       <input type='hidden' name='phone' id='phone' >
-                       <input type='hidden' name='address' id='address' >
-                       <input type='hidden' name='area' id='area' >
-                       <input type='hidden' name='price' id='price' >
-                       <input type='hidden' name='cmt' id='cmt' >
-                       <input type='hidden' name='file1' id='file1' >
                        
                        <button  type="submit" id='submit' class="btn btn-default" >삭제</button>
                    </FORM>

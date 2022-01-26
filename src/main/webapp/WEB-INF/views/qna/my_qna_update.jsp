@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -55,7 +55,7 @@ function updatefun() {
                     <label class="col-md-2" style='color:#555555;; font-weight: bold; '>글 내용</label>
                     <div class="col-md-10">
                         <textarea name='content' required="required" 
-                           class="form-control" rows="12" style='width: 100%;'></textarea>
+                           class="form-control" rows="12" style='width: 100%;'>${content }</textarea>
                     </div>
                 </div>
     
@@ -69,5 +69,7 @@ function updatefun() {
         
     </div>
 </div>
+
+<jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
 </html>

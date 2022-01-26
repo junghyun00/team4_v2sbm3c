@@ -23,69 +23,35 @@
 
 <script type="text/javascript">
 
-$("#submit_search").click(function() {
-    console.log("클릭");
-    alert("gg");
-
-    var list = '${list}';   // 페이징 된 리스트
-    console.log("list : "+ list);
-    var list2 = '${list2}';  // 페이징 안 된 이름, 주소 리스트
-    console.log("list2 : "+ list2);
-});
-
-
-
 // 지도에 마커를 표시하려면 주소 배열이 필요해서 주소 배열, 목록 만들기
-var list = '${list}';   // 페이징 된 리스트
 var list2 = '${list2}';  // 페이징 안 된 이름, 주소 리스트
 // console.log("list2 : "+list2);
 
 
 var list2_park_count = '${search_count}';
-// console.log("list2_park_count : ", list2_park_count);
-
 var park_su = '${park_su}';
-// console.log("park_su : ", park_su);
-                
-                
 var split1 = list2.split(", ");
-// console.log("split1 : ", split1);
                 
 //////////////////주차장 이름 name_list에 배열로 저장/////////////////////
 var name_list = [];
 for(var i = 1; i <= list2_park_count; i++) {
     var num1 = 2+(i-1)*11;
-
-//     console.log("split1[num1] : ", split1[num1]);
     var split1num1 = split1[num1];
-//     console.log("split1num1 : ", split1num1);
-    
     var split3 = split1num1.split("=");
-//     console.log("split3[0] : ", split3[0]);
-//     console.log("split3[1] : ", split3[1]);
 
     name_list[i-1] = split3[1];          
 }
-console.log(name_list);
 
 
 //////////////////주차장 주소 address_list에 배열로 저장/////////////////////
 var address_list = [];
 for(var i = 1; i <= list2_park_count; i++) {
     var num = 4+(i-1)*11;
-
-//     console.log("split1[num] : ", split1[num]);
     var split1num = split1[num];
-//     console.log("split1num : ", split1num);
-    
     var split2 = split1num.split("=");
-//     console.log("split2[0] : ", split2[0]);
-//     console.log("split2[1] : ", split2[1]);
 
     address_list[i-1] = split2[1];          
 }
-console.log(address_list);
-///////////                 완성                        ///////////////
 
 
 var map;
@@ -99,15 +65,11 @@ function initialize() {
 
     for (var i = 0; i < list2_park_count; i++) {
         const addr = address_list[i];
-//      console.log(i, ". addr : " , addr);
-        
+
         address = addr.replace(/\(/gi, '&#40');
         address = addr.replace(/\)/gi, '&#41');    // 주소에 있는 괄호 없앰
-//      console.log('address : ', address);
-
 
         var params = '&address=' + address;
-        console.log('params ', params);
 
         $.ajax({
             type: "GET",
@@ -115,20 +77,13 @@ function initialize() {
             data: params,  
             success: response_map,  
           });
-        
     }
-    
 }            
                 
                 
 function response_map(data){ 
-    console.log("response_map 함수로 들어옴");
-    // 전송된 위도, 경도를 설정
     var latlng = new google.maps.LatLng(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
-    console.log("latlng"+latlng);
     
-
-
  // 지도 출력 옵션
 var mapOptions = {
   streetViewControl : false,
@@ -140,17 +95,6 @@ var mapOptions = {
 map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
 coordinates.push(latlng);
-    //  console.log(typeof(coordinates));
-    //  console.log(coordinates);
-    //  alert(coordinates);
-//   console.log("coordinates"+coordinates);
-//   console.log("coordinates.length : "+coordinates.length);
-    
-//   for (var i=0; i<coordinates.length; i++) {
-//       console.log("coordinates["+i+"] : "+coordinates[i]);
-//       console.log("----------------------------------------");
-//   }
- 
 
 bounds = new google.maps.LatLngBounds();
 for (var i = 0; i < coordinates.length; i++) {
@@ -159,9 +103,7 @@ for (var i = 0; i < coordinates.length; i++) {
 map.fitBounds(bounds); // 마커가 전부 출력되도록 중심점과 사이즈 자동 조절
 for (var i = 0; i < coordinates.length; i++) {
     addMarker(coordinates[i]);
-  }
-                    
-             
+  }    
 }
 
 
@@ -175,7 +117,6 @@ function addMarker(latlng) {
     google.maps.event.addListener(marker, 'click', function(event) {
         popInfoWindow(latlng);
     });
-
 }
 
 function popInfoWindow(latlng) {
@@ -184,7 +125,7 @@ function popInfoWindow(latlng) {
                     
     var geocoder = new google.maps.Geocoder(); // 주소와 좌표 변환
     map.setCenter(latlng);
-    addMarker(latlng); //마커출력
+    addMarker(latlng);   // 마커출력
     geocoder.geocode({'latLng' : latlng // 좌표 지정
     }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) { // 구굴 맵 지원 여부
@@ -194,7 +135,6 @@ function popInfoWindow(latlng) {
             
             
             var cont='';
-            // alert(latlng.lat() + ", " + latlng.lng());
             var address = results[0].formatted_address;
             
             // 주소에서 대한민국 추출
@@ -202,17 +142,6 @@ function popInfoWindow(latlng) {
             address = address.substring(space_position);
             address_s = address.substr(1);
             
-            
-            
-    //         console.log("name_list : "+name_list[0]);
-    //         console.log("name_list : "+name_list[2]);
-    //         console.log("address_list : "+address_list[0]);
-    //         console.log("address_list : "+address_list[0]);
-    //         console.log("address_list : "+address_list[0].length);
-            console.log("address_s : "+address_s);  
-    //         console.log("address_s : "+address_s.length);  
-    
-    
             for (var j=0; j<address_list.length; j++) {
                 if (address_list[j] == address_s) {
                     cont = '<div id="content">';
@@ -221,8 +150,6 @@ function popInfoWindow(latlng) {
                     cont += '<br></div>';
                     cont += '<p><b>주소 :</b> ' + address_s + '</p>';
                     cont += '</div>';
-                } else {
-//                     console.log("구글 지도의 주소와 주차장 주소가 일치하지 않아 인포창을 띄울 수 없음");
                 }
             }
                        
@@ -279,7 +206,7 @@ window.onload = initialize; // 시작 함수 지정 및 호출
                     <TR>
                       <TH class="th_bs">주차장 이름</TH>
                       <TH class="th_bs">주소</TH>
-                      <TH class="th_bs">1시간 당 <br>가격</TH>
+                      <TH class="th_bs">30분 당 <br>가격</TH>
                     </TR>
                  </thead>
                 

@@ -62,14 +62,20 @@ order by parkno desc;
 
 -- 삭제
 DELETE FROM park
-WHERE parkno=52;
+WHERE parkno=59;
+
+
+
+
+
+
 
 
 
 -- 수정
 UPDATE park
-SET address='서울특별시 광진구 자양동 5-5'
-WHERE parkno=3;
+SET name='서울특별시 '
+WHERE parkno=55;
 
 
 UPDATE park
@@ -84,7 +90,7 @@ commit;
 select parkno, memberno, name, phone, address, area, price, cmt, file1
 from park
 where (address like '%건대%'
-    OR name like '%건대%')
+    OR name like '%명동%')
     
     
 
@@ -109,7 +115,8 @@ FROM (
                         where (address like '%%' OR name like '%%')
             )
 )
-WHERE r >= 1 AND r <= 3;
+WHERE r >= 1 AND r <= 6
+ORDER BY parkno DESC;
 
 
 
@@ -131,6 +138,13 @@ ORDER BY parkno DESC;
 select parkno, memberno, name, phone, address, area, price, cmt, file1
 from park
 where memberno=2 and parkno = 3;
+
+
+-- 지도 검색용 sql
+SELECT name, address
+FROM park
+Where (address like '%강남%');
+
 
 
 

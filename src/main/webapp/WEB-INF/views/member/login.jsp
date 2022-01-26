@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -68,7 +68,7 @@
 		      <div class="content_body_bottom" style='text-align: center;'>
 		          <button type="submit" class="btn btn-dark btn-md">로그인</button>
 		          <button type='button' onclick="location.href='./create.do'" class="btn btn-dark btn-md">회원가입</button>
-		          <button type='button' onclick="loadDefault();" class="btn btn-dark btn-md">테스트 계정</button>
+		          <button type='button' onclick="loadDefault();" class="btn btn-dark btn-md">관리자 계정</button>
 		      </div>   
 		      
 		    </FORM>

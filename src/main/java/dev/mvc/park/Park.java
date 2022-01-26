@@ -3,24 +3,39 @@ package dev.mvc.park;
 import java.io.File;
 
 public class Park {
+<<<<<<< HEAD
 
     /** 페이지당 출력할 레코드 갯수 */
 
     /** �럹�씠吏��떦 異쒕젰�븷 �젅肄붾뱶 媛��닔 */
     public static int RECORD_PER_PAGE  = 10;
+=======
+    /** 페이지당 출력할 레코드 갯수 */
+    public static int RECORD_PER_PAGE  = 6;
+//    public static int RECORD_PER_PAGE  = 10;
+>>>>>>> 512b99187afd91405b2946adf789b22817dbe6fe
     
-    /** 釉붾윮�떦 �럹�씠吏� �닔, �븯�굹�쓽 釉붾윮�� 1媛� �씠�긽�쓽 �럹�씠吏�濡� 援ъ꽦�맖 */
-    public static int PAGE_PER_BLOCK = 5;
+//    public static int PAGE_PER_BLOCK = 5;
+    
+//    public static String LIST_FILE = "park_list_search_paging.do";
+//    
+//    public static String ADMIN_LIST_FILE = "park_list.do";
     
     
-    /** 紐⑸줉 �뙆�씪紐� */
+    // Windows, VMWare, AWS cloud 
+    
+    /** 블럭당 페이지 수, 하나의 블럭은 1개 이상의 페이지로 구성됨 */
+    public static int PAGE_PER_BLOCK = 10;
+    
+    
+    /** 목록 파일명 */
     public static String LIST_FILE = "park_list_search_paging.do";
     
-    /** admin 紐⑸줉 �뙆�씪紐� */
+    /** admin 목록 파일명 */
     public static String ADMIN_LIST_FILE = "park_list.do";
     
     
-    // Windows, VMWare, AWS cloud �젅�� 寃쎈줈
+    // Windows, VMWare, AWS cloud 절대 경로
     public static synchronized String getUploadDir() {
         String path = "";
         if (File.separator.equals("\\")) {

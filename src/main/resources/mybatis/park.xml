@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                       )
          )
          WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
-    
+        
     </select>
     
     
@@ -103,10 +103,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
     
-    <!-- 주소만 select -->
-    <select id="only_address" resultType="dev.mvc.park.ParkVO">
+    <!-- 주소만 select  list 2 -->
+    <select id="only_address" resultType="dev.mvc.park.ParkVO" parameterType="String">
         SELECT name, address
         FROM park
+        WHERE (address LIKE '%' || #{address} || '%')
     </select>
     
     

@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -37,7 +37,7 @@ function updatefun() {
     <div class="container">
         <div class="row-fluid">
             <div style='margin:30px;'>
-            <h4>○○님의 주차장 수정</h4>
+            <h4>주차장 수정 (관리자 전용)</h4>
             <div style='border-bottom: solid 3px #555555; '></div>
             </div>
         </div>
