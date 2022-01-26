@@ -4,34 +4,19 @@ import java.util.List;
 
 
 public interface ReviewDAOInter {
-<<<<<<< HEAD
-	//∏Æ∫‰ µÓ∑œ	
+
+	//Î¶¨Î∑∞ Îì±Î°ù	
 	public int review_create(ReviewVO reviewvo);
 	
-	//¡÷¬˜¿Â ∫∞ ∏Æ∫‰ ∏Ò∑œ	
+	//Ï£ºÏ∞®Ïû• Î≥Ñ Î¶¨Î∑∞ Î™©Î°ù	
 	public List<ReviewlistVO> listcmt_by_parkno(int parkno);
 	
-	//∏Æ∫‰ ªË¡¶	
-=======
-    /**
-     * Î¶¨Î∑∞ Îì±Î°ù    
-     * @param reviewvo
-     * @return
-     */
-	public int review_create(ReviewVO reviewvo);
-	
+	//Î¶¨Î∑∞ ÏÇ≠Ï†ú	
+
 	/**
-	 * Ï£ºÏ∞®Ïû• Î≥Ñ Î¶¨Î∑∞ Î™©Î°ù
-	 * @param parkno
-	 * @return
-	 */
-	public List<ReviewlistVO> listcmt_by_parkno(int parkno);
-	
-	/**
-	 * Î¶¨Î∑∞ ÏÇ≠Ï†ú   
+	 * Áî±—âÎü≠ ÔøΩÍ∂òÔøΩÏ†£   
 	 * @param reviewno
 	 * @return
 	 */
->>>>>>> 512b99187afd91405b2946adf789b22817dbe6fe
 	public int review_delete(int reviewno);
 }
