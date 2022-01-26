@@ -14,7 +14,7 @@ import java.util.List;
 public interface ReservationDAOInter {
     
     /**
-     * 주차장 등록
+     * 예약 기능
      * @param ReservationVO
      * @return
      */
@@ -22,7 +22,7 @@ public interface ReservationDAOInter {
 
 
     /**
-     * 글 한 개 조회
+     * 예약 정보 조회
      * @param reserveno
      * @return
      */
@@ -30,14 +30,14 @@ public interface ReservationDAOInter {
     
 
     /**
-     * 검색 레코드 갯수
+     * 예약 총 개수
      * @param hashMap
      * @return
      */
     public int search_count(HashMap<String, Object> hashMap);
     
     /**
-     * Reservation 목록 + 검색 + 페이징
+     * 예약 내역 페이징 처리
      * @param map
      * @return
      */
@@ -45,7 +45,7 @@ public interface ReservationDAOInter {
     
     
     /**
-     * 예약 삭제
+     * �삁�빟 �궘�젣
      * @param reserveno
      * @return
      */
@@ -53,7 +53,7 @@ public interface ReservationDAOInter {
 
     
     /**
-     * 회원별 예약 목록 조회
+     * �쉶�썝蹂� �삁�빟 紐⑸줉 議고쉶
      * @param reserveno
      * @return
      */
@@ -61,21 +61,21 @@ public interface ReservationDAOInter {
     
     
     /**
-     * 회원별 예약 목록 Park + Reservation join
+     * �쉶�썝蹂� �삁�빟 紐⑸줉 Park + Reservation join
      * @return
      */
     public List<Park_ReservationVO> my_reser_join(int memberno);
     
     
     /**
-     * 관리자 확인용 예약 목록 Park + Reservation join
+     * 愿�由ъ옄 �솗�씤�슜 �삁�빟 紐⑸줉 Park + Reservation join
      * @return
      */
     public List<Park_ReservationVO> reser_list();
     
     
     /**
-     * 예약 정보 수정
+     * �삁�빟 �젙蹂� �닔�젙
      * @param reservationVO
      * @return
      */

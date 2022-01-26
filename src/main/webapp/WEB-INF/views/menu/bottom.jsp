@@ -4,7 +4,7 @@
 
   
   <%-- 화면 하단 메뉴 --%>
-  <DIV class='copyright'>
+  <DIV class='copyright bg-dark text-white mt-5 container-fluied'>
     Powered by 주차장 하단.
   </DIV>
   

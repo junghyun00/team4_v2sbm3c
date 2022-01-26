@@ -60,7 +60,7 @@ public class ParkCont {
                                                                      @RequestParam(value = "memberno", defaultValue = "1") int memberno,
                                                                      @RequestParam(value = "parkno", defaultValue = "1") int parkno,
                                                                      HttpSession session) {
-    	ModelAndView mav = new ModelAndView(); 
+ModelAndView mav = new ModelAndView(); 
         
         if (memberProc.isMember(session)) {
             HashMap<String, Object> map = new HashMap<String, Object>(); 
@@ -71,11 +71,7 @@ public class ParkCont {
             MemberVO memberVO = this.memberProc.read(memberno);
             mav.addObject("memberVO", memberVO);
             //System.out.println(memberVO.getMemberno());
-<<<<<<< HEAD
             
-=======
-
->>>>>>> c6f91e05c69cb8240082f53f8b125d22e626e695
             // 검색 목록
             List<ParkVO> list = parkProc.park_list_search_paging(map);
             mav.addObject("list", list);
