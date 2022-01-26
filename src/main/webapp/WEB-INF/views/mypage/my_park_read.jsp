@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BLOG</title>
+<title>주차장</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumGgocNaeEum.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -46,7 +46,7 @@
                 <span style="font-size: 1.0em; font-weight: bold;">주소 [ ${address } ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">구역번호 [ ${area } ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 전화번호 [ ${phone } ]</span><br><br>
-                <span style="font-size: 1.0em; font-weight: bold;">1 시간 당 가격 [ ${price }원 ]</span><br><br>
+                <span style="font-size: 1.0em; font-weight: bold;">30분 당 가격 [ ${price }원 ]</span><br><br>
                 <span style="font-size: 1.0em; font-weight: bold;">주차장 설명 <br> [ ${cmt } ]</span><br><br><br><br>
                 
                 

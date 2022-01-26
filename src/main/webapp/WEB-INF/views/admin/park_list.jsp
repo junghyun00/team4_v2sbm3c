@@ -163,7 +163,7 @@ function delete_ajax(parkno) {
                       <TH class="th_bs">주소</TH>
                       <TH class="th_bs">구역번호</TH>
                       <TH class="th_bs">전화번호</TH>
-                      <TH class="th_bs">시간 당 가격</TH>
+                      <TH class="th_bs">30분 당 가격</TH>
                       <TH class="th_bs">기타</TH>
                     </TR>
                  </thead>
