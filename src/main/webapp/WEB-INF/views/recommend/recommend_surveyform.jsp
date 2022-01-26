@@ -24,11 +24,7 @@
 
        function recommend_parking() {
            var params = $('#frm').serialize();
-<<<<<<< HEAD
-     	   alert(params);  
-=======
 //     	   alert(params); 
->>>>>>> bcf40b20c4978fe029a6c32550ae48301354b61c
 
            $.ajax({
                type: "GET",
@@ -75,7 +71,7 @@
 							<div class="mt-3">
 								<h5>주차 목적</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="purposepark" id='purposepark1' class="purposepark" value='1'>시설 이용
+									<input type="radio" name="purposepark" id='purposepark1' class="purposepark" value='1' checked='checked'>시설 이용
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="purposepark" id='purposepark2' class="purposepark" value='2'>주변 방문
@@ -87,7 +83,7 @@
 							<div class="mt-3">
 								<h5>선호 요일</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1'>평일
+									<input type="radio" name="preferday" id='preferday1' class="preferday" value='1' checked='checked'>평일
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="preferday" id='preferday2' class="preferday" value='2'>주말
@@ -96,7 +92,7 @@
 							<div class="mt-3">
 								<h5>예약 기간</h5>
 								<label class="radio-inline mr-5"> 
-									<input type="radio" name="reserveperiod" id='reserveperiod1' class="reserveperiod" value='1'>장기
+									<input type="radio" name="reserveperiod" id='reserveperiod1' class="reserveperiod" value='1' checked='checked'>장기
 								</label>
 								<label class="radio-inline mr-5"> 
 									<input type="radio" name="reserveperiod" id='reserveperiod2' class="reserveperiod" value='2'>단기
