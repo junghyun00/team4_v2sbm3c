@@ -3,6 +3,8 @@ package dev.mvc.recommend;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,13 +31,18 @@ public class RecommendCont {
     
     // http://localhost:9091/recommend/recommend_surveyform.do
     @RequestMapping(value = "/recommend_surveyform.do", method = RequestMethod.GET)
-    public ModelAndView survey(int memberno) {
+    public ModelAndView survey(String memberno, HttpSession session) {
         
         ModelAndView mav = new ModelAndView();
-        mav.addObject("memberno", memberno);
-//        System.out.println(memberno);
-        mav.setViewName("/recommend/recommend_surveyform");
-
+        
+        if (memberProc.isMember(session)) {
+            mav.addObject("memberno", memberno);
+    //        System.out.println(memberno);
+            mav.setViewName("/recommend/recommend_surveyform");
+        } else {
+            mav.setViewName("/member/login_need"); 
+        }
+        
         return mav;
     }
     
@@ -50,7 +57,7 @@ public class RecommendCont {
 //        System.out.println("memberno" + memberVO2.getMemberno());
         
         int cnt = this.recommendProc.recommend_create(recommendVO);
-        recommendVO = this.recommendProc.read(recommendVO.getMemberno());
+//        recommendVO = this.recommendProc.read(recommendVO.getMemberno());
         
         mav.addObject("memberVO", recommendVO);
         JSONObject json = new JSONObject();

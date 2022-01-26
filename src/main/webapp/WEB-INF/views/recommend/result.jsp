@@ -18,6 +18,7 @@
         
         function send() {
             var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+
             
             $.ajax({
               url: 'http://localhost:8000/recommend_parking/end_ajax/',  // Spring Boot -> Django 호출
